@@ -1,3 +1,6 @@
+*{
+  text-transform: capitalize;
+}
 .card {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -78,4 +81,43 @@
       background-color: #219653;
     }
   }
+}
+// navbar
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: #ccc;
+  div{
+    display: flex;
+    align-items: center;
+    ul{
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+  }
+  .LoginSignup{
+    gap: 20px;
+    button{
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      transition: background-color 0.2s;
+  
+      &:hover {
+        background-color: #2980b9;
+      }
+      Link {
+        list-style: none;
+        text-decoration: none;
+      }
+    }
+  }
+  
 }

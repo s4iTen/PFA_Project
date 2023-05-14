@@ -1,18 +1,19 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase';
-import { useHistory } from 'react-router-dom';
+
+
+const LoggedInComponent = () => {
+  return (
+    <div>
+      {/* Content of the component */}
+    </div>
+  );
+};
 
 const NavBar = () => {
-  const isLoggedIn = !!localStorage.getItem('current user'); // Check if the user is logged in
+  const isLoggedIn = !!localStorage.getItem('current user');
 
-  const navigateToLogin = () => {
-    history.push('/Login');
-  };
-
-  const navigateToSignUp = () => {
-    history.push('/SignUp');
-  };
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -22,14 +23,20 @@ const NavBar = () => {
       .catch((error) => {
         console.log(error);
       });
-      
   };
-  
+
+  const navigateToLogin = () => {
+    window.location.href = '/Login';
+  };
+
+  const navigateToSignUp = () => {
+    window.location.href = '/SignUp';
+  };
 
   return (
     <div className='navbar'>
       <div>
-        <a href='#'>logo</a>
+        <a href='/'>logo</a>
         <ul>
           <li>Home</li>
           <li>Design</li>
@@ -37,15 +44,17 @@ const NavBar = () => {
           <li>About Us</li>
         </ul>
       </div>
+      {isLoggedIn && <LoggedInComponent />}
       <div className='LoginSignup'>
-        <button onClick={navigateToLogin}>Log In</button>
-        <button onClick={navigateToSignUp}>Sign Up</button>
-      </div>
-      {isLoggedIn && (
-        <div className='LoginSignup'>
+        {isLoggedIn ? (
           <button onClick={handleSignOut}>Sign Out</button>
-        </div>
-      )}
+        ) : (
+          <>
+            <button onClick={navigateToLogin}>Log In</button>
+            <button onClick={navigateToSignUp}>Sign Up</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

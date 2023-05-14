@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/Style.scss';
+import auth from '../firebase';
 
 const Card = () => {
   const [liked, setLiked] = useState(false);
@@ -15,7 +16,8 @@ const Card = () => {
       <div className="buttons">
         <button className="buy-button">Buy Now</button>
         <button className={`like-button ${liked ? 'liked' : ''}`} onClick={handleLike}>
-          <i className={`fas ${liked ? 'fa-heart' : 'fa-heart-o' }`}></i>Like
+        { liked ?
+            <i style={{paddingRight: 10}} className={'fas fa-heart'}></i> : <></>}Like
         </button>
         <button className="add-to-cart-button">Add to Cart</button>
       </div>

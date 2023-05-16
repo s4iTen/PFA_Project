@@ -120,5 +120,21 @@
       }
     }
   }
+  .userContainer {
+    width: auto;
+    left: 10px;
+    .userTools {
+      
+      display: none;
+      height: 100px;
+      background-color: red;
+
+    }
+  }
+  &:hover {
+    .userTools {
+      
+    }
+  }
   
 }

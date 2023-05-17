@@ -4,6 +4,8 @@ import auth from '../firebase';
 import { useHistory } from 'react-router-dom';
 
 const NavBar = () => {
+  const history = useHistory();
+
   const isLoggedIn = !!localStorage.getItem('current user'); // Check if the user is logged in
 
   const navigateToLogin = () => {

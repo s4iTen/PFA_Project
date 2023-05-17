@@ -5,6 +5,7 @@ import { BrowserRouter,Route,Routes } from "react-router-dom";
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Main from './Pages/Main';
+import AddLikedCard from './Pages/AddLikedCard';
 function App() {
   return (
     
@@ -13,6 +14,7 @@ function App() {
         <Route path="/Login" element={<Login />}/>
         <Route path="/SignUp" element={<SignUp />}/>
         <Route path="/" element={<Main />}/>
+        <Route path='/liked' element={<AddLikedCard />}></Route>
       </Routes>
       </BrowserRouter>
   );

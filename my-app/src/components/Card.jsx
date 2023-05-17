@@ -7,6 +7,12 @@ const Card = () => {
 
   const handleLike = () => {
     setLiked(!liked);
+    // Save the liked state to a user's liked cards list in the backend or local storage
+    // You can use auth.currentUser.uid to identify the current user if using Firebase authentication
+    // Example: Save the liked state to Firestore database
+    // auth.firestore().collection('users').doc(auth.currentUser.uid).update({
+    //   likedCards: liked ? firebase.firestore.FieldValue.arrayRemove(cardId) : firebase.firestore.FieldValue.arrayUnion(cardId)
+    // });
   };
 
   return (
@@ -16,8 +22,8 @@ const Card = () => {
       <div className="buttons">
         <button className="buy-button">Buy Now</button>
         <button className={`like-button ${liked ? 'liked' : ''}`} onClick={handleLike}>
-        { liked ?
-            <i style={{paddingRight: 10}} className={'fas fa-heart'}></i> : <></>}Like
+          {liked ? <i style={{ paddingRight: 10 }} className={'fas fa-heart'}></i> : <></>}
+          {liked ? 'Liked' : 'Like'}
         </button>
         <button className="add-to-cart-button">Add to Cart</button>
       </div>

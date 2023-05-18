@@ -1,7 +1,7 @@
+import { loginn } from "../Styles/loginn.css";
 import { React, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
-import loginn from "../Styles/loginn.css";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
 

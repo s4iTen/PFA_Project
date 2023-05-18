@@ -1,37 +1,41 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Helmet } from 'react-helmet';
+
+
+
+
+
 
 const NavBar = () => {
-  const history = useHistory();
-
-  const isLoggedIn = !!localStorage.getItem('current user'); // Check if the user is logged in
+  
+  const isLoggedIn = !!localStorage.getItem('current user');
+  
+  const handleSignOut = () => {
+    signOut(auth)
+    .then(() => {
+      localStorage.removeItem('current user');
+      window.location.href = '/';
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  };
 
   const navigateToLogin = () => {
-    history.push('/Login');
+    window.location.href = '/Login';
   };
 
   const navigateToSignUp = () => {
-    history.push('/SignUp');
+    window.location.href = '/SignUp';
   };
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        localStorage.removeItem('current user');
-        window.location.href = '/Login';
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
-  };
-  
 
   return (
     <div className='navbar'>
       <div>
-        <a href='#'>logo</a>
+        <a href='/'>logo</a>
         <ul>
           <li>Home</li>
           <li>Design</li>
@@ -40,16 +44,42 @@ const NavBar = () => {
         </ul>
       </div>
       <div className='LoginSignup'>
-        <button onClick={navigateToLogin}>Log In</button>
-        <button onClick={navigateToSignUp}>Sign Up</button>
-      </div>
-      {isLoggedIn && (
-        <div className='LoginSignup'>
-          <button onClick={handleSignOut}>Sign Out</button>
+        {!isLoggedIn ? (
+          <>
+            <button onClick={navigateToLogin}>Log In</button>
+            <button onClick={navigateToSignUp}>Sign Up</button>
+            
+          </>
+        ) : (
+          <div className='userContainer'>
+            <div className='userTools'>
+              <ul>
+                <li>Profile</li>
+                <li>Likes</li>
+                <button onClick={handleSignOut}>Sign Out</button>
+              </ul>
+            </div>
+          <select name="" id="">
+            <option value="" disabled>Settings</option>
+            <option value="">Settings</option>
+            <option value="">Settings</option>
+            <option value="">Settings</option>
+            <div className='dropdown'>
+                  <ul>
+                    <li>Settings</li>
+                    <li>Account</li>
+                    <li>Likes</li>
+                  </ul>
+                  </div>
+          </select>
+        
+        <button onClick={handleSignOut}>Sign Out</button>
         </div>
-      )}
-    </div>
-  );
+  
+        )}
+      </div>
+      </div>
+  )
 };
 
 export default NavBar;

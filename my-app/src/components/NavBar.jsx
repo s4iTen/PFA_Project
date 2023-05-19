@@ -5,10 +5,6 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 
-
-
-
-
 const NavBar = () => {
   
   const isLoggedIn = !!localStorage.getItem('current user');

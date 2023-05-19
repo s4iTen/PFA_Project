@@ -21,11 +21,23 @@
     text-align: center;
     transition: 0.4s;
   }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: -46px;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+    left: -750px;
+    margin-left: 45px;
+  }
   
   .login-card > h2 {
     font-size: 50px;
     font-weight: 600;
-    margin: 0 0 30px;
+    margin: 0 0 20px;
   }
   
   .login-card form {
@@ -38,8 +50,8 @@
     border: 1.5px solid #dfe1f0;
     outline: none;
     width: 100%;
-    height: 56px;
-    padding: 0 16px;
+    height: 60px;
+    padding: 0 0;
     background: #f6f7ff;
     color: inherit;
     border-radius: 6px;
@@ -49,7 +61,7 @@
   }
   
   button.control {
-    position: relative;
+  position: relative;
   margin: 0;
   padding: 0.8em 1em;
   outline: none;
@@ -161,3 +173,61 @@
   display: flex;
   height: 21vh;
   }
+
+  .cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: #000000;
+    justify-content: left;
+   }
+   
+   .cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 45px;
+    display: block;
+    border-radius: 50px;
+    background: #b1dae7;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+   }
+   
+   .cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #234567;
+   }
+   
+   .cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #234567;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+   }
+   
+   .cta:hover:before {
+    width: 100%;
+    background: #b1dae7;
+   }
+   
+   .cta:hover svg {
+    transform: translateX(0);
+   }
+   
+   .cta:active {
+    transform: scale(0.95);
+   }

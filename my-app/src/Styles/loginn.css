@@ -14,7 +14,7 @@
     color: rgb(0, 0, 0);
     font-size: 50px;
   }
-  
+
   .login-card {
     width: 400px;
     padding: 50px 50px 80px;
@@ -22,6 +22,19 @@
     text-align: center;
     transition: 0.4s;
     background: #dfe1f0;
+  }
+  
+  .button-groupe {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 170px;
+  }
+  
+  .button-groupe button {
+    margin-right: 10px;
+    left: -750px;
+    margin-left: 60px;
+    margin-top: 10px;
   }
   
   .login-card > h2 {

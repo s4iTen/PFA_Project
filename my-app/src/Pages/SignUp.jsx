@@ -1,15 +1,22 @@
 import { React, useState } from "react";
 import auth from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import login from "../Styles/login.css";
+import "../Styles/login.css";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const SignUp = () => {
-
   const onChange = () => {
     console.log("changed");
     setCaptchaDone(true);
+  };
+
+  const navigateToLogin = () => {
+    window.location.href = "/Login";
+  };
+
+  const navigateTomain = () => {
+    window.location.href = "/";
   };
 
   const [captchaIsDone, setCaptchaDone] = useState(false);
@@ -52,10 +59,18 @@ const SignUp = () => {
   };
 
   return (
-  
     <div className="wrapper">
-      <div className="login-card">
-      <img className="logo" src={logo} />
+      <div>
+        <div className="button-group">
+          <button className="cta" onClick={navigateToLogin}>
+            Log In
+          </button>
+          <button className="cta" onClick={navigateTomain}>
+            Home
+          </button>
+        </div>
+        <div className="login-card">
+        <img className="logo" src={logo} />
         <h2>Sign Up</h2>
         <form action="">
           <input
@@ -97,6 +112,7 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

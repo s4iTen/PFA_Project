@@ -7,9 +7,9 @@ const Main = () => {
   return (
     <div>
         <NavBar/>
+        <ModelViewer scale="40" modelPath={"/nike_air_jordan_1.glb"} />
         <Card/>
         <div>
-        <ModelViewer scale="40" modelPath={"/AirForce.glb"} />
         </div>
     </div>
         

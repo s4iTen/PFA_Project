@@ -7,10 +7,8 @@ const Main = () => {
   return (
     <div>
         <NavBar/>
-        <ModelViewer scale="40" modelPath={"/nike_shoes.glb"} />
+        <ModelViewer scale="40" modelPath={"/Jordan.glb"} />
         <Card/>
-        <div>
-        </div>
     </div>
         
   )

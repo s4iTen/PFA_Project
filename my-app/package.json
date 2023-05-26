@@ -13,6 +13,7 @@
     "gltf-loader": "^1.0.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
+    "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^6.1.0",
@@ -20,6 +21,7 @@
     "react-scripts": "5.0.1",
     "scss": "^0.2.4",
     "three": "^0.152.2",
+    "valtio": "^1.10.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

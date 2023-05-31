@@ -1,4 +1,36 @@
-canvas {
+
+.ShoesContainer {
     width: 100%;
-    height: 1000px;
+    height: 95vh;
+    background-color: #F5F5DC;
+    display: flex;
+    gap: 10px;
+    
+}
+.ShoesTextContainer {
+    width: 80%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+
+}
+.Customize-Button {
+    width: 50%;
+    color: white;
+    background-color: black;
+    margin-right: 5.5%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    border-radius: 2%;
+    padding: 5%;
+    text-align: left;
+    line-height: 1.6;
+}
+.Customize-Button p {
+    font-size: 25px;
+    text-indent: 0;
+    direction: rtl;
+    display: inline;
+    text-indent: 20px;
 }

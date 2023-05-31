@@ -1,9 +1,9 @@
 import { React, useState } from "react";
 import auth from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import "../Styles/login.css";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
+import "../Styles/signup.css";
 
 const SignUp = () => {
   const onChange = () => {
@@ -15,7 +15,7 @@ const SignUp = () => {
     window.location.href = "/Login";
   };
 
-  const navigateTomain = () => {
+  const navigateToMain = () => {
     window.location.href = "/";
   };
 
@@ -25,94 +25,103 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  console.log(email);
-  console.log(password);
-  const signIn = async (e) => {
-    e.preventDefault();
-    console.log(email);
-    console.log(password);
-    if (password === confirmPassword) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          const userId = user.uid;
-          localStorage.setItem("current user", user.uid);
-        })
+  const [error, setError] = useState("");
 
-        .then(() => {
-          updateProfile(auth.currentUser, {
-            displayName: lastName + " " + firstName,
-            email: email,
-          });
-          window.location.href = "/";
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-          console.log(errorMessage);
-        });
-    } else {
-      alert("check your password");
+  const signUp = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      setError("Please enter your redentials");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const userId = user.uid;
+      localStorage.setItem("current user", userId);
+
+      await updateProfile(auth.currentUser, {
+        displayName: lastName + " " + firstName,
+        email: email,
+      });
+
+      window.location.href = "/";
+    } catch (error) {
+      const errorMessage = error.message;
+      setError("Failed to create an account. Please try again.");
+      console.log(errorMessage);
     }
   };
-
   return (
-    <div className="wrapper">
+    <div className="login-page">
       <div>
-        <div className="button-group">
-          <button className="cta" onClick={navigateToLogin}>
-            Log In
-          </button>
-          <button className="cta" onClick={navigateTomain}>
+        <div className="home-button-container">
+          <button className="button b1" onClick={navigateToMain}>
             Home
           </button>
         </div>
-        <div className="login-card">
-        <img className="logo" src={logo} />
-        <h2>Sign Up</h2>
-        <form action="">
-          <input
-            type="text"
-            placeholder="first name"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="last name"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="confirm password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          {captchaIsDone && (
-            <button className="control" type="submit" onClick={signIn}>
-              Join Now
-            </button>
-          )}
-          <div>
-            <ReCAPTCHA
-              sitekey="6LfaSRgmAAAAALmDD1g8ej0pTjlsDkb6MX-kUKX9"
-              onChange={onChange}
-            />
-            ,
+        <div className="login-box">
+          <div className="logo">
+            <img src={logo} />
+            <div className="content">
+              <h2 className="title">Sign Up</h2>
+              {error && <div className="alert">{error}</div>}
+              <div className="user-box">
+                <form action="">
+                  <input
+                    type="text"
+                    placeholder="first name"
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="last name"
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                  <input
+                    type="email"
+                    placeholder="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="confirm password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  {captchaIsDone && (
+                    <button className="button" type="submit" onClick={signUp}>
+                      Join Now
+                    </button>
+                  )}
+                </form>
+                <div>
+                  <ReCAPTCHA
+                    sitekey="6LfaSRgmAAAAALmDD1g8ej0pTjlsDkb6MX-kUKX9"
+                    onChange={onChange}
+                  />
+                  <div className="p">
+                    If you have an account?{" "}
+                    <a href="/login" className="a2">
+                      Login!
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

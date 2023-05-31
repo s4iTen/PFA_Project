@@ -84,40 +84,57 @@
 }
 // navbar
 .navbar{
+  img {
+    width: 120px;
+  }
+  color: #F5F5DC;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  background-color: #ccc;
-  div{
+  background-color: black ;
+  .ul{
     display: flex;
     align-items: center;
     ul{
       display: flex;
       list-style: none;
       gap: 20px;
+      li{
+        cursor: pointer;
+      }
     }
   }
   .LoginSignup{
-    gap: 20px;
+    div{
+      display: flex;
+      gap: 20px;
+    }
     button{
       border: none;
-      padding: 8px 16px;
+      width: 100px;
+      height: 50px;
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
-      background-color: #3498db;
-      color: #fff;
+      background-color: #F5F5DC;
+      color: black;
       transition: background-color 0.2s;
   
       &:hover {
-        background-color: #2980b9;
+        background-color: #d1d1ba;
       }
       Link {
         list-style: none;
         text-decoration: none;
       }
     }
+  }
+  .userContainer{
+    gap: 20px;
+    position: relative;
+    display: flex;
   }
   
 }

@@ -1,233 +1,141 @@
-/* signup.css */
-.wrapper {
-    display: grid;
-    place-items: center;
-    height: 100vh; /* Adjust the height to fit your requirements */
-    background: #000000;
-    font-family: "Euclid Circular A";
-    color: #000000;
-    background-image: url("../assets/pre.png");
-    background-size: cover;
-  }
-
-  h2 {
-    color: rgb(0, 0, 0);
-  }
-  
-  .login-card {
-    width: 400px;
-    padding: 50px 50px 80px;
-    border-radius: 2rem;
-    text-align: center;
-    transition: 0.4s;
-  }
-
-  .button-group {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: -46px;
-  }
-  
-  .button-group button {
-    margin-right: 10px;
-    left: -750px;
-    margin-left: 45px;
-  }
-  
-  .login-card > h2 {
-    font-size: 50px;
-    font-weight: 600;
-    margin: 0 0 20px;
-  }
-  
-  .login-card form {
-    display: grid;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  
-  .login-card input {
-    border: 1.5px solid #dfe1f0;
-    outline: none;
-    width: 100%;
-    height: 60px;
-    padding: 0 0;
-    background: #f6f7ff;
-    color: inherit;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 18px;
-    transition: 0.4s;
-  }
-  
-  button.control {
-  position: relative;
-  margin: 0;
-  padding: 0.8em 1em;
-  outline: none;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
+.login-page {
+  background-image: url("../assets/pre.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh; /* Set the height to full viewport height */
+  display: flex; /* Add flexbox to center the content vertically */
   align-items: center;
-  cursor: pointer;
-  border: none;
-  text-transform: uppercase;
-  background-color: #333;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 300;
-  font-size: 18px;
-  font-family: inherit;
-  z-index: 0;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-  }
-  
-  button {
-    position: relative;
-    margin: 0;
-    padding: 0.8em 1em;
-    outline: none;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-    text-transform: uppercase;
-    background-color: #333;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: 300;
-    font-size: 18px;
-    font-family: inherit;
-    z-index: 0;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-  }
-  
-  button:hover {
-    animation: sh0 0.5s ease-in-out both;
-  }
-  
-  @keyframes sh0 {
-    0% {
-      transform: rotate(0deg) translate3d(0, 0, 0);
-    }
-  
-    25% {
-      transform: rotate(7deg) translate3d(0, 0, 0);
-    }
-  
-    50% {
-      transform: rotate(-7deg) translate3d(0, 0, 0);
-    }
-  
-    75% {
-      transform: rotate(1deg) translate3d(0, 0, 0);
-    }
-  
-    100% {
-      transform: rotate(0deg) translate3d(0, 0, 0);
-    }
-  }
-  
-  button:hover span {
-    animation: storm 0.7s ease-in-out both;
-    animation-delay: 0.06s;
-  }
-  
-  button::before,
-  button::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #fff;
-    opacity: 0;
-    transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
-    z-index: -1;
-    transform: translate(100%, -25%) translate3d(0, 0, 0);
-  }
-  
-  button:hover::before,
-  button:hover::after {
-    opacity: 0.15;
-    transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
-  }
-  
-  button:hover::before {
-    transform: translate3d(50%, 0, 0) scale(0.9);
-  }
-  
-  button:hover::after {
-    transform: translate(50%, 0) scale(1.1);
-  }
-  
-  
+}
 
-  .logo {
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  padding: 20px;
   display: flex;
-  height: 21vh;
-  }
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
 
-  .cta {
-    position: relative;
-    margin: auto;
-    padding: 12px 18px;
-    transition: all 0.2s ease;
-    border: none;
-    background: #000000;
-    justify-content: left;
-   }
-   
-   .cta:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 45px;
-    display: block;
-    border-radius: 50px;
-    background: #b1dae7;
-    width: 45px;
-    height: 45px;
-    transition: all 0.3s ease;
-   }
-   
-   .cta span {
-    position: relative;
-    font-family: "Ubuntu", sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #234567;
-   }
-   
-   .cta svg {
-    position: relative;
-    top: 0;
-    margin-left: 10px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: #234567;
-    stroke-width: 2;
-    transform: translateX(-5px);
-    transition: all 0.3s ease;
-   }
-   
-   .cta:hover:before {
-    width: 100%;
-    background: #b1dae7;
-   }
-   
-   .cta:hover svg {
-    transform: translateX(0);
-   }
-   
-   .cta:active {
-    transform: scale(0.95);
-   }
+.home-button-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.content {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.user-box {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.user-box input:focus ~ label,
+.user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #fff;
+  font-size: 12px;
+}
+
+.a2 {
+  color: #ffffff;
+}
+
+form a {
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+form a.a2 {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.p {
+  color: #ffffff;
+}
+
+.button {
+  --bg: #3c04787b;
+  --hover-bg: #ef43cd;
+  --hover-text: #000;
+  color: #fff;
+  border: 5px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.8em 4em;
+  background: var(--bg);
+  transition: 0.2s;
+  margin-top: 20px;
+  margin-bottom: 2rem;
+}
+
+.button:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.button:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  text-align: center;
+}

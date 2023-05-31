@@ -2,11 +2,19 @@ import React from 'react';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase';
 import { useState } from 'react';
-import { Helmet } from 'react-helmet';
-
+import "../Styles/Menu.css"
+import { motion, Variants } from "framer-motion";
+import Logo from "../assets/logo.png"
 
 const NavBar = () => {
-  
+  const itemVariants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 }
+    },
+    closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
+  };
   const isLoggedIn = !!localStorage.getItem('current user');
   
   const handleSignOut = () => {
@@ -27,47 +35,95 @@ const NavBar = () => {
   const navigateToSignUp = () => {
     window.location.href = '/SignUp';
   };
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
+  const handleMenuClick = () => {
+    setMenuOpen(!isMenuOpen); 
+  };
+  const [isOpen, setIsOpen] = useState(false);
+  const list = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  }
+  
+  const item = {
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -100 },
+  }
+  const dropdownClass = isMenuOpen ? 'dropdown-content open' : 'dropdown-content';
   return (
     <div className='navbar'>
-      <div>
-        <a href='/'>logo</a>
+      <div className='ul'>
+        <a href='/'><img src={Logo} alt="" /></a>
         <ul>
-          <li>Home</li>
-          <li>Design</li>
-          <li>Contact Us</li>
-          <li>About Us</li>
+          <li> <a onClick={() => { window.location.href = '/'; }}>home</a></li>
+          <li><a onClick={() => { window.location.href = '/Design'; }}>Design</a> </li>
+          <li><a onClick={() => { window.location.href = '/'; }}>Contact Us</a> </li>
+          <li><a onClick={() => { window.location.href = '/'; }}>About Us</a></li>
         </ul>
       </div>
       <div className='LoginSignup'>
         {!isLoggedIn ? (
-          <>
+          <div>
             <button onClick={navigateToLogin}>Log In</button>
             <button onClick={navigateToSignUp}>Sign Up</button>
-            
-          </>
+          </div>
         ) : (
           <div className='userContainer'>
-            <div className='userTools'>
-              <ul>
-                <li>Profile</li>
-                <li>Likes</li>
-                <button onClick={handleSignOut}>Sign Out</button>
-              </ul>
-            </div>
-          <select name="" id="">
-            <option value="" disabled>Settings</option>
-            <option value="">Settings</option>
-            <option value="">Settings</option>
-            <option value="">Settings</option>
-            <div className='dropdown'>
-                  <ul>
-                    <li>Settings</li>
-                    <li>Account</li>
-                    <li>Likes</li>
-                  </ul>
-                  </div>
-          </select>
+          
+          <motion.nav
+            initial={false}
+            animate={isOpen ? "open" : "closed"}
+            className="menu"
+          >
+            <motion.button className='menuButton'
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              Menu
+              <motion.div
+                variants={{
+                  open: { rotate: 180 },
+                  closed: { rotate: 0 }
+                }}
+                transition={{ duration: 0.2 }}
+                style={{ originY: 0.55 }}
+              >
+                <svg width="15" height="15" viewBox="0 0 20 20">
+                  <path d="M0 7 L 20 7 L 10 16" />
+                </svg>
+              </motion.div>
+            </motion.button>
+            <motion.ul
+              variants={{
+                open: {
+                  clipPath: "inset(0% 0% 0% 0% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.7,
+                    delayChildren: 0.3,
+                    staggerChildren: 0.05
+                  }
+                },
+                closed: {
+                  clipPath: "inset(10% 50% 90% 50% round 10px)",
+                  transition: {
+                    type: "spring",
+                    bounce: 0,
+                    duration: 0.3
+                  }
+                }
+              }}
+              style={{ pointerEvents: isOpen ? "auto" : "none" }} className='menuDrop'
+            >
+              <motion.li variants={itemVariants} className='menuDropLi'>Item 1 </motion.li>
+              <motion.li variants={itemVariants} className='menuDropLi'>Item 2 </motion.li>
+              <motion.li variants={itemVariants} className='menuDropLi'>Item 3 </motion.li>
+              <motion.li variants={itemVariants} className='menuDropLi'>Item 4 </motion.li>
+              <motion.li variants={itemVariants} className='menuDropLi'>Item 5 </motion.li>
+            </motion.ul>
+          </motion.nav>
         
         <button onClick={handleSignOut}>Sign Out</button>
         </div>

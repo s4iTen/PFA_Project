@@ -4,19 +4,29 @@ import { OrbitControls } from "@react-three/drei";
 import BigShoes from "./BigShoes";
 import '../Styles/ShoesContainer.css';
 
-const ModelViewer = ({ modelPath, scale = 40, position = [0, 0, 0] }) => {
+const ModelViewer = ({ modelPath, scale = 60, position = [0, 0, 0.8] }) => {
+  
   return (
     <div className="ShoesContainer"> 
 
+    
     <Canvas >
       <ambientLight intensity={0.3} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
         <BigShoes modelPath={modelPath} scale={scale} position={position} />
-        <OrbitControls />
+        <OrbitControls  enableZoom={false} enableRotate={false}/>
       </Suspense>
     </Canvas>
+    <div className="Customize-Button">
+      <p>Welcome to Nikez Store, your premier destination for premium footwear and cutting-edge style.
+         Our website is designed to provide you with a seamless shopping experience, allowing you to explore our extensive collection of Nike shoes with ease.</p>
+         <br />
+          <p>Customize your own Nike Shoes! Unleash your creativity and design a pair that's uniquely yours. Click below to create your own design and make a style statement with Nike.</p>
+          <hr />
+          <button onClick={() => { window.location.href = '/Design'; }}>Customize Your Own Shoes</button>
+    </div>
     </div>
   );
 };

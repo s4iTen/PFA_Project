@@ -1,20 +1,26 @@
 import React, { useRef, useState, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import NavBar from "../components/NavBar";
 import { proxy, useSnapshot } from "valtio";
 import { HexColorPicker } from "react-colorful";
-import "../Styles/Design.css"
+import "../Styles/Design.css";
+import * as THREE from 'three';
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
+import {useScreenshot} from 'use-react-screenshot'
+
 
 const state = proxy({
   current: null,
   items: {
     TheEntireShoes: "#ffffff",
-    Laces006: "#ff0000",
-    Nike_Logo_right001: "#ff0000",
-    Ticket: "#ff0000",
-    Shoe_Flap002: "#ff0000",
+    Laces006: "#ffffff",
+    Nike_Logo_right001: "#ffffff",
+    Ticket: "#ffffff",
+    Shoe_Flap002: "#ffffff",
     BackOftheShoes: "#ffffff",
     TheFrontOfTheShoes: "#fffffff",
     BottomOfTheShoes: "#ffffff",
@@ -23,25 +29,120 @@ const state = proxy({
   },
 });
 
+
 function Picker() {
+  const [image, takeScreenShot] = useScreenshot({
+    
+  });
+  const isLoggedIn = !!localStorage.getItem('current user');
+  const [selectedItem, setSelectedItem] = useState(null);
   const snap = useSnapshot(state);
+
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  const userId = currentUser ? currentUser.uid : "";
+  const db = getFirestore();
 
   const handleColorChange = (key, color) => {
     state.items[key] = color;
   };
 
+  const handleItemClick = (key) => {
+    if (selectedItem === key) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem(key);
+    }
+  };
+
+  const handleColorInputChange = (key, event) => {
+    state.items[key] = event.target.value;
+  };
+
+  const handleShoeNameChange = (event) => {
+    state.shoeName = event.target.value;
+  };
+
+
+
+  const handleSave = async () => {
+    
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().substring(0, 10); // Format the date as YYYY-MM-DD
+  
+    const colorDictionary = {
+      userId: userId,
+      shoeName: state.shoeName,
+      creationDate: formattedDate, // Use the formatted current date
+      ...snap.items,
+    };
+  
+    if (isLoggedIn) {
+      try {
+        const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
+        const existingDictionary = querySnapshot.docs.find((doc) => {
+          const data = doc.data();
+          if (data.userId === userId && data.shoeName === state.shoeName) { // Check if shoe name already exists
+            for (const key in snap.items) {
+              if (data[key] !== snap.items[key]) {
+                return false;
+              }
+            }
+            return true;
+          }
+          return false;
+        });
+  
+        if (existingDictionary) {
+          alert("You have already created this shoes before.");
+          return;
+        }
+  
+        const docRef = await addDoc(collection(db, "color-dictionaries"), colorDictionary);
+        console.log("Color dictionary saved with ID: ", docRef.id);
+        alert("Created successfully");
+      } catch (error) {
+        console.error("Error saving color dictionary: ", error);
+      }
+    } else {
+      if (!isLoggedIn) {
+        // Store the data locally
+        localStorage.setItem('savedData', JSON.stringify(snap.items));
+        window.location.href='/Login';
+        return;
+      }
+    }
+  };
+  
   return (
     <div className="slider">
+      <input
+        type="text"
+        placeholder="Shoe Name"
+        value={state.shoeName}
+        onChange={handleShoeNameChange}
+      />
       {Object.entries(snap.items).map(([key, color]) => (
         <div key={key} className="input">
-          <HexColorPicker
-            className="picker"
-            color={color}
-            onChange={(newColor) => handleColorChange(key, newColor)}
+          <h1 onClick={() => handleItemClick(key)}>{key}</h1>
+          {selectedItem === key && (
+            <HexColorPicker
+              className="picker"
+              color={color}
+              onChange={(newColor) => handleColorChange(key, newColor)}
+            />
+          )}
+          <input
+            className="color-input"
+            type="text"
+            value={color}
+            onChange={(event) => handleColorInputChange(key, event)}
           />
-          <h1>{key}</h1>
         </div>
       ))}
+      <button className="save-button" onClick={handleSave}>
+        Save
+      </button>
     </div>
   );
 }
@@ -59,10 +160,11 @@ function Mesh(props) {
 
 function Shoes(props) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
-  const snap = useSnapshot(state);
+  const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
+
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={pivot} position={[4, 0, 0]} rotation={[0.8, 0, 0]}>
       <Mesh
         geometry={nodes.BackLeftAndRight.geometry}
         material={materials["default"]}
@@ -161,18 +263,23 @@ export default function Design() {
   return (
     <>
       <NavBar />
-      <div className="canvas-container">
-        <Canvas>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[10, 10, 20]} />
+      <div className="Design-Page">
+        <div className="canvas-container" id="design-container">
+          <Canvas>
+            <ambientLight intensity={0.5} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <pointLight position={[10, 10, 20]} />
 
-          <Suspense fallback={null}>
-            <Shoes />
-          </Suspense>
-          <OrbitControls />
-        </Canvas>
-        <Picker />
+            <Suspense fallback={null}>
+              <Shoes />
+            </Suspense>
+            <OrbitControls enableZoom={false} />
+          </Canvas>
+        </div>
+        <div className="Logos-container">
+          <h1>Logos Container</h1>
+          <Picker />
+        </div>
       </div>
     </>
   );

@@ -5,13 +5,15 @@ import NikeShoesPage from '../components/Data_shoes';
 import Gallery from '../components/Gallery';
 import Newseason from '../components/Newseason';
 import Footer from '../components/Footer';
+import SavedCardList from '../components/SavedCard';
 
 
 const Main = () => {
   return (
-    <div>
+    <div className='Content-Container'>
       <NavBar/>
       <ModelViewer scale="40" modelPath={"/Jordan.glb"} style={{ pointerEvents: "none" }}/>
+      <SavedCardList />
       <NikeShoesPage />
       <Gallery />
       <Newseason />

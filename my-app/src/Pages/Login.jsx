@@ -4,8 +4,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
+  const location = useLocation();
+  const savedData = location.state && location.state.savedData;
+
   const onChange = () => {
     console.log("changed");
     setCaptchaDone(true);
@@ -36,7 +40,12 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         localStorage.setItem("current user", user.uid);
-        window.location.href = "/";
+        if (savedData) {
+          // Navigate back to the Design page with the saved data
+          window.location.href = "/Design";
+        } else {
+          window.location.href = "/";
+        }
       })
       .catch((error) => {
         const errorCode = error.code;

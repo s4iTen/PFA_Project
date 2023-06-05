@@ -1,5 +1,6 @@
-*{
-  text-transform: capitalize;
+.Content-Container {
+  background-color: #e7e3d9;
+
 }
 .card {
   border: 1px solid #ccc;
@@ -21,7 +22,9 @@
 
   .card-body {
     flex: 1;
+
   }
+
 
   h2 {
     font-size: 18px;
@@ -87,7 +90,7 @@
   img {
     width: 120px;
   }
-  color: #F5F5DC;
+  color: #F8F6F4;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -118,12 +121,12 @@
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
-      background-color: #F5F5DC;
+      background-color: #F8F6F4;
       color: black;
       transition: background-color 0.2s;
   
       &:hover {
-        background-color: #d1d1ba;
+        background-color: #f8f6f493;
       }
       Link {
         list-style: none;

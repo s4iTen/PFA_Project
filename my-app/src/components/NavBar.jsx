@@ -3,6 +3,7 @@ import { signOut } from 'firebase/auth';
 import auth from '../firebase';
 import { useState } from 'react';
 import "../Styles/Menu.css"
+import "../Styles/Style.scss"
 import { motion, Variants } from "framer-motion";
 import Logo from "../assets/logo.png"
 

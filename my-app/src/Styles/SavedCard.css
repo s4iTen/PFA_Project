@@ -1,0 +1,20 @@
+.Shoe-Container {
+    width: 500px;
+    height: 500px;
+    background-color: aliceblue;
+}
+.Shoe-Container Canvas {
+    width: 500px;
+    height: 300px;
+    margin-top: 20px;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.description h1 , .description h2{
+    margin: 0;
+}

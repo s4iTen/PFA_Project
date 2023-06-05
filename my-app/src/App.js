@@ -1,6 +1,4 @@
-import Card from './components/Card';
 import './App.css';
-import NavBar from './components/NavBar';
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
@@ -16,6 +14,8 @@ function App() {
         <Route path="/SignUp" element={<SignUp />}/>
         <Route path="/" element={<Main />}/>
         <Route path="/Design" element={<Design />}/>
+
+
       </Routes>
       </BrowserRouter>
   );

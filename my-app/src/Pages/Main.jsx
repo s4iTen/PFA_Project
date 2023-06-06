@@ -5,7 +5,7 @@ import NikeShoesPage from '../components/Data_shoes';
 import Gallery from '../components/Gallery';
 import Newseason from '../components/Newseason';
 import Footer from '../components/Footer';
-import SavedCardList from '../components/SavedCard';
+import SavedCardList from '../components/SavedCardList';
 
 
 const Main = () => {

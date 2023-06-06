@@ -118,7 +118,7 @@ const NavBar = () => {
               }}
               style={{ pointerEvents: isOpen ? "auto" : "none" }} className='menuDrop'
             >
-              <motion.li variants={itemVariants} className='menuDropLi'>Item 1 </motion.li>
+              <motion.li  onClick={() => { window.location.href = '/MyShoes'; }} variants={itemVariants} className='menuDropLi'>My Shoes </motion.li>
               <motion.li variants={itemVariants} className='menuDropLi'>Item 2 </motion.li>
               <motion.li variants={itemVariants} className='menuDropLi'>Item 3 </motion.li>
               <motion.li variants={itemVariants} className='menuDropLi'>Item 4 </motion.li>

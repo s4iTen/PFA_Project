@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { firestore } from './firebase';
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,12 +15,15 @@ const SavedCardList = () => {
     const fetchData = async () => {
       try {
         const db = getFirestore();
-        const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
-        const colorDictionaries = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setColorDictionaries(colorDictionaries);
+        const colRef = collection(db, "color-dictionaries");
+        const docsSnap = await getDocs(colRef);
+
+        const dictionaries = [];
+        docsSnap.forEach((doc) => {
+          dictionaries.push(doc.data());
+        });
+
+        setColorDictionaries(dictionaries);
         setIsLoading(false);
       } catch (error) {
         console.error("Error retrieving color dictionaries: ", error);
@@ -35,12 +37,21 @@ const SavedCardList = () => {
     return <div>Loading...</div>;
   }
 
+  if (colorDictionaries.length === 0) {
+    return <div>No color dictionaries found.</div>;
+  }
+
   return (
-    <div>
-      <Swiper navigation pagination={{ clickable: true }}>
-        {colorDictionaries.map((colorDictionary) => (
-          <SwiperSlide key={colorDictionary.id}>
-            <SavedCard colorDictionary={colorDictionary} />
+    <div className="swiper-container">
+      <h1>Designed Shoes:</h1>
+      <Swiper
+        navigation
+        slidesPerView={4} // Display 4 cards per view
+        spaceBetween={10} // Space between each card
+      >
+        {colorDictionaries.map((dictionary, idx) => (
+          <SwiperSlide key={idx}>
+            <SavedCard colorDictionary={dictionary} />
           </SwiperSlide>
         ))}
       </Swiper>

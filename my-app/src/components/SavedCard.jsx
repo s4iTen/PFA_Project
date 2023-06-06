@@ -1,28 +1,10 @@
-import React, { useEffect, useState, useRef, Suspense } from "react";
+import React, { useRef, Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 import * as THREE from 'three';
 import '../Styles/SavedCard.css'
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { proxy } from "valtio";
-import { useSnapshot } from "valtio";
 
-const state = proxy({
-  current: null,
-  items: {
-    TheEntireShoes: "#ffffff",
-    Laces006: "#ffffff",
-    Nike_Logo_right001: "#ffffff",
-    Ticket: "#ff0000",
-    Shoe_Flap002: "#ffffff",
-    BackOftheShoes: "#ffffff",
-    TheFrontOfTheShoes: "#fffffff",
-    BottomOfTheShoes: "#ffffff",
-    theFrontFromINside: "#ffffff",
-    BackLeftAndRight: "#ffffff",
-  },
-});
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -144,39 +126,7 @@ function Shoes({ colorDictionary}) {
   );
 }
 
-const SavedCard = ({  width, height }) => {
-  const [colorDictionary, setColorDictionary] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const db = getFirestore();
-          const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
-          const colorDictionaries = querySnapshot.docs.map((doc) => doc.data());
-          const mergedColorDictionary = {};
-          colorDictionaries.forEach((dictionary) => {
-            Object.entries(dictionary).forEach(([key, value]) => {
-              mergedColorDictionary[key] = value;
-            });
-          });
-          setColorDictionary(mergedColorDictionary);
-          // console.log(mergedColorDictionary)
-          setIsLoading(false);
-        } catch (error) {
-          console.error("Error retrieving color dictionaries: ", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!colorDictionary) {
-    return <div>Error: Color dictionary not found.</div>;
-  }
+const SavedCard = ({ colorDictionary }) => {
 
   return (
     <div className="Shoe-Container">
@@ -184,7 +134,7 @@ const SavedCard = ({  width, height }) => {
         <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0 ] }} >
           <OrbitControls enableZoom={false} enableRotate={false} />
           <Suspense fallback={null}>
-            <Shoes colorDictionary={colorDictionary} width={width} height={height}/>
+            <Shoes colorDictionary={colorDictionary} />
           </Suspense>
           <ambientLight intensity={0.5} />
           <directionalLight position={[0, 10, 5]} intensity={0.6} />

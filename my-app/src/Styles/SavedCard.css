@@ -1,7 +1,8 @@
 .Shoe-Container {
-    width: 500px;
+    width: 350px;
     height: 500px;
     background-color: aliceblue;
+    margin: auto;
 }
 .Shoe-Container Canvas {
     width: 500px;

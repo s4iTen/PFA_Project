@@ -5,7 +5,7 @@ import shoeData from "../data/shoes.json";
 import "../Styles/card.css";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
+
 
 // Initialize Swiper modules
 SwiperCore.use([Navigation, Pagination]);

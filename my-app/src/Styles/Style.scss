@@ -1,5 +1,5 @@
 .Content-Container {
-  background-color: #e7e3d9;
+  background-color: #F7E1AE;
 
 }
 .card {
@@ -87,16 +87,18 @@
 }
 // navbar
 .navbar{
+  
   img {
     width: 120px;
+    
   }
   color: #F8F6F4;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  background-color: black ;
+  padding: 10px 30px;
+  background-color: #617A55 ;
   .ul{
     display: flex;
     align-items: center;
@@ -106,7 +108,14 @@
       gap: 20px;
       li{
         cursor: pointer;
+        transition: 0.5s;
+        &:hover{
+          text-decoration:underline;
+          transition: 0.5s;
+          scale: 1.1;
+        }
       }
+      
     }
   }
   .LoginSignup{

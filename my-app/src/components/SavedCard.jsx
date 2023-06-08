@@ -1,10 +1,9 @@
 import React, { useRef, Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import * as THREE from 'three';
-import '../Styles/SavedCard.css'
+import * as THREE from "three";
+import "../Styles/SavedCard.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -16,12 +15,17 @@ function Mesh({ colorDictionary, ...props }) {
   );
 }
 
-function Shoes({ colorDictionary}) {
+function Shoes({ colorDictionary }) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
 
   return (
-    <group ref={pivot} position={[4, 0, 0]} rotation={[0.8, 0, 0]} scale={[1, 2, 2]}>
+    <group
+      ref={pivot}
+      position={[4, 0, 0]}
+      rotation={[0.8, 0, 0]}
+      scale={[1, 2, 2]}
+    >
       <Mesh
         geometry={nodes.BackLeftAndRight.geometry}
         material={materials["default"]}
@@ -127,11 +131,10 @@ function Shoes({ colorDictionary}) {
 }
 
 const SavedCard = ({ colorDictionary }) => {
-
   return (
     <div className="Shoe-Container">
       <div className="canvas-wrapper">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0 ] }} >
+        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
           <OrbitControls enableZoom={false} enableRotate={false} />
           <Suspense fallback={null}>
             <Shoes colorDictionary={colorDictionary} />
@@ -140,8 +143,18 @@ const SavedCard = ({ colorDictionary }) => {
           <directionalLight position={[0, 10, 5]} intensity={0.6} />
         </Canvas>
         <div className="description">
-          <h1>{colorDictionary.shoeName}</h1>
-          <h2>150 dt</h2>
+          <div className="name">
+            <h2>Shoe Name:</h2>
+            <h2>{colorDictionary.shoeName}</h2>
+          </div>
+          <div className="price">
+            <h2>Price: </h2>
+            <h2>150 dt</h2>
+          </div>
+          <div className="Buttons">
+            <button>Buy Now</button>
+            <button>Add to cart</button>
+          </div>
         </div>
       </div>
     </div>

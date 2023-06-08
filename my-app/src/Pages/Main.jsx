@@ -14,7 +14,7 @@ const Main = () => {
       <NavBar/>
       <ModelViewer scale="40" modelPath={"/Jordan.glb"} style={{ pointerEvents: "none" }}/>
       <SavedCardList />
-      <NikeShoesPage />
+      
       <Gallery />
       <Newseason />
       <Footer />

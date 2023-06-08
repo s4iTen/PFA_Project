@@ -10,6 +10,16 @@ const ModelViewer = ({ modelPath, scale = 60, position = [0, 0, 0.8] }) => {
     <div className="ShoesContainer"> 
 
     
+    
+    <div className="Customize-Button">
+    <h1> Welcome to Nikez Store</h1>
+      <p> your first destination for premium footwear and cutting-edge style.
+         Our website is designed to provide you with a seamless shopping experience, allowing you to explore our extensive collection of Nike shoes with ease.</p>
+         <br />
+          <p>Customize your own Nike Shoes! Unleash your creativity and design a pair that's uniquely yours. Click below to create your own design and make a style statement with Nike.</p>
+          <hr />
+          <button onClick={() => { window.location.href = '/Design'; }}>Customize Your Own Shoes</button>
+    </div>
     <Canvas >
       <ambientLight intensity={0.3} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -19,14 +29,6 @@ const ModelViewer = ({ modelPath, scale = 60, position = [0, 0, 0.8] }) => {
         <OrbitControls  enableZoom={false} enableRotate={false}/>
       </Suspense>
     </Canvas>
-    <div className="Customize-Button">
-      <p>Welcome to Nikez Store, your premier destination for premium footwear and cutting-edge style.
-         Our website is designed to provide you with a seamless shopping experience, allowing you to explore our extensive collection of Nike shoes with ease.</p>
-         <br />
-          <p>Customize your own Nike Shoes! Unleash your creativity and design a pair that's uniquely yours. Click below to create your own design and make a style statement with Nike.</p>
-          <hr />
-          <button onClick={() => { window.location.href = '/Design'; }}>Customize Your Own Shoes</button>
-    </div>
     </div>
   );
 };

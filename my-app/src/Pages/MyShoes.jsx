@@ -9,6 +9,7 @@ function MyShoes() {
 
     const [colorDictionaries, setColorDictionaries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter,Route,Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Main from './Pages/Main';
@@ -8,18 +8,18 @@ import MyShoes from './Pages/MyShoes';
 
 function App() {
   return (
-    
-      <BrowserRouter>
+
+    <BrowserRouter>
       <Routes>
-        <Route path="/Login" element={<Login />}/>
-        <Route path="/SignUp" element={<SignUp />}/>
-        <Route path="/" element={<Main />}/>
-        <Route path="/Design" element={<Design />}/>
-        <Route path="/MyShoes" element={<MyShoes />}/>
+        <Route path="/Login" element={<Login />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/Design" element={<Design />} />
+        <Route path="/MyShoes" element={<MyShoes />} />
 
 
       </Routes>
-      </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

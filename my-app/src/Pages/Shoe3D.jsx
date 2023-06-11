@@ -1,11 +1,10 @@
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import "../Styles/SavedCard.css";
 import { Canvas } from "@react-three/fiber";
+import { useLocation } from "react-router-dom";
 import { OrbitControls } from "@react-three/drei";
-import { useNavigate } from "react-router-dom";
-import { useStateContext } from "../context/StateContext";
+import '../Styles/Shoes3D.css'
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -21,13 +20,12 @@ function Shoes({ colorDictionary }) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
 
-
   return (
     <group
       ref={pivot}
       position={[4, 0, 0]}
       rotation={[0.8, 0, 0]}
-      scale={[1, 2, 2]}
+      scale={[1, 1, 1]}
     >
       <Mesh
         geometry={nodes.BackLeftAndRight.geometry}
@@ -132,49 +130,26 @@ function Shoes({ colorDictionary }) {
     </group>
   );
 }
-
-const SavedCard = ({ colorDictionary }) => {
-  const { onAdd } = useStateContext();
-  const navigate = useNavigate();
-  const CardData = () => {
-
-    const Data = colorDictionary;
-    console.log(Data);
-    navigate('/Shoe3D', {state:{colorDictionary}})
-  };
-
-  const addToCart = (product) => {
-    onAdd(product, 1);
-  };
+const Shoe3D = () => {
+  const location = useLocation();
+  const { colorDictionary } = location.state;
+  useEffect(()=> {
+    console.log(colorDictionary);
+  }, [colorDictionary])
 
   return (
-    <div className="Shoe-Container" onClick={CardData}>
-      <div className="canvas-wrapper">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-          <OrbitControls enableZoom={false} enableRotate={false} />
-          <Suspense fallback={null}>
-            <Shoes colorDictionary={colorDictionary} />
-          </Suspense>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[0, 10, 5]} intensity={0.6} />
-        </Canvas>
-        <div className="description">
-          <div className="name">
-            <h2>Shoe Name:</h2>
-            <h2>{colorDictionary.shoeName}</h2>
-          </div>
-          <div className="price">
-            <h2>Price: </h2>
-            <h2>150 dt</h2>
-          </div>
-          <div className="Buttons">
-            <button>Buy Now</button>
-            <button button onClick={() => addToCart(colorDictionary)}>Add to cart</button>
-          </div>
-        </div>
-      </div>
+    <div className="canvasContainer">
+      <h1>Shoe3d</h1>
+      <Canvas  dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[0, 10, 5]} intensity={0.6} />
+        <Suspense fallback={null}>
+          <Shoes colorDictionary={colorDictionary} />
+        </Suspense>
+        <OrbitControls enableZoom={false} />
+      </Canvas>
     </div>
   );
 };
 
-export default SavedCard;
+export default Shoe3D;

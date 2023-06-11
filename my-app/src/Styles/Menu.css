@@ -7,9 +7,17 @@
   width: 100px;
   padding-inline-start: 0px;
   padding: 10px 0;
+  z-index: 1000;
+}
+.menuDropLi:hover {
+  background-color: #617A55;
+  color: aliceblue;
+  transition: 0.5s;
 }
 .menuDropLi{
   padding: 5px 10px 10px 10px;
+  cursor: pointer;
+  color: black; 
 }
 .menuButton {
   display: flex;

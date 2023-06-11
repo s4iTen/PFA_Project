@@ -31,9 +31,7 @@ const state = proxy({
 
 
 function Picker() {
-  const [image, takeScreenShot] = useScreenshot({
-    
-  });
+  const [image, takeScreenShot] = useScreenshot({});
   const isLoggedIn = !!localStorage.getItem('current user');
   const [selectedItem, setSelectedItem] = useState(null);
   const snap = useSnapshot(state);
@@ -63,26 +61,23 @@ function Picker() {
     state.shoeName = event.target.value;
   };
 
-
-
   const handleSave = async () => {
-    
     const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().substring(0, 10); // Format the date as YYYY-MM-DD
-  
+    const formattedDate = currentDate.toISOString().substring(0, 10);
+
     const colorDictionary = {
       userId: userId,
       shoeName: state.shoeName,
-      creationDate: formattedDate, // Use the formatted current date
+      creationDate: formattedDate,
       ...snap.items,
     };
-  
+
     if (isLoggedIn) {
       try {
         const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
         const existingDictionary = querySnapshot.docs.find((doc) => {
           const data = doc.data();
-          if (data.userId === userId && data.shoeName === state.shoeName) { // Check if shoe name already exists
+          if (data.userId === userId && data.shoeName === state.shoeName) {
             for (const key in snap.items) {
               if (data[key] !== snap.items[key]) {
                 return false;
@@ -92,12 +87,12 @@ function Picker() {
           }
           return false;
         });
-  
+
         if (existingDictionary) {
           alert("You have already created this shoes before.");
           return;
         }
-  
+
         const docRef = await addDoc(collection(db, "color-dictionaries"), colorDictionary);
         console.log("Color dictionary saved with ID: ", docRef.id);
         alert("Created successfully");
@@ -106,14 +101,13 @@ function Picker() {
       }
     } else {
       if (!isLoggedIn) {
-        // Store the data locally
         localStorage.setItem('savedData', JSON.stringify(snap.items));
-        window.location.href='/Login';
+        window.location.href = '/Login';
         return;
       }
     }
   };
-  
+
   return (
     <div className="slider">
       <input
@@ -124,20 +118,35 @@ function Picker() {
       />
       {Object.entries(snap.items).map(([key, color]) => (
         <div key={key} className="input">
-          <h1 onClick={() => handleItemClick(key)}>{key}</h1>
+          <button
+            className={`item-button ${selectedItem === key ? 'active' : ''}`}
+            onClick={() => handleItemClick(key)}
+          >
+            {key}
+          </button>
           {selectedItem === key && (
-            <HexColorPicker
-              className="picker"
-              color={color}
-              onChange={(newColor) => handleColorChange(key, newColor)}
-            />
+            <>
+              <div className="picker-container">
+                <div
+                  className="picker-color"
+                  style={{ backgroundColor: color }}
+                  onClick={() => handleItemClick(key)}
+                />
+                <div className="picker-overlay">
+                  <HexColorPicker
+                    color={color}
+                    onChange={(newColor) => handleColorChange(key, newColor)}
+                  />
+                </div>
+              </div>
+              <input
+                className="color-input"
+                type="text"
+                value={color}
+                onChange={(event) => handleColorInputChange(key, event)}
+              />
+            </>
           )}
-          <input
-            className="color-input"
-            type="text"
-            value={color}
-            onChange={(event) => handleColorInputChange(key, event)}
-          />
         </div>
       ))}
       <button className="save-button" onClick={handleSave}>
@@ -264,6 +273,10 @@ export default function Design() {
     <>
       <NavBar />
       <div className="Design-Page">
+        <div className="Logos-container">
+          <h1>Logos Container</h1>
+          <Picker />
+        </div>
         <div className="canvas-container" id="design-container">
           <Canvas>
             <ambientLight intensity={0.5} />
@@ -275,10 +288,6 @@ export default function Design() {
             </Suspense>
             <OrbitControls enableZoom={false} />
           </Canvas>
-        </div>
-        <div className="Logos-container">
-          <h1>Logos Container</h1>
-          <Picker />
         </div>
       </div>
     </>

@@ -168,8 +168,16 @@ const SavedCard = ({ colorDictionary }) => {
             <h2>150 dt</h2>
           </div>
           <div className="Buttons">
-            <button>Buy Now</button>
-            <button button onClick={() => addToCart(colorDictionary)}>Add to cart</button>
+            <button onClick={(event) => {
+    event.stopPropagation();
+    // Handle the button click logic here
+  }}
+>Buy Now</button>
+            <button onClick={(event) => {
+    event.stopPropagation();
+    addToCart(colorDictionary);
+  }}
+>Add to cart</button>
           </div>
         </div>
       </div>

@@ -143,9 +143,6 @@ const SavedCard = ({ colorDictionary }) => {
     navigate('/Shoe3D', {state:{colorDictionary}})
   };
 
-  const addToCart = (product) => {
-    onAdd(product, 1);
-  };
 
   return (
     <div className="Shoe-Container" onClick={CardData}>
@@ -162,14 +159,6 @@ const SavedCard = ({ colorDictionary }) => {
           <div className="name">
             <h2>Shoe Name:</h2>
             <h2>{colorDictionary.shoeName}</h2>
-          </div>
-          <div className="price">
-            <h2>Price: </h2>
-            <h2>150 dt</h2>
-          </div>
-          <div className="Buttons">
-            <button>Buy Now</button>
-            <button button onClick={() => addToCart(colorDictionary)}>Add to cart</button>
           </div>
         </div>
       </div>

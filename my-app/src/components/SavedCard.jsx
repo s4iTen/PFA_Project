@@ -5,6 +5,7 @@ import "../Styles/SavedCard.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
+import { useStateContext } from "../context/StateContext";
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -19,6 +20,7 @@ function Mesh({ colorDictionary, ...props }) {
 function Shoes({ colorDictionary }) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
+
 
   return (
     <group
@@ -132,12 +134,17 @@ function Shoes({ colorDictionary }) {
 }
 
 const SavedCard = ({ colorDictionary }) => {
+  const { onAdd } = useStateContext();
   const navigate = useNavigate();
   const CardData = () => {
 
     const Data = colorDictionary;
     console.log(Data);
     navigate('/Shoe3D', {state:{colorDictionary}})
+  };
+
+  const addToCart = (product) => {
+    onAdd(product, 1);
   };
 
   return (
@@ -162,7 +169,7 @@ const SavedCard = ({ colorDictionary }) => {
           </div>
           <div className="Buttons">
             <button>Buy Now</button>
-            <button>Add to cart</button>
+            <button button onClick={() => addToCart(colorDictionary)}>Add to cart</button>
           </div>
         </div>
       </div>

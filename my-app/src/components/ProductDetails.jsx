@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { client, urlFor } from "../lib/client";
 import NavBar from "./NavBar";
+import "../Styles/globals.css";
+import { useStateContext } from "../context/StateContext";
+import {
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiFillStar,
+  AiOutlineStar,
+} from "react-icons/ai";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [index, setIndex] = useState(0);
+  const [otherProducts, setOtherProducts] = useState([]);
+  const { decQty, incQty, qty, onAdd } = useStateContext();
+  const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -17,6 +29,9 @@ const ProductDetails = () => {
         if (result.length === 1) {
           setProduct(result[0]);
           console.log(result);
+          if (result[0].sizes && result[0].sizes.length > 0) {
+            setSelectedSize(result[0].sizes[0]);
+          }
         } else {
           console.error("Product not found.");
         }
@@ -25,7 +40,20 @@ const ProductDetails = () => {
       }
     };
 
+    const fetchOtherProducts = async () => {
+      try {
+        const result = await client.fetch(
+          `*[_type == "product" && _id != "${id}"]`
+        );
+        setOtherProducts(result);
+        console.log(result);
+      } catch (error) {
+        console.error("Error fetching other products:", error);
+      }
+    };
+
     fetchProduct();
+    fetchOtherProducts();
   }, [id]);
 
   const handleQuantityDecrease = () => {
@@ -39,15 +67,11 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    // Implement the logic to add the product to the cart
-    // You can use a state or a separate cart management system
     console.log("Product added to cart:", product);
     console.log("Selected quantity:", quantity);
   };
 
   const handleBuyNow = () => {
-    // Implement the logic for buying the product
-    // You can redirect the user to a checkout page or process the purchase here
     console.log("Buying product:", product);
     console.log("Selected quantity:", quantity);
   };
@@ -56,31 +80,109 @@ const ProductDetails = () => {
     return <div>Loading...</div>;
   }
 
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
+
   return (
     <div>
       <NavBar />
-      <h1>{product.name}</h1>
-      <img src={urlFor(product.image[0]).url()} alt={product.name} />
-      <h3>{product.price}DT</h3>
-      <h3>{product.details}</h3>
-
       <div>
-        <label htmlFor="quantity">Quantity:</label>
-        <button onClick={handleQuantityDecrease}>-</button>
-        <span id="quantity">{quantity}</span>
-        <button onClick={handleQuantityIncrease}>+</button>
+        <div className="product-detail-container">
+          <div>
+            <div className="image-container">
+              <img
+                src={urlFor(product.image && product.image[index])}
+                className="product-detail-image"
+              />
+            </div>
+            <div className="small-images-container">
+              {product.image?.map((item, i) => (
+                <img
+                  key={i}
+                  src={urlFor(item)}
+                  className={
+                    i === index ? "small-image selected-image" : "small-image"
+                  }
+                  onMouseEnter={() => setIndex(i)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="product-detail-desc">
+            <h1>{product.name}</h1>
+            <div className="reviews">
+              <div>
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiFillStar />
+                <AiOutlineStar />
+              </div>
+              <p>(20)</p>
+            </div>
+            <h2>Details: </h2>
+            <p>{product.details}</p>
+            <p className="price">{product.price}DT</p>
+            <div className="quantity">
+              <h2>Quantity:</h2>
+              <p className="quantity-desc">
+                <span className="minus" onClick={decQty}>
+                  <AiOutlineMinus />
+                </span>
+                <span className="num">{qty}</span>
+                <span className="plus" onClick={incQty}>
+                  <AiOutlinePlus />
+                </span>
+              </p>
+            </div>
+            <div className="sizes">
+              <h2>Sizes:</h2>
+              <div className="size-options">
+                {product.sizes &&
+                  product.sizes.map((size, i) => (
+                    <button key={i} className="size-option">
+                      {size}
+                    </button>
+                  ))}
+              </div>
+            </div>
+            <button data-text="Awesome" className="button">
+              {" "}
+              <span className="actual-text" onClick={handleAddToCart}>
+                &nbsp;Buy NoW&nbsp;
+              </span>
+              <span className="hover-text" aria-hidden="true">
+                &nbsp;Nikez&nbsp;
+              </span>
+            </button>
+          </div>
+        </div>
+        <div className="maylike-products-wrapper">
+          <div className="marquee">
+            <h2>You may also like</h2>
+            <div className="maylike-products-container track">
+              {otherProducts.map((otherProduct) => (
+                <div key={otherProduct._id}>
+                  <a href={`/product/${otherProduct._id}`}>
+                    <img
+                      src={urlFor(
+                        otherProduct.image && otherProduct.image[0]
+                      ).url()}
+                      alt={otherProduct.name}
+                      width={250}
+                      height={250}
+                      style={{ borderRadius: "15px" }}
+                    />
+                    <h1>{otherProduct.name}</h1>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-
-      <button onClick={handleAddToCart}>Add to Cart</button>
-      <button onClick={handleBuyNow}>Buy Now</button>
-
-      {product.image.slice(1).map((image, index) => (
-        <img
-          key={index}
-          src={urlFor(image).url()}
-          alt={`${product.name} - Image ${index + 4}`}
-        />
-      ))}
     </div>
   );
 };

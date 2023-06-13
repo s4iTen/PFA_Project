@@ -89,8 +89,8 @@
 .navbar{
   
   img {
-    width: 120px;
-    
+    width: 200px;
+    margin-left: 10px;
   }
   color: #F8F6F4;
   font-weight: 600;
@@ -98,7 +98,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 30px;
-  background-color: #617A55 ;
+  background-image: url('../assets/nav.png');
+  background-size: cover;
+  background-position: -1px;
+  background-repeat: no-repeat;
   .ul{
     display: flex;
     align-items: center;

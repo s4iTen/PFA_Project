@@ -35,6 +35,15 @@ export default {
         name: 'details',
         title: 'Details',
         type: 'string',
-      }
+      },
+      {
+        name: 'sizes',
+        title: 'Sizes',
+        type: 'array',
+        of: [{ type: 'string' }],
+        options: {
+          layout: 'tags', // This will render the sizes as tags in the Sanity Studio
+        },
+      },
     ]
   }

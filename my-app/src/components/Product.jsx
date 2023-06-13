@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../lib/client";
-import "../Styles/card.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useStateContext } from "../context/StateContext";
+import "../Styles/globals.css"
 
 SwiperCore.use([Navigation]);
 
-const Product = () => {
+const Product = () => { 
   const { onAdd } = useStateContext();
+  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

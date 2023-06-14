@@ -6,6 +6,7 @@ import Newseason from "../components/Newseason";
 import Footer from "../components/Footer";
 import SavedCardList from "../components/SavedCardList";
 import Product from "../components/Product";
+import auth from "../firebase";
 
 const Main = () => {
   return (
@@ -17,7 +18,7 @@ const Main = () => {
         style={{ pointerEvents: "none" }}
       />
       <div>
-      <SavedCardList />
+        <SavedCardList />
       </div>
 
       <Product />

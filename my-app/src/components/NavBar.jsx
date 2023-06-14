@@ -4,14 +4,37 @@ import auth from "../firebase";
 import { useState } from "react";
 import "../Styles/Menu.css";
 import "../Styles/Style.scss";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Logo from "../assets/logo.png";
 import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 import { AiOutlineShopping } from "react-icons/ai";
+import sanityClient from '@sanity/client';
 import '../Styles/globals.css';
 
+
+const sanityConfig = {
+  projectId: 'your-project-id',
+  dataset: 'your-dataset',
+};
+const client = sanityClient(sanityConfig);
+
+
 const NavBar = () => {
+
+
+  const user = auth.currentUser;
+  const AdminId = 'VFDBZoqI6Ehi4nAF5aauCVOK4P52';
+  let userId;
+
+  if (user) {
+    userId = user.uid;
+    // Do something with the user ID
+  }
+  const handleAddItem = () => {
+      window.location.href='https://sanity-project-iota.vercel.app/'
+    };
+
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
   const itemVariants = {
@@ -178,22 +201,22 @@ const NavBar = () => {
                 >
                   My Shoes{" "}
                 </motion.li>
-                <motion.li variants={itemVariants} className="menuDropLi">
-                  Item 2{" "}
-                </motion.li>
+                {AdminId === userId && (
+                  <motion.li variants={itemVariants} className="menuDropLi" onClick={handleAddItem}>
+                    Add Item
+                  </motion.li>
+                )}
                 <motion.li variants={itemVariants} className="menuDropLi">
                   Item 3{" "}
                 </motion.li>
                 <motion.li variants={itemVariants} className="menuDropLi">
                   Item 4{" "}
                 </motion.li>
-                <motion.li variants={itemVariants} className="menuDropLi">
-                  Item 5{" "}
+                <motion.li onClick={handleSignOut} variants={itemVariants} className="menuDropLi">
+                Sign Out{" "}
                 </motion.li>
               </motion.ul>
             </motion.nav>
-
-            <button onClick={handleSignOut}>Sign Out</button>
           </div>
         )}
       </div>

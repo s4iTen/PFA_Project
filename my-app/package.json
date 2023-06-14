@@ -47,6 +47,7 @@
     "use-react-screenshot": "^3.0.0",
     "uuid": "^9.0.0",
     "valtio": "^1.10.5",
+    "vite": "^4.3.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

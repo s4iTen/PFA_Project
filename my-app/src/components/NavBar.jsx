@@ -85,10 +85,10 @@ const NavBar = () => {
     : "dropdown-content";
   return (
     <div className="navbar">
-      <div className="ul">
         <a href="/">
           <img src={Logo} alt="" />
         </a>
+      <div className="ul">
         <ul>
           <li>
             {" "}

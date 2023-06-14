@@ -2,7 +2,7 @@ import React, { useRef, Suspense, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom"; 
 import { OrbitControls } from "@react-three/drei";
 import "../Styles/cart.css";
 import NavBar from "../components/NavBar";

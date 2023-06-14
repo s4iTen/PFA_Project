@@ -1,14 +1,31 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
-import Card from '../components/Card'
+import React from "react";
+import NavBar from "../components/NavBar";
+import ModelViewer from "../components/Shoes";
+import Gallery from "../components/Gallery";
+import Newseason from "../components/Newseason";
+import Footer from "../components/Footer";
+import SavedCardList from "../components/SavedCardList";
+import Product from "../components/Product";
+import auth from "../firebase";
+
 const Main = () => {
   return (
-    <div>
-        <NavBar/>
-        <Card/>
-        
-    </div>
-  )
-}
+    <div className="Content-Container">
+      <NavBar />
+      <ModelViewer
+        scale="40"
+        modelPath={"/Jordan.glb"}
+        style={{ pointerEvents: "none" }}
+      />
+      <div>
+        <SavedCardList />
+      </div>
 
-export default Main
+      <Product />
+      <Newseason />
+      <Footer />
+    </div>
+  );
+};
+
+export default Main;

@@ -1,5 +1,6 @@
-*{
-  text-transform: capitalize;
+.Content-Container {
+  background-color: #F7E1AE;
+
 }
 .card {
   border: 1px solid #ccc;
@@ -21,7 +22,9 @@
 
   .card-body {
     flex: 1;
+
   }
+
 
   h2 {
     font-size: 18px;
@@ -85,34 +88,58 @@
 }
 // navbar
 .navbar{
+  
+  img {
+    width: 200px;
+    margin-left: 10px;
+  }
+  color: #F8F6F4;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  background-color: #ccc;
-  div{
+  padding: 10px 30px;
+  background-image: url('../assets/nav.png');
+  background-size: cover;
+  background-position: -1px;
+  background-repeat: no-repeat;
+  .ul{
     display: flex;
     align-items: center;
     ul{
       display: flex;
       list-style: none;
       gap: 20px;
+      li{
+        cursor: pointer;
+        transition: 0.5s;
+        &:hover{
+          text-decoration:underline;
+          transition: 0.5s;
+          scale: 1.1;
+        }
+      }
+      
     }
   }
   .LoginSignup{
-    gap: 20px;
+    div{
+      display: flex;
+      gap: 20px;
+    }
     button{
       border: none;
-      padding: 8px 16px;
+      width: 100px;
+      height: 50px;
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
-      background-color: #3498db;
-      color: #fff;
+      background-color: #F8F6F4;
+      color: black;
       transition: background-color 0.2s;
   
       &:hover {
-        background-color: #2980b9;
+        background-color: #f8f6f493;
       }
       Link {
         list-style: none;
@@ -120,21 +147,10 @@
       }
     }
   }
-  .userContainer {
-    width: auto;
-    left: 10px;
-    .userTools {
-      
-      display: none;
-      height: 100px;
-      background-color: red;
-
-    }
-  }
-  &:hover {
-    .userTools {
-      
-    }
+  .userContainer{
+    gap: 20px;
+    position: relative;
+    display: flex;
   }
   
 }

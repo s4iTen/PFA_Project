@@ -157,7 +157,6 @@ const SavedCard = ({ colorDictionary }) => {
         </Canvas>
         <div className="description">
           <div className="name">
-            <h2>Shoe Name:</h2>
             <h2>{colorDictionary.shoeName}</h2>
           </div>
         </div>

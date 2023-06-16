@@ -1,14 +1,28 @@
 const express = require('express');
+const stripe = require('stripe')('sk_test_...'); // Your secret API key
 const app = express();
 
 // Serve the static files
 app.use(express.static('public'));
 
-// Endpoint to retrieve shoe data
-app.get('/api/shoes', (req, res) => {
-  // Read the shoe data from the JSON file
-  const shoeData = require('./shoe_data.json');
-  res.json(shoeData);
+// Parse JSON bodies
+app.use(express.json());
+
+// Endpoint to create a checkout session
+app.post('/api/stripe', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        price: '{{PRICE_ID}}', // Replace with the actual price ID
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: 'http://localhost:3000/success', // Replace with your success URL
+    cancel_url: 'http://localhost:3000/cancel', // Replace with your cancel URL
+  });
+
+  res.json({ id: session.id });
 });
 
 // Start the server

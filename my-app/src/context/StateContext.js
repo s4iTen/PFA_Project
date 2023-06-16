@@ -13,6 +13,12 @@ export const StateContextProvider = ({ children }) => {
   let foundProduct;
   let index;
 
+  const addToCart = (product) => {
+    // Add your logic for adding the product to the cart here
+    // For example:
+    setCartItems([...cartItems, product]);
+  };
+
   const incQty = () => {
     setQty((prevQty) => prevQty + 1);
   };
@@ -46,7 +52,7 @@ export const StateContextProvider = ({ children }) => {
       product.quantity = quantity;
       setCartItems([...cartItems, { ...product }]);
     }
-    toast.success(`${qty} ${product.name} Added To The Cart.`);
+
   };
 
   const toggleCartItemQuantity = (id, value) => {
@@ -93,6 +99,7 @@ export const StateContextProvider = ({ children }) => {
         setCartItems,
         setTotalPrice,
         setTotalQuantities,
+        addToCart,
       }}
     >
       {children}

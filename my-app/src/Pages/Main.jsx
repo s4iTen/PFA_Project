@@ -6,6 +6,8 @@ import Newseason from "../components/Newseason";
 import Footer from "../components/Footer";
 import SavedCardList from "../components/SavedCardList";
 import Product from "../components/Product";
+import HeroBanner from "../components/HeroBanner";
+import "@stripe/stripe-js";
 
 const Main = () => {
   return (
@@ -19,9 +21,8 @@ const Main = () => {
       <div>
       <SavedCardList />
       </div>
-
+      <HeroBanner />
       <Product />
-      <Newseason />
       <Footer />
     </div>
   );

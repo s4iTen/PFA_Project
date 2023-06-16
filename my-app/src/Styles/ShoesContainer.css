@@ -1,23 +1,23 @@
-
 .ShoesContainer {
     width: 100%;
     height: 95vh;
-    background-color: #F7E1AE;
+    background-color: #ffffff;
     display: flex;
     gap: 10px;
     box-sizing: border-box;
     padding-inline: 100px;
     align-items: center;
-}
-.ShoesTextContainer {
-    width: 80%;
+  }
+  
+  .ShoesTextContainer {
+    width: 50%; /* Adjust the width as needed */
     display: flex;
     align-items: center;
     text-align: center;
-
-}
-.Customize-Button {
-    width: 50%;
+  }
+  
+  .Customize-Button {
+    width: 100%;
     color: #617A55;
     background-color: #FFF8D6;
     height: 70%;
@@ -27,13 +27,47 @@
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-}
-.Customize-Button button{
+    justify-content: center; /* Center the content vertically */
+  }
+  
+  .Customize-Button button {
     height: 50px;
-}
-.Customize-Button p {
+  }
+  
+  .Customize-Button p {
     font-size: 25px;
     display: inline;
     margin-block-start: 0;
     margin-block-end: 0;
-}
+  }
+  
+  .ModelViewerContainer {
+    width: 50%; /* Adjust the width as needed */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+  }
+  
+  .card {
+    width: 210px;
+    height: 235px;
+    background: #212121;
+    box-shadow: rgba(0, 0, 0, 0.4) 10px 20px 30px, rgba(0, 0, 0, 0.3) 10px 1px 53px 3px, rgba(1, 0, 0, 0.2) 0px -1px 3px inset;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: #fff;
+  }
+  
+  .card:hover {
+    transform: scale(1.021);
+  }
+  
+  .card:active {
+    transform: scale(0.95) rotateZ(1.1deg);
+  }
+  

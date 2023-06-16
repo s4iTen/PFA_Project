@@ -2,7 +2,7 @@ import React, { useRef, Suspense, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useLocation } from "react-router-dom"; 
+import { useLocation } from "react-router-dom";
 import { OrbitControls } from "@react-three/drei";
 import "../Styles/cart.css";
 import NavBar from "../components/NavBar";
@@ -35,11 +35,10 @@ function Shoes({ colorDictionary }) {
     const angle = elapsedTime * speed;
 
     // Calculate the x and z coordinates within the circular range
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
+    const y = Math.sin(angle) * radius;
 
     // Apply the new position to the pivot
-    pivot.current.position.z = z;
+    pivot.current.position.y = y;
   });
 
   useEffect(() => {
@@ -268,8 +267,14 @@ const Shoe3D = () => {
             <div>
               <button data-text="Awesome" className="button">
                 {" "}
-                <span className="actual-text">&nbsp;Buy NoW&nbsp;</span>
-                <span className="hover-text" aria-hidden="true">
+                <span className="actual-text" style={{ cursor: "pointer" }}>
+                  &nbsp;Buy NoW&nbsp;
+                </span>
+                <span
+                  className="hover-text"
+                  aria-hidden="true"
+                  style={{ cursor: "pointer" }}
+                >
                   &nbsp;Nikez&nbsp;
                 </span>
               </button>

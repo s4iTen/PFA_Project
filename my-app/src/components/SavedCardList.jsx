@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
 import SavedCard from "./SavedCard";
+import "../Styles/SavedCard.css";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -42,8 +42,8 @@ const SavedCardList = () => {
   }
 
   return (
-    <div className="swiper-container">
-      <h1>Designed Shoes:</h1>
+    <div>
+      <h2>Find Out What Other Styles You Can Wear </h2>
       <Swiper
         navigation
         slidesPerView={4} // Display 4 cards per view
@@ -51,7 +51,9 @@ const SavedCardList = () => {
       >
         {colorDictionaries.map((dictionary, idx) => (
           <SwiperSlide key={idx}>
+            <div className="snip1418">
             <SavedCard colorDictionary={dictionary} />
+    </div>
           </SwiperSlide>
         ))}
       </Swiper>

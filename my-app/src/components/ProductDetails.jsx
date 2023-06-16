@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { client, urlFor } from "../lib/client";
 import NavBar from "./NavBar";
 import "../Styles/globals.css";
-import { useStateContext } from "../context/StateContext";
+import { useStateContext, addToCart } from "../context/StateContext";
+
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -19,6 +20,7 @@ const ProductDetails = () => {
   const [otherProducts, setOtherProducts] = useState([]);
   const { decQty, incQty, qty, onAdd } = useStateContext();
   const [selectedSize, setSelectedSize] = useState("");
+  const { addToCart } = useStateContext();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -64,11 +66,6 @@ const ProductDetails = () => {
 
   const handleQuantityIncrease = () => {
     setQuantity(quantity + 1);
-  };
-
-  const handleAddToCart = () => {
-    console.log("Product added to cart:", product);
-    console.log("Selected quantity:", quantity);
   };
 
   const handleBuyNow = () => {
@@ -148,12 +145,20 @@ const ProductDetails = () => {
                   ))}
               </div>
             </div>
-            <button data-text="Awesome" className="button">
+            <button
+              data-text="Awesome"
+              className="button"
+              onClick=""
+            >
               {" "}
-              <span className="actual-text" onClick={handleAddToCart}>
+              <span className="actual-text" style={{ cursor: "pointer" }}>
                 &nbsp;Buy NoW&nbsp;
               </span>
-              <span className="hover-text" aria-hidden="true">
+              <span
+                className="hover-text"
+                aria-hidden="true"
+                style={{ cursor: "pointer" }}
+              >
                 &nbsp;Nikez&nbsp;
               </span>
             </button>

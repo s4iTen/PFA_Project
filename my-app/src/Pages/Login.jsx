@@ -51,10 +51,10 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(error);
-        if(errorMessage == 'Firebase: Error (auth/wrong-password).'){
-          setError('wrong password');
-        }else if (errorMessage == 'Firebase: Error (auth/user-not-found).'){
-          setError('verify your email');
+        if (errorMessage == "Firebase: Error (auth/wrong-password).") {
+          setError("wrong password");
+        } else if (errorMessage == "Firebase: Error (auth/user-not-found).") {
+          setError("verify your email");
         }
       });
   };

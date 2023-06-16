@@ -1,8 +1,0 @@
-{
-  "overrides": [
-    {
-      "files": ["src/sanity-nikez-store/**"],
-      "extends": ["@sanity/eslint-config-studio"]
-    }
-  ]
-}

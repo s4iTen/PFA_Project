@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/NavBar";
 import ModelViewer from "../components/Shoes";
-import Gallery from "../components/Gallery";
-import Newseason from "../components/Newseason";
 import Footer from "../components/Footer";
 import SavedCardList from "../components/SavedCardList";
 import Product from "../components/Product";
 import HeroBanner from "../components/HeroBanner";
-import "@stripe/stripe-js";
-
+import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Main = () => {
   return (
     <div className="Content-Container">
+      <ToastContainer />
       <NavBar />
       <ModelViewer
         scale="40"
@@ -19,7 +19,7 @@ const Main = () => {
         style={{ pointerEvents: "none" }}
       />
       <div>
-      <SavedCardList />
+        <SavedCardList />
       </div>
       <HeroBanner />
       <Product />

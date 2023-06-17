@@ -74,7 +74,6 @@ const ProductDetails = () => {
           name: product.name,
           price: product.price,
           quantity: quantity,
-          image: product.image && product.image[index], // Add the image property
         },
       ];
 

@@ -30,7 +30,6 @@ const Cart = () => {
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-        image: item.image, // Fix the property name here
       }));
 
       const response = await axios.post("http://localhost:3001/api/server", {

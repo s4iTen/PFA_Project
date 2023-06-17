@@ -4,7 +4,7 @@ const stripe = require('stripe')('sk_test_51NFb0NHo0XtniAaJZVKSIz7SMIy2rfPIjwrco
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 
 // Create a payment intent
 app.post('/api/server', async (req, res) => {

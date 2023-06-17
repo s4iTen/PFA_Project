@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { client } from "../lib/client";
+import '../Styles/globals.css';
 
 const Banner = () => {
   const [bannerData, setBannerData] = useState([]);

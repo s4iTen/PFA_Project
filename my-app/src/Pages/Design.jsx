@@ -286,7 +286,7 @@ export default function Design() {
             <Suspense fallback={null}>
               <Shoes />
             </Suspense>
-            <OrbitControls enableZoom={false} />
+            <OrbitControls enableZoom={false} enablePan={false}/>
           </Canvas>
         </div>
       </div>

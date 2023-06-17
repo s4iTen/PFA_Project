@@ -8,12 +8,14 @@ import HeroBanner from "../components/HeroBanner";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Shoesy from "../components/Shoes";
+
 const Main = () => {
   return (
     <div className="Content-Container">
       <ToastContainer />
       <NavBar />
-      <ModelViewer />
+      <Shoesy />
       <div>
         <SavedCardList />
       </div>

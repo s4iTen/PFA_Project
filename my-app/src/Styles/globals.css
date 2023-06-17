@@ -231,6 +231,21 @@ text-align: end;
   margin-top: 120px;
   background-position: center bottom -75px;
 }
+
+.footer-bannerr-container{
+  padding: 100px 40px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  position: relative;
+  height: 400px;
+  line-height: 1; 
+  color: rgb(255, 255, 255);
+  width: 100%;
+  margin-top: 120px;
+  background-position: center bottom -75px;
+}
+
 .banner-desc{
   display: flex ;
   justify-content: space-between;

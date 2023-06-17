@@ -148,7 +148,7 @@ const SavedCard = ({ colorDictionary }) => {
     <div className="Shoe-Container" onClick={CardData}>
       <div className="canvas-wrapper">
         <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-          <OrbitControls enableZoom={false} enableRotate={false} />
+          <OrbitControls enableZoom={false} enableRotate={false} enablePan={false}/>
           <Suspense fallback={null}>
             <Shoes colorDictionary={colorDictionary} />
           </Suspense>

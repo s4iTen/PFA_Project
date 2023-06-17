@@ -289,7 +289,7 @@ const Shoe3D = () => {
           <Suspense fallback={null}>
             <Shoes colorDictionary={colorDictionary} />
           </Suspense>
-          <OrbitControls enableZoom={false} />
+          <OrbitControls enableZoom={false} enablePan={false}/>
         </Canvas>
       </div>
     </>

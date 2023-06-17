@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import { client, urlFor } from "../lib/client";
 import NavBar from "./NavBar";
 import "../Styles/globals.css";
-import { useStateContext, addToCart } from "../context/StateContext";
+import { useStateContext } from "../context/StateContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import {
   AiOutlineMinus,
@@ -15,12 +17,11 @@ import {
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
   const [index, setIndex] = useState(0);
   const [otherProducts, setOtherProducts] = useState([]);
-  const { decQty, incQty, qty, onAdd } = useStateContext();
-  const [selectedSize, setSelectedSize] = useState("");
-  const { addToCart } = useStateContext();
+  const { decQty, incQty, qty } = useStateContext();
+  const [setSelectedSize] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -58,27 +59,41 @@ const ProductDetails = () => {
     fetchOtherProducts();
   }, [id]);
 
-  const handleQuantityDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const handleQuantityIncrease = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleBuyNow = () => {
-    console.log("Buying product:", product);
-    console.log("Selected quantity:", quantity);
-  };
-
   if (!product) {
     return <div>Loading...</div>;
   }
 
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
+  };
+
+  const handleCheckout = async () => {
+    try {
+      const lineItems = [
+        {
+          name: product.name,
+          price: product.price,
+          quantity: quantity,
+        },
+      ];
+
+      const response = await axios.post("http://localhost:3001/api/server", {
+        line_items: lineItems,
+      });
+
+      const { data } = response;
+      if (data && data.id) {
+        window.location = data.url;
+
+        toast.success("Thank you for your purchase!", {
+          autoClose: 8000,
+        });
+      } else {
+        console.error("Invalid response from server");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -148,7 +163,7 @@ const ProductDetails = () => {
             <button
               data-text="Awesome"
               className="button"
-              onClick=""
+              onClick={handleCheckout}
             >
               {" "}
               <span className="actual-text" style={{ cursor: "pointer" }}>

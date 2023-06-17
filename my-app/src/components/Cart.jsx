@@ -9,37 +9,11 @@ import {
 import { TiDeleteOutline } from "react-icons/ti";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
-import getStripe from "../lib/getStripe";
-import { toast } from "react-hot-toast";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
-  const handleCheckout = async () => {
-    const stripe = await getStripe();
-
-    const formattedItems = cartItems.map((item) => ({
-      name: item.name,
-      price: item.price,
-      image: item.image,
-      quantity: item.quantity,
-    }));
-
-    const response = await fetch("http://localhost:3001/api/stripe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formattedItems),
-    });
-
-    if (response.status === 500) return;
-
-    const data = await response.json();
-
-    toast.loading("redirecting...");
-
-    stripe.redirectToCheckout({ sessionId: data.session_id });
-  };
-
   const CartRef = useRef();
   const {
     totalPrice,
@@ -49,6 +23,33 @@ const Cart = () => {
     toggleCartItemQuantity,
     Remove,
   } = useStateContext();
+
+  const handleCheckout = async () => {
+    try {
+      const lineItems = cartItems.map((item) => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      }));
+
+      const response = await axios.post("http://localhost:3001/api/server", {
+        line_items: lineItems,
+      });
+
+      const { data } = response;
+      if (data && data.id) {
+        window.location = data.url;
+
+        toast.success("Thank you for your purchase!", {
+          autoClose: 4000,
+        });
+      } else {
+        console.error("Invalid response from server");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="cart-wrapper" ref={CartRef}>

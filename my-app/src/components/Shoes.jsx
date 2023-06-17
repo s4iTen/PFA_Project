@@ -161,6 +161,7 @@ export default function Shoesy() {
       <div className="footer-bannerr-container">
         <div className="bannner-desc">
           <div className="left">
+            <h1>Unstoppable</h1>
             <p>Get Your OwN Shoes</p>
             <h2>Unleash your potential</h2>
             <h3>Fly Alone</h3>

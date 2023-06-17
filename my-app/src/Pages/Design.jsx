@@ -9,7 +9,6 @@ import "../Styles/Design.css";
 import * as THREE from 'three';
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom';
 import {useScreenshot} from 'use-react-screenshot'
 
 

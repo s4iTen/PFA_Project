@@ -10,19 +10,18 @@ import "../Styles/globals.css";
 
 const state = proxy({
   items: {
-    TheEntireShoes: "#9d3e3e",
-    Laces006: "#0f0505",
-    Nike_Logo_right001: "#834a4a",
-    Ticket: "#ac5454",
-    Shoe_Flap002: "#752121",
-    BackOftheShoes: "#975959",
-    TheFrontOfTheShoes: "#361111",
-    BottomOfTheShoes: "#753636",
-    theFrontFromINside: "#c97a7a",
+    TheEntireShoes: "#ffffff",
+    Laces006: "#000000",
+    Nike_Logo_right001: "#ffffff",
+    Ticket: "#000000",
+    Shoe_Flap002: "#ffffff",
+    BackOftheShoes: "#ffffff",
+    TheFrontOfTheShoes: "#000000",
+    BottomOfTheShoes: "#ffffff",
+    theFrontFromINside: "#ffffff",
     BackLeftAndRight: "#000000",
   },
 });
-
 function Mesh(props) {
   const snap = useSnapshot(state);
   const { geometry, material, color, ...rest } = props;
@@ -36,7 +35,7 @@ function Mesh(props) {
 
 function Shoes(props) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
-  const pivot = useRef(new THREE.Object3D());
+  const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
   const [rotation, setRotation] = useState(0);
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
@@ -57,10 +56,12 @@ function Shoes(props) {
     return () => {
       clearInterval(interval);
     };
-  }, []); // Run the effect only once on mount
+  }, []); // Run the effect only once on mount3
+
+
 
   return (
-    <group ref={pivot} position={[3, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
+    <group ref={pivot} position={[4, 0, 0]} rotation={[0.8, 0, 0]}>
       <Mesh
         geometry={nodes.BackLeftAndRight.geometry}
         material={materials["default"]}
@@ -156,6 +157,7 @@ function Shoes(props) {
 }
 
 export default function Shoesy() {
+  
   return (
     <>
       <div className="footer-bannerr-container">
@@ -173,16 +175,16 @@ export default function Shoesy() {
         </div>
       </div>
       <div className="canvas-Container">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 0, 0]} angle={0.15} penumbra={1} />
-          <pointLight position={[10, 10, 20]} />
+      <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0]}} >
+            <ambientLight intensity={0.5} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <pointLight position={[10, 10, 20]} />
 
-          <Suspense fallback={null}>
-            <Shoes />
-          </Suspense>
-          <OrbitControls enableZoom={false} enablePan={false} />
-        </Canvas>
+            <Suspense fallback={null}>
+              <Shoes />
+            </Suspense>
+            <OrbitControls enableZoom={false} enablePan={false} enableRotate={false}/>
+          </Canvas>
       </div>
     </>
   );

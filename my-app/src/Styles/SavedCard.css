@@ -6,7 +6,7 @@
     min-width: 230px;
     max-width: 250px;
     width: 100%;
-    background: transparent;  
+    background-color: rgb(255, 255, 255);
     text-align: center;
     color: #000000;
     border-radius: 10px;
@@ -14,4 +14,9 @@
     margin-top: 90px;
     perspective: 20em;
     margin-bottom: 80px
+  }
+
+  h2 {
+    margin-top: 40px;
+    text-align: center;
   }

@@ -4,9 +4,10 @@ import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
 import "../Styles/ShoesContainer.css";
+import "../Styles/globals.css";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import "../Styles/globals.css";
 
 const state = proxy({
   items: {
@@ -23,18 +24,6 @@ const state = proxy({
   },
 });
 
-const model2State = {
-  BackLeftAndRight: "#ffffff",
-  BackOftheShoes: "#ffffff",
-  BottomOfTheShoes: "#ffffff",
-  Laces006: "#ffffff",
-  Nike_Logo_right001: "#ffffff",
-  Shoe_Flap002: "#ffffff",
-  TheEntireShoes: "#ffffff",
-  theFrontFromINside: "#ffffff",
-  TheFrontOfTheShoes: "#ffffff",
-  Ticket: "#ffffff",
-};
 function Mesh(props) {
   const snap = useSnapshot(state);
   const { geometry, material, color, ...rest } = props;
@@ -50,7 +39,7 @@ function Shoes(props) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
   const [rotation, setRotation] = useState(0);
-  
+
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
 
@@ -167,24 +156,49 @@ function Shoes(props) {
     </group>
   );
 }
-
 export default function Shoesy() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/design");
+  };
   return (
     <>
       <div className="footer-bannerr-container">
+        <button
+          className="button"
+          onClick={handleClick}
+          style={{ marginLeft: 800, color: "black" }}
+        >
+          {" "}
+          <span className="actual-text" style={{ cursor: "pointer" }}>
+            &nbsp;GET YOUR OWN STYLE&nbsp;
+          </span>
+          <span
+            className="hover-text"
+            aria-hidden="true"
+            style={{ cursor: "pointer" }}
+          >
+            &nbsp;GET NOW&nbsp;
+          </span>
+        </button>
+
         <div className="bannner-desc">
           <div className="left">
+            <h2>Unleash your potential</h2>
             <h1>Unstoppable</h1>
             <p>Get Your OwN Shoes</p>
-            <h2>Unleash your potential</h2>
             <h3>Fly Alone</h3>
             <div className="right">
               <h2>Step up your style</h2>
-              <h3>Unparalleled quality</h3>
+              <h3>Unparalleled Quality</h3>
+              <h2>new heights with Nikez</h2>
+              <h3> Fuel your passion</h3>
             </div>
           </div>
         </div>
       </div>
+
       <div className="canvas-Container">
         <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
           <ambientLight intensity={0.5} />
@@ -193,22 +207,6 @@ export default function Shoesy() {
 
           <Suspense fallback={null}>
             <Shoes />
-          </Suspense>
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            enableRotate={false}
-          />
-        </Canvas>
-      </div>
-      <div className="canvas-Container-second">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[10, 10, 20]} />
-
-          <Suspense fallback={null}>
-            <Shoes state={model2State} />
           </Suspense>
           <OrbitControls
             enableZoom={false}

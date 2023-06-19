@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AiOutlineMinus,
@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const CartRef = useRef();
+  const [selectedSize, setSelectedSize] = useState(null);
   const {
     totalPrice,
     totalQuantities,
@@ -25,9 +26,13 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
     try {
       const lineItems = cartItems.map((item) => ({
-        name: item.name,
+        name: `${item.name} - Size: ${selectedSize}`,
         price: item.price,
         quantity: item.quantity,
       }));
@@ -49,6 +54,10 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
   };
 
   return (
@@ -92,6 +101,16 @@ const Cart = () => {
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>
+                    <div className="sizesCart">
+                      <select value={selectedSize} onChange={handleSizeChange}>
+                        <option value="">Add Your Size</option>
+                        {item.sizes.map((size, index) => (
+                          <option key={index} value={size}>
+                            {size}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                     <h4>{item.price}DT</h4>
                   </div>
                   <div className="flex bottom">

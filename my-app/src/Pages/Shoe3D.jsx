@@ -4,7 +4,8 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import { OrbitControls } from "@react-three/drei";
-import "../Styles/cart.css";
+import "../Styles/Shoes3D.css";
+import '../Styles/cart.css';
 import NavBar from "../components/NavBar";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
@@ -317,7 +318,7 @@ const Shoe3D = () => {
           </div>
         </div>
       </div>
-      <div className="canvasContainer ">
+      <div className="d-Container">
         <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[0, 10, 5]} intensity={0.6} />

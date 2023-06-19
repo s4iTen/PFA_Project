@@ -6,6 +6,7 @@ import "../Styles/globals.css";
 import { useStateContext } from "../context/StateContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import {
   AiOutlineMinus,
@@ -21,7 +22,7 @@ const ProductDetails = () => {
   const [index, setIndex] = useState(0);
   const [otherProducts, setOtherProducts] = useState([]);
   const { decQty, incQty, qty } = useStateContext();
-  const [setSelectedSize] = useState("");
+  const [selectedSize, setSelectedSize] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,9 +33,6 @@ const ProductDetails = () => {
         if (result.length === 1) {
           setProduct(result[0]);
           console.log(result);
-          if (result[0].sizes && result[0].sizes.length > 0) {
-            setSelectedSize(result[0].sizes[0]);
-          }
         } else {
           console.error("Product not found.");
         }
@@ -63,17 +61,18 @@ const ProductDetails = () => {
     return <div>Loading...</div>;
   }
 
-  const handleSizeChange = (event) => {
-    setSelectedSize(event.target.value);
-  };
-
   const handleCheckout = async () => {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
+
     try {
       const lineItems = [
         {
-          name: product.name,
+          name: `${product.name} - Size: ${selectedSize}`,
           price: product.price,
-          quantity: quantity,
+          quantity: qty,
         },
       ];
 
@@ -96,11 +95,16 @@ const ProductDetails = () => {
     }
   };
 
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
+
   return (
     <div>
       <NavBar />
       <div>
         <div className="product-detail-container">
+        <ToastContainer />
           <div>
             <div className="image-container">
               <img
@@ -137,6 +141,17 @@ const ProductDetails = () => {
             <h2>Details: </h2>
             <p>{product.details}</p>
             <p className="price">{product.price}DT</p>
+            <div className="sizes">
+              <h2>Sizes:</h2>
+              <select value={selectedSize} onChange={handleSizeChange}>
+                <option value="">Select a size</option>
+                {product.sizes.map((size, index) => (
+                  <option key={index} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="quantity">
               <h2>Quantity:</h2>
               <p className="quantity-desc">
@@ -148,17 +163,6 @@ const ProductDetails = () => {
                   <AiOutlinePlus />
                 </span>
               </p>
-            </div>
-            <div className="sizes">
-              <h2>Sizes:</h2>
-              <div className="size-options">
-                {product.sizes &&
-                  product.sizes.map((size, i) => (
-                    <button key={i} className="size-option">
-                      {size}
-                    </button>
-                  ))}
-              </div>
             </div>
             <button
               data-text="Awesome"

@@ -90,6 +90,7 @@
   }
   
   .bannner-desc .left h2{
+    color: #212121;
     margin:18px;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
@@ -103,9 +104,11 @@
     margin-left: 400px;
     margin-top: -70px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(0, 0, 0);
   }
   .bannner-desc .right h2{
     font-size: 18px;
     margin-left: 1200px;
     font-family: cursive;
   }
+

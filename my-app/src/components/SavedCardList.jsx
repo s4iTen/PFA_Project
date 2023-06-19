@@ -53,8 +53,8 @@ const SavedCardList = () => {
           <SwiperSlide key={idx}>
             <div className="snip1418">
             <SavedCard colorDictionary={dictionary} />
-    </div>
-          </SwiperSlide>
+      </div>
+            </SwiperSlide>
         ))}
       </Swiper>
     </div>

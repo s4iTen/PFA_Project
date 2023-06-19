@@ -66,7 +66,7 @@ const Product = () => {
                 className="button"
                 onClick={() => addToCart(product)}
               >
-                <span className="actual-text" style={{ cursor: "pointer" }}>
+                <span className="actual-text" style={{ cursor: "pointer", color: "black" }}>
                   &nbsp;Go Add&nbsp;
                 </span>
                 <span

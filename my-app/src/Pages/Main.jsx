@@ -9,6 +9,10 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Shoesy from "../components/Shoes";
+import Spline from "../components/Spline";
+
+
+
 
 const Main = () => {
   return (
@@ -16,6 +20,7 @@ const Main = () => {
       <ToastContainer />
       <NavBar />
       <Shoesy />
+      {/* <Spline /> */}
       <div>
         <SavedCardList />
       </div>

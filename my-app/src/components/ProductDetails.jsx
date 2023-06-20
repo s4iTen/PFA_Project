@@ -15,6 +15,7 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
+import { color } from "framer-motion";
 
 const ProductDetails = () => {
   const { id } = useParams();

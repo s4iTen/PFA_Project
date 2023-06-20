@@ -44,7 +44,7 @@ function Shoes(props) {
     const elapsedTime = state.clock.getElapsedTime();
 
     const radius = 1;
-    const speed = 1;
+    const speed = 1;  
     const angle = elapsedTime * speed;
 
     const y = Math.sin(angle) * radius;
@@ -185,10 +185,10 @@ export default function Shoesy() {
 
         <div className="bannner-desc">
           <div className="left">
+            <h3>Fly Alone</h3>
             <h2>Unleash your potential</h2>
             <h1>Unstoppable</h1>
             <p>Get Your OwN Shoes</p>
-            <h3>Fly Alone</h3>
             <div className="right">
               <h2>Step up your style</h2>
               <h3>Unparalleled Quality</h3>

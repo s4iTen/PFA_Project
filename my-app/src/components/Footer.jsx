@@ -1,8 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../Styles/Footer.css";
 import Logo from "../assets/logo.png";
 
 function App() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="main">
       <div className="footer">
@@ -17,38 +25,41 @@ function App() {
                 "--time": `${2 + Math.random() * 2}s`,
                 "--delay": `${-1 * (2 + Math.random() * 2)}s`,
               }}
+              key={i}
             />
           ))}
         </div>
         <div className="content">
-          <p>Discover the latest Nike shoe collections and shop online.</p>
+          <h2 className="title">Discover the latest Nike shoe collections and shop online.</h2>
           <img src={Logo} alt="Logo" className="footer-logo" />
           <div className="footer-section">
             <ul className="footer-links">
               <li>
-                <a href="/">Home</a>
+                <Link to="/" onClick={scrollToTop}>
+                  Home
+                </Link>
               </li>
               <li>
-                <a href="/products">Products</a>
+                <Link to="/">Products</Link>
               </li>
               <li>
-                <a href="/about">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
+            <div className="footer-contact">
+              <h2>Contact Us</h2>
+              <h4>123 Street, Tunis</h4>
+              <h4>Email: info@nikestore.com</h4>
+              <h4>Phone: +216 56 890 250</h4>
+            </div>
           </div>
-          <div className="footer-contact">
-            <h2>Contact Us</h2>
-            <p>123 Street, City Name</p>
-            <p>Email: info@nikestore.com</p>
-            <p>Phone: +1 234 56789</p>
-          </div>
-          <p>
+          <p className="copy">
             &copy; {new Date().getFullYear()} Nike Store. All rights reserved.
           </p>
-          </div>
+        </div>
       </div>
     </div>
   );

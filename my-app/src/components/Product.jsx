@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { client, urlFor } from "../lib/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
@@ -49,8 +50,8 @@ const Product = () => {
       <Swiper navigation slidesPerView={4} spaceBetween={25}>
         {products.map((product) => (
           <SwiperSlide key={product._id}>
-            <div className="snip1418">
-              <a href={`/product/${product._id}`}>
+            <div className="snip14188">
+              <Link to={`/product/${product._id}`}>
                 <img
                   src={urlFor(product.image[0]).url()}
                   alt={product.name}
@@ -58,15 +59,14 @@ const Product = () => {
                   height={250}
                   className="img"
                 />
-
                 <h1>{product.name}</h1>
-              </a>
+              </Link>
               <button
                 data-text="Awesome"
                 className="button"
                 onClick={() => addToCart(product)}
               >
-                <span className="actual-text" style={{ cursor: "pointer", color: "black" }}>
+                <span className="actual-text" style={{ cursor: "pointer" }}>
                   &nbsp;Go Add&nbsp;
                 </span>
                 <span

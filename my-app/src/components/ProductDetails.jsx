@@ -7,6 +7,7 @@ import { useStateContext } from "../context/StateContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import Footer from "../components/Footer";
 
 import {
   AiOutlineMinus,
@@ -23,6 +24,7 @@ const ProductDetails = () => {
   const [otherProducts, setOtherProducts] = useState([]);
   const { decQty, incQty, qty } = useStateContext();
   const [selectedSize, setSelectedSize] = useState(null);
+  const [sizeError, setSizeError] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -103,8 +105,8 @@ const ProductDetails = () => {
     <div>
       <NavBar />
       <div>
-        <div className="product-detail-container">
         <ToastContainer />
+        <div className="product-detail-container">
           <div>
             <div className="image-container">
               <img
@@ -206,6 +208,9 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

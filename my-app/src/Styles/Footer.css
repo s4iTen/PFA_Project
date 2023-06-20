@@ -90,9 +90,9 @@ body {
   }
   
   .footer-logo {
-    width: 135px;
+    width: 170px;
     height: auto;
-    margin-bottom: 10px;
+    margin-top: -50px;
   }
   
   .footer-contact {
@@ -101,3 +101,10 @@ body {
     margin-left: 500px;
   }
   
+  .copy {
+    text-align: center;
+  }
+
+.footer-contact{
+margin-top: -10px;
+}

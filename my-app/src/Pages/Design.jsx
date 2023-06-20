@@ -9,7 +9,6 @@ import "../Styles/Design.css";
 import * as THREE from 'three';
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
-import {useScreenshot} from 'use-react-screenshot'
 
 
 const state = proxy({
@@ -30,7 +29,6 @@ const state = proxy({
 
 
 function Picker() {
-  const [image, takeScreenShot] = useScreenshot({});
   const isLoggedIn = !!localStorage.getItem('current user');
   const [selectedItem, setSelectedItem] = useState(null);
   const snap = useSnapshot(state);

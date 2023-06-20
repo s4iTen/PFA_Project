@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import { OrbitControls } from "@react-three/drei";
 import "../Styles/Shoes3D.css";
-import '../Styles/cart.css';
+import "../Styles/cart.css";
 import NavBar from "../components/NavBar";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
@@ -234,7 +234,7 @@ const Shoe3D = () => {
 
     const result = await stripe.redirectToCheckout({
       lineItems: [{ price: "price_1NKQcPHo0XtniAaJRRhNxP92", quantity: 1 }],
-      mode: "subscription", // Specify the mode as "payment"
+      mode: "subscription",
       sessionId: session_id,
       successUrl: successUrl,
     });

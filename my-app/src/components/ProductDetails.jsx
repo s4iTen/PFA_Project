@@ -25,7 +25,6 @@ const ProductDetails = () => {
   const [otherProducts, setOtherProducts] = useState([]);
   const { decQty, incQty, qty } = useStateContext();
   const [selectedSize, setSelectedSize] = useState(null);
-  const [sizeError, setSizeError] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {

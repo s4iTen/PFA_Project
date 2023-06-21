@@ -13,8 +13,8 @@ import sanityClient from "@sanity/client";
 import "../Styles/globals.css";
 
 const sanityConfig = {
-  projectId: "your-project-id",
-  dataset: "your-dataset",
+  projectId: "fg0vn4ia",
+  dataset: "production",
 };
 const client = sanityClient(sanityConfig);
 
@@ -233,4 +233,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-  

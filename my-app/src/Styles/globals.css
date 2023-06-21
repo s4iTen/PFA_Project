@@ -482,6 +482,7 @@ padding: 30px 65px;
 }
 .product-detail-desc p{
   margin-top: 10px;
+  font-family: cursive;
 }
 .reviews p{
   color: #000000;
@@ -863,6 +864,7 @@ margin-top: 160px;
 
 .sizes {
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 .sizes h2 {
@@ -881,15 +883,15 @@ margin-top: 160px;
 
 .sizesCart {
   margin-top: 3rem;
-  margin-right: 10px;
+  margin-right: -69px;
+  cursor: pointer;
 }
 
 
 .sizesCart select {
   padding: 0.5rem;
   font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border: transparent;
   cursor: pointer;
 }
 

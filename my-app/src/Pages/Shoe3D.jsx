@@ -9,6 +9,8 @@ import "../Styles/cart.css";
 import NavBar from "../components/NavBar";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
+import Footer from "../components/Footer";
+import { Toaster, toast } from "react-hot-toast";
 
 const stripePromise = loadStripe(
   "pk_test_51NFb0NHo0XtniAaJpxVNhZDfQyET3wo8u6fTsbrcjIUxAOGk37SnIrLJ5hE7TxhvJJhmeCiX1NrUjRjFG6KdOjU800EmkQ9iLC"
@@ -26,16 +28,16 @@ function Mesh({ colorDictionary, ...props }) {
 
 function Shoes({ colorDictionary }) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
-  const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
-  const [rotation, setRotation] = useState(0); // State variable for rotation
+  const pivot = useRef(new THREE.Object3D());
+  const [rotation, setRotation] = useState(0);
 
   // Use the useFrame hook to update the rotation on each frame
   useFrame((state, delta) => {
     const elapsedTime = state.clock.getElapsedTime();
 
     // Calculate the new rotation values for circular motion
-    const radius = 1; // Adjust the radius for a smaller circle
-    const speed = 1; // Adjust the speed of rotation as needed
+    const radius = 1;
+    const speed = 1;
 
     // Calculate the angle based on elapsed time and speed
     const angle = elapsedTime * speed;
@@ -165,16 +167,11 @@ function Shoes({ colorDictionary }) {
 }
 const Shoe3D = () => {
   const location = useLocation();
+  const [selectedSize, setSelectedSize] = useState(null);
   const { colorDictionary } = location.state;
   useEffect(() => {
     console.log(colorDictionary);
   }, [colorDictionary]);
-
-  const [selectedSize, setSelectedSize] = useState(null);
-  const handleSizeSelection = (size) => {
-    setSelectedSize(size);
-  };
-  const sizes = [40, 41, 42, 43, 44];
 
   const handleShare = (platform) => {
     const url = window.location.protocol + "//" + window.location.hostname;
@@ -215,6 +212,10 @@ const Shoe3D = () => {
   ];
 
   const handleBuyNow = async () => {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
     const stripe = await stripePromise;
 
     const sessionResponse = await fetch("http://localhost:3001/api/server", {
@@ -224,13 +225,16 @@ const Shoe3D = () => {
       },
       body: JSON.stringify({
         price_id: "price_1NKQcPHo0XtniAaJRRhNxP92",
+        metadata: {
+          size: selectedSize,
+        },
       }),
     });
     const sessionData = await sessionResponse.json();
 
     const { session_id } = sessionData;
 
-    const successUrl = "http://localhost:3000/success";
+    const successUrl = "http://localhost:3000/";
 
     const result = await stripe.redirectToCheckout({
       lineItems: [{ price: "price_1NKQcPHo0XtniAaJRRhNxP92", quantity: 1 }],
@@ -244,28 +248,32 @@ const Shoe3D = () => {
     }
   };
 
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
+  };
+
+  const sizes = [40, 41, 42, 43, 44];
+
   return (
     <>
       <div>
         <NavBar />
         <div className="card">
+          <Toaster />
           <h2>{colorDictionary.shoeName}</h2>
-          <p>{colorDictionary.details}</p>
-          <h4>Select Size:</h4>
-          <div className="sizeButtons">
-            {sizes.map((size) => (
-              <button
-                key={size}
-                className={`sizeButton ${
-                  selectedSize === size ? "selected" : ""
-                }`}
-                onClick={() => handleSizeSelection(size)}
-              >
-                {size}
-              </button>
-            ))}
+          <div className="sizes">
+            <select
+              value={selectedSize}
+              onChange={(e) => handleSizeSelection(e.target.value)}
+            >
+              <option value="">Select Size</option>
+              {sizes.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
           </div>
-          <div></div>
           <div className="social-buttons">
             <h3>Share:</h3>
             <button onClick={() => handleShare("facebook")}>
@@ -328,6 +336,7 @@ const Shoe3D = () => {
           <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>
       </div>
+      <Footer />
     </>
   );
 };

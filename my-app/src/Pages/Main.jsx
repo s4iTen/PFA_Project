@@ -5,10 +5,10 @@ import Footer from "../components/Footer";
 import SavedCardList from "../components/SavedCardList";
 import Product from "../components/Product";
 import HeroBanner from "../components/HeroBanner";
-import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Shoesy from "../components/Shoes";
+
 
 const Main = () => {
   return (

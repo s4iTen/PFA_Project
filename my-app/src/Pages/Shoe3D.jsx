@@ -4,9 +4,15 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import { OrbitControls } from "@react-three/drei";
+import "../Styles/Shoes3D.css";
 import "../Styles/cart.css";
 import NavBar from "../components/NavBar";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51NFb0NHo0XtniAaJpxVNhZDfQyET3wo8u6fTsbrcjIUxAOGk37SnIrLJ5hE7TxhvJJhmeCiX1NrUjRjFG6KdOjU800EmkQ9iLC"
+);
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -171,7 +177,6 @@ const Shoe3D = () => {
   const sizes = [40, 41, 42, 43, 44];
 
   const handleShare = (platform) => {
-    // Get the URL of the current page without query parameters
     const url = window.location.protocol + "//" + window.location.hostname;
 
     // Create a dynamic share message based on the platform
@@ -190,17 +195,14 @@ const Shoe3D = () => {
         shareMessage
       )}`;
 
-      // Open Twitter share dialog in a new window
       window.open(twitterShareUrl, "_blank", "width=600,height=300");
     } else if (platform === "instagram") {
       shareMessage = `Check out this awesome product on Instagram: ${url}`;
 
-      // Attempt to open Instagram app to share (if installed)
       window.location.href = `instagram://share?text=${encodeURIComponent(
         shareMessage
       )}`;
 
-      // If the Instagram app is not installed, redirect to the Instagram website
       setTimeout(() => {
         window.location.href = `https://www.instagram.com/?hl=en`;
       }, 1000);
@@ -211,6 +213,36 @@ const Shoe3D = () => {
     { id: 1, name: "John", rating: 4, comment: "Great product!" },
     { id: 2, name: "Jane", rating: 4, comment: "Highly recommended!" },
   ];
+
+  const handleBuyNow = async () => {
+    const stripe = await stripePromise;
+
+    const sessionResponse = await fetch("http://localhost:3001/api/server", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        price_id: "price_1NKQcPHo0XtniAaJRRhNxP92",
+      }),
+    });
+    const sessionData = await sessionResponse.json();
+
+    const { session_id } = sessionData;
+
+    const successUrl = "http://localhost:3000/success";
+
+    const result = await stripe.redirectToCheckout({
+      lineItems: [{ price: "price_1NKQcPHo0XtniAaJRRhNxP92", quantity: 1 }],
+      mode: "subscription",
+      sessionId: session_id,
+      successUrl: successUrl,
+    });
+
+    if (result.error) {
+      console.error(result.error);
+    }
+  };
 
   return (
     <>
@@ -265,7 +297,11 @@ const Shoe3D = () => {
               <h3>150DT</h3>
             </div>
             <div>
-              <button data-text="Awesome" className="button">
+              <button
+                data-text="Awesome"
+                className="button"
+                onClick={handleBuyNow}
+              >
                 {" "}
                 <span className="actual-text" style={{ cursor: "pointer" }}>
                   &nbsp;Buy NoW&nbsp;
@@ -282,14 +318,14 @@ const Shoe3D = () => {
           </div>
         </div>
       </div>
-      <div className="canvasContainer ">
+      <div className="d-Container">
         <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[0, 10, 5]} intensity={0.6} />
           <Suspense fallback={null}>
             <Shoes colorDictionary={colorDictionary} />
           </Suspense>
-          <OrbitControls enableZoom={false} enablePan={false}/>
+          <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>
       </div>
     </>

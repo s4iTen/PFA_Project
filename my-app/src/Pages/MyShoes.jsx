@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react'
-import NavBar from '../components/NavBar'
+import React, { useState, useEffect } from "react";
+import NavBar from "../components/NavBar";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import  auth  from '../firebase.js';
-import firebase from 'firebase/app';
+import auth from "../firebase.js";
+import firebase from "firebase/app";
 import SavedCard from "../components/SavedCard";
 
 function MyShoes() {
-
-    const [colorDictionaries, setColorDictionaries] = useState([]);
+  const [colorDictionaries, setColorDictionaries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -38,25 +37,21 @@ function MyShoes() {
     const CurrentId = currentUser.uid;
     console.log(CurrentId);
   } else {
-    console.log('No user is currently signed in.');
+    console.log("No user is currently signed in.");
   }
   return (
-    
     <div>
+      <NavBar />
 
-        <NavBar />
-
-        {colorDictionaries.map((dictionary, idx) => {
-            if (dictionary.userId === currentUser.uid) {
-                return (
-            <SavedCard colorDictionary={dictionary} />
-                );}
-                else {
-                    return null
-                }
-            })}
+      {colorDictionaries.map((dictionary, idx) => {
+        if (dictionary.userId === currentUser.uid) {
+          return <SavedCard colorDictionary={dictionary} />;
+        } else {
+          return null;
+        }
+      })}
     </div>
-  )
+  );
 }
 
-export default MyShoes
+export default MyShoes;

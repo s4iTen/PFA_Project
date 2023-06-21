@@ -1,4 +1,6 @@
-.canvasContainer{
-    height: 80vh;
-    width: 100%;
+.d-Container {
+    height: 90vh;
+    width: 30%;
+    margin-top: -562px;
+    margin-left: 750px;
 }

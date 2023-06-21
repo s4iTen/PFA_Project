@@ -9,22 +9,18 @@ import Logo from "../assets/logo.png";
 import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 import { AiOutlineShopping } from "react-icons/ai";
-import sanityClient from '@sanity/client';
-import '../Styles/globals.css';
-
+import sanityClient from "@sanity/client";
+import "../Styles/globals.css";
 
 const sanityConfig = {
-  projectId: 'your-project-id',
-  dataset: 'your-dataset',
+  projectId: "your-project-id",
+  dataset: "your-dataset",
 };
 const client = sanityClient(sanityConfig);
 
-
 const NavBar = () => {
-
-
   const user = auth.currentUser;
-  const AdminId = 'VFDBZoqI6Ehi4nAF5aauCVOK4P52';
+  const AdminId = "VFDBZoqI6Ehi4nAF5aauCVOK4P52";
   let userId;
 
   if (user) {
@@ -32,8 +28,8 @@ const NavBar = () => {
     // Do something with the user ID
   }
   const handleAddItem = () => {
-      window.location.href='https://sanity-project-iota.vercel.app/'
-    };
+    window.location.href = "https://sanity-project-iota.vercel.app/";
+  };
 
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
@@ -85,9 +81,9 @@ const NavBar = () => {
     : "dropdown-content";
   return (
     <div className="navbar">
-        <a href="/">
-          <img src={Logo} alt="" />
-        </a>
+      <a href="/">
+        <img src={Logo} alt="" />
+      </a>
       <div className="ul">
         <ul>
           <li>
@@ -130,16 +126,20 @@ const NavBar = () => {
         </ul>
       </div>
       <div>
-        <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
+        <button
+          type="button"
+          className="cart-icon"
+          onClick={() => setShowCart(true)}
+        >
           <AiOutlineShopping />
           <span className="cart-item-qty">{totalQuantities}</span>
         </button>
       </div>
-        {showCart && <Cart />}
+      {showCart && <Cart />}
       <div className="LoginSignup">
         {!isLoggedIn ? (
           <div>
-            <button onClick={navigateToLogin}>Log In</button> 
+            <button onClick={navigateToLogin}>Log In</button>
             <button onClick={navigateToSignUp}>Sign Up</button>
           </div>
         ) : (
@@ -202,7 +202,11 @@ const NavBar = () => {
                   My Shoes{" "}
                 </motion.li>
                 {AdminId === userId && (
-                  <motion.li variants={itemVariants} className="menuDropLi" onClick={handleAddItem}>
+                  <motion.li
+                    variants={itemVariants}
+                    className="menuDropLi"
+                    onClick={handleAddItem}
+                  >
                     Add Item
                   </motion.li>
                 )}
@@ -212,8 +216,12 @@ const NavBar = () => {
                 <motion.li variants={itemVariants} className="menuDropLi">
                   Item 4{" "}
                 </motion.li>
-                <motion.li onClick={handleSignOut} variants={itemVariants} className="menuDropLi">
-                Sign Out{" "}
+                <motion.li
+                  onClick={handleSignOut}
+                  variants={itemVariants}
+                  className="menuDropLi"
+                >
+                  Sign Out{" "}
                 </motion.li>
               </motion.ul>
             </motion.nav>
@@ -225,3 +233,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+  

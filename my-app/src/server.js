@@ -1,5 +1,5 @@
 const express = require('express');
-const stripe = require('stripe')('sk_test_...'); // Your secret API key
+const stripe = require('stripe')('sk_test_51NFb0NHo0XtniAaJZVKSIz7SMIy2rfPIjwrcoKC1y2KCtZz5T1CaUJMNmrfFJOZvttsYPdmojR9qdkZ1hWy0HEF400bTRypBGZ'); // Your secret API key
 const app = express();
 
 // Serve the static files

@@ -27,6 +27,7 @@
     "framer-motion-3d": "^10.12.16",
     "gltf-loader": "^1.0.0",
     "har-validator": "^5.1.5",
+    "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
     "next": "^13.4.5",
     "node-sass": "^7.0.3",

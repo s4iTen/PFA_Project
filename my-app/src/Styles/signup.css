@@ -1,14 +1,14 @@
-.login-page {
+.loginn-page {
   background-image: url("../assets/pre.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh; /* Set the height to full viewport height */
-  display: flex; /* Add flexbox to center the content vertically */
+  height: 100vh;
+  display: flex;
   align-items: center;
 }
 
 
-.login-box {
+.loginn-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -138,4 +138,38 @@ form a.a2 {
   border: 1px solid #f5c6cb;
   border-radius: 4px;
   text-align: center;
+}
+@media screen and (max-width: 767px) {
+
+  .login-page {
+    background-image: url("../assets/pre.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 355px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .home-button-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+
 }

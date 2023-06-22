@@ -4,11 +4,11 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import auth from "../firebase.js";
 import firebase from "firebase/app";
 import SavedCard from "../components/SavedCard";
+import '../Styles/MyShoes.css';
 
 function MyShoes() {
   const [colorDictionaries, setColorDictionaries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,14 +42,15 @@ function MyShoes() {
   return (
     <div>
       <NavBar />
-
-      {colorDictionaries.map((dictionary, idx) => {
-        if (dictionary.userId === currentUser.uid) {
-          return <SavedCard colorDictionary={dictionary} />;
-        } else {
-          return null;
-        }
-      })}
+      <div className="snip141887">
+        {colorDictionaries.map((dictionary, idx) => {
+          if (dictionary.userId === currentUser.uid) {
+            return <SavedCard colorDictionary={dictionary} />;
+          } else {
+            return null;
+          }
+        })}
+        </div>
     </div>
   );
 }

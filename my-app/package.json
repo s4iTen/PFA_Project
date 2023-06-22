@@ -34,6 +34,7 @@
     "react": "^18.2.0",
     "react-admin": "^4.11.2",
     "react-admin-firebase": "^4.1.2",
+    "react-cam-recorder": "^1.11.7",
     "react-chatbot-kit": "^2.1.2",
     "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",

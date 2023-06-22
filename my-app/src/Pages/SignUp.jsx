@@ -59,14 +59,14 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="login-page">
+    <div className="loginn-page">
       <div>
         <div className="home-button-container">
           <button className="button b1" onClick={navigateToMain}>
             Home
           </button>
         </div>
-        <div className="login-box">
+        <div className="loginn-box">
           <div className="logo">
             <img src={logo} />
             <div className="content">

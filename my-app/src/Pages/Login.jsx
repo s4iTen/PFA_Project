@@ -63,13 +63,13 @@ const Login = () => {
     <div class="login-page">
       <div>
         <div className="home-button-container">
-          <button className="button b1" onClick={navigateTomain}>
+          <button className="button" onClick={navigateTomain}>
             Home
           </button>
         </div>
         <div className="login-box">
           <div className="logo">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo"/>
           </div>
           <div className="content">
             <h2 className="title">Log In</h2>

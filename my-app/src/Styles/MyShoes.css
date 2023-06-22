@@ -1,0 +1,22 @@
+.snip141887 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .snip141887 > * {
+    font-family: 'Raleway', Arial, sans-serif;
+    cursor: pointer;
+    overflow: hidden;
+    min-width: 230px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    color: #000000;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 5px; /* Adjust the value to reduce the spacing */
+    background: linear-gradient(to right, #cca9a9 0%, #ecd0d0 50%, transparent 100%);
+    /* Add any additional styling for the product card */
+  }
+  

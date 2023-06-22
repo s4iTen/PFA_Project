@@ -210,12 +210,6 @@ const NavBar = () => {
                     Add Item
                   </motion.li>
                 )}
-                <motion.li variants={itemVariants} className="menuDropLi">
-                  Item 3{" "}
-                </motion.li>
-                <motion.li variants={itemVariants} className="menuDropLi">
-                  Item 4{" "}
-                </motion.li>
                 <motion.li
                   onClick={handleSignOut}
                   variants={itemVariants}

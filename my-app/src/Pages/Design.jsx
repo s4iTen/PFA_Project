@@ -1,4 +1,4 @@
-import React, { useRef, useState, Suspense } from "react";
+import React, { useRef, useState, Suspense, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
@@ -6,10 +6,11 @@ import NavBar from "../components/NavBar";
 import { proxy, useSnapshot } from "valtio";
 import { HexColorPicker } from "react-colorful";
 import "../Styles/Design.css";
-import * as THREE from 'three';
+import * as THREE from "three";
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
-
+import { useScreenshot } from "use-react-screenshot";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 
 const state = proxy({
   current: null,
@@ -27,16 +28,25 @@ const state = proxy({
   },
 });
 
-
 function Picker() {
-  const isLoggedIn = !!localStorage.getItem('current user');
+  const [image, takeScreenShot] = useScreenshot({});
+  const isLoggedIn = !!localStorage.getItem("current user");
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const [Done, setDone] = useState(false);
   const snap = useSnapshot(state);
-
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
   const auth = getAuth();
   const currentUser = auth.currentUser;
   const userId = currentUser ? currentUser.uid : "";
   const db = getFirestore();
+
+  useEffect(() => {
+    if (Done) {
+      window.location.href = "/";
+    }
+  }, [Done]);
 
   const handleColorChange = (key, color) => {
     state.items[key] = color;
@@ -58,7 +68,9 @@ function Picker() {
     state.shoeName = event.target.value;
   };
 
-  const handleSave = async () => {
+  const handleSave = async (c) => {
+    setLoader(true);
+    const animation = animate(count, 100, { duration: 3 });
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().substring(0, 10);
 
@@ -71,7 +83,9 @@ function Picker() {
 
     if (isLoggedIn) {
       try {
-        const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
+        const querySnapshot = await getDocs(
+          collection(db, "color-dictionaries")
+        );
         const existingDictionary = querySnapshot.docs.find((doc) => {
           const data = doc.data();
           if (data.userId === userId && data.shoeName === state.shoeName) {
@@ -87,25 +101,34 @@ function Picker() {
 
         if (existingDictionary) {
           alert("You have already created this shoes before.");
-          return;
+          setLoader(false);
+          return animation.stop;
         }
 
-        const docRef = await addDoc(collection(db, "color-dictionaries"), colorDictionary);
+        const docRef = await addDoc(
+          collection(db, "color-dictionaries"),
+          colorDictionary
+        );
         console.log("Color dictionary saved with ID: ", docRef.id);
         alert("Created successfully");
+        setLoader(false);
+        setDone(true);
+        return animation.stop;
       } catch (error) {
         console.error("Error saving color dictionary: ", error);
       }
     } else {
       if (!isLoggedIn) {
-        localStorage.setItem('savedData', JSON.stringify(snap.items));
-        window.location.href = '/Login';
+        localStorage.setItem("savedData", JSON.stringify(snap.items));
+        window.location.href = "/Login";
         return;
       }
     }
   };
 
-  return (
+  return loader ? (
+    <motion.h1>{rounded}</motion.h1>
+  ) : (
     <div className="slider">
       <input
         type="text"
@@ -116,7 +139,7 @@ function Picker() {
       {Object.entries(snap.items).map(([key, color]) => (
         <div key={key} className="input">
           <button
-            className={`item-button ${selectedItem === key ? 'active' : ''}`}
+            className={`item-button ${selectedItem === key ? "active" : ""}`}
             onClick={() => handleItemClick(key)}
           >
             {key}
@@ -167,7 +190,6 @@ function Mesh(props) {
 function Shoes(props) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
-
 
   return (
     <group ref={pivot} position={[4, 0, 0]} rotation={[0.8, 0, 0]}>
@@ -283,7 +305,7 @@ export default function Design() {
             <Suspense fallback={null}>
               <Shoes />
             </Suspense>
-            <OrbitControls enableZoom={false} enablePan={false}/>
+            <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>
         </div>
       </div>

@@ -81,7 +81,7 @@ const NavBar = () => {
     : "dropdown-content";
   return (
     <div className="navbar">
-      <a href="/">
+      <a href="/Main">
         <img src={Logo} alt="" />
       </a>
       <div className="ul">
@@ -90,7 +90,7 @@ const NavBar = () => {
             {" "}
             <a
               onClick={() => {
-                window.location.href = "/";
+                window.location.href = "/Main";
               }}
             >
               home

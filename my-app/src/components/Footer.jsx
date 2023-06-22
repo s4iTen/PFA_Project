@@ -30,12 +30,14 @@ function App() {
           ))}
         </div>
         <div className="content">
-          <h2 className="title">Discover the latest Nike shoe collections and shop online.</h2>
+          <h2 className="title">
+            Discover the latest Nike shoe collections and shop online.
+          </h2>
           <img src={Logo} alt="Logo" className="footer-logo" />
           <div className="footer-section">
             <ul className="footer-links">
               <li>
-                <Link to="/" onClick={scrollToTop}>
+                <Link to="/Main" onClick={scrollToTop}>
                   Home
                 </Link>
               </li>

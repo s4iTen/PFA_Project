@@ -9,11 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { Canvas } from "@react-three/fiber";
 import "react-toastify/dist/ReactToastify.css";
 import Shoesy from "../components/Shoes";
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 import { OrbitControls } from "@react-three/drei";
 
-function New () {
-
+function New() {
   return (
     <div className="">
       <Spline scene="https://prod.spline.design/h5c2jh4NVwguAJsC/scene.splinecode" />
@@ -21,8 +20,6 @@ function New () {
   );
 }
 const Main = () => {
-
-
   return (
     <div className="Content-Container">
       <ToastContainer />

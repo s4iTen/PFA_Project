@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../Styles/Footer.css";
 import Logo from "../assets/logo.png";
 
-function App() {
+function Footer() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -35,22 +35,6 @@ function App() {
           </h2>
           <img src={Logo} alt="Logo" className="footer-logo" />
           <div className="footer-section">
-            <ul className="footer-links">
-              <li>
-                <Link to="/Main" onClick={scrollToTop}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/">Products</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
             <div className="footer-contact">
               <h2>Contact Us</h2>
               <h4>123 Street, Tunis</h4>
@@ -67,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default Footer;

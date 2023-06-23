@@ -27,6 +27,7 @@ const Main = () => {
     <div className="Content-Container">
       <ToastContainer />
       <NavBar />
+      <New />
       <Shoesy />
       <div>
         <SavedCardList />

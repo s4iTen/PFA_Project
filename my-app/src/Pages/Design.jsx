@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import { proxy, useSnapshot } from "valtio";
 import { HexColorPicker } from "react-colorful";
 import "../Styles/Design.css";
@@ -11,6 +12,8 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { useScreenshot } from "use-react-screenshot";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const state = proxy({
   current: null,
@@ -53,11 +56,8 @@ function Picker() {
   };
 
   const handleItemClick = (key) => {
-    if (selectedItem === key) {
-      setSelectedItem(null);
-    } else {
-      setSelectedItem(key);
-    }
+    const selectedPosition = key === selectedItem ? null : key;
+    setSelectedItem(selectedPosition);
   };
 
   const handleColorInputChange = (key, event) => {
@@ -68,7 +68,14 @@ function Picker() {
     state.shoeName = event.target.value;
   };
 
-  const handleSave = async (c) => {
+  const handleSave = async () => {
+    const shoeName = state.shoeName?.trim();  
+
+    if (!shoeName) {
+      toast.error("Please enter a shoe name");
+      return;
+    }
+
     setLoader(true);
     const animation = animate(count, 100, { duration: 3 });
     const currentDate = new Date();
@@ -83,24 +90,15 @@ function Picker() {
 
     if (isLoggedIn) {
       try {
-        const querySnapshot = await getDocs(
-          collection(db, "color-dictionaries")
+        const existingDictionary = await getExistingDictionary(
+          userId,
+          state.shoeName
         );
-        const existingDictionary = querySnapshot.docs.find((doc) => {
-          const data = doc.data();
-          if (data.userId === userId && data.shoeName === state.shoeName) {
-            for (const key in snap.items) {
-              if (data[key] !== snap.items[key]) {
-                return false;
-              }
-            }
-            return true;
-          }
-          return false;
-        });
 
         if (existingDictionary) {
-          alert("You have already created this shoes before.");
+          toast.error(
+            "You have already created this shoe before. Please enter a unique name."
+          );
           setLoader(false);
           return animation.stop;
         }
@@ -110,7 +108,7 @@ function Picker() {
           colorDictionary
         );
         console.log("Color dictionary saved with ID: ", docRef.id);
-        alert("Created successfully");
+        toast.success("Created successfully");
         setLoader(false);
         setDone(true);
         return animation.stop;
@@ -126,20 +124,33 @@ function Picker() {
     }
   };
 
+  async function getExistingDictionary(userId, shoeName) {
+    const querySnapshot = await getDocs(collection(db, "color-dictionaries"));
+    const existingDictionary = querySnapshot.docs.find((doc) => {
+      const data = doc.data();
+      return data.userId === userId && data.shoeName === shoeName;
+    });
+
+    return existingDictionary;
+  }
+
   return loader ? (
     <motion.h1>{rounded}</motion.h1>
   ) : (
     <div className="slider">
       <input
         type="text"
-        placeholder="Shoe Name"
+        placeholder="Add Your Shoe Name"
         value={state.shoeName}
         onChange={handleShoeNameChange}
+        className="Name"
       />
       {Object.entries(snap.items).map(([key, color]) => (
         <div key={key} className="input">
           <button
-            className={`item-button ${selectedItem === key ? "active" : ""}`}
+            className={`item-button ${
+              selectedItem === key ? "active" : ""
+            } ${key}`}
             onClick={() => handleItemClick(key)}
           >
             {key}
@@ -169,8 +180,22 @@ function Picker() {
           )}
         </div>
       ))}
-      <button className="save-button" onClick={handleSave}>
-        Save
+      <button
+        data-text="Awesome"
+        className="button"
+        onClick={handleSave}
+        style={{ marginTop: "-5px", marginLeft: "1250px" }}
+      >
+        <span className="actual-text" style={{ cursor: "pointer" }}>
+          &nbsp;SAVE&nbsp;
+        </span>
+        <span
+          className="hover-text"
+          aria-hidden="true"
+          style={{ cursor: "pointer" }}
+        >
+          &nbsp;SAvE&nbsp;
+        </span>
       </button>
     </div>
   );
@@ -291,9 +316,9 @@ export default function Design() {
   return (
     <>
       <NavBar />
+      <ToastContainer />
       <div className="Design-Page">
         <div className="Logos-container">
-          <h1>Logos Container</h1>
           <Picker />
         </div>
         <div className="canvas-container" id="design-container">
@@ -308,6 +333,7 @@ export default function Design() {
             <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>
         </div>
+        <Footer />
       </div>
     </>
   );

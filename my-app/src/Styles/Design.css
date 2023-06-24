@@ -1,7 +1,111 @@
+.item-button {
+  --c: #fff;
+ /* text color */
+  background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%) var(--_p,100%)/300% no-repeat,
+    #151821;
+ /* background color */
+  color: #0000;
+  border: none;
+  transform: perspective(500px) rotateY(calc(20deg*var(--_i,-1)));
+  text-shadow: calc(var(--_i,-1)* 0.08em) -.01em 0   var(--c),
+    calc(var(--_i,-1)*-0.08em)  .01em 2px #0004;
+  outline-offset: .1em;
+  transition: 0.3s;
+}
+
+.item-button:hover,
+.item-button:focus-visible {
+  --_p: 0%;
+  --_i: 1;
+}
+
+.item-button:active {
+  text-shadow: none;
+  color: var(--c);
+  box-shadow: inset 0 0 9e9q #0005;
+  transition: 0s;
+}
+
+.item-button {
+  font-family: cursive;
+  font-size: 2rem;
+  margin: 0;
+  cursor: pointer;
+  padding: .1em .3em;
+}
+
+.item-button.BackOftheShoes {
+  position: absolute;
+  bottom: 190px;
+  left: 70px;
+}
+
+.item-button.TheEntireShoes {
+  position: absolute;
+  top: 150px;
+  left: 1200px;
+}
+
+.item-button.Laces006{
+  position: absolute;
+  top: 150px;
+  left: 800px;
+}
+
+.item-button.Nike_Logo_right001 {
+  position: absolute;
+  top: 250px;
+  left: 1100px;
+}
+
+.item-button.Shoe_Flap002 {
+  position: absolute;
+  top: 380px;
+  left: 1200px;
+}
+
+.item-button.TheFrontOfTheShoes {
+  position: absolute;
+  top: 380px;
+  left: 20px;
+}
+
+.item-button.theFrontFromINside {
+  position: absolute;
+  top: 250px;
+  left: 85px;
+}
+.item-button.BackLeftAndRight {
+  position: absolute;
+  top: 500px;
+  left: 1220px;
+}
+
+.item-button.BottomOfTheShoes {
+  position: absolute;
+  top: 150px;
+  left: 300px;
+}
+
+.item-button.Ticket {
+  position: absolute;
+  top: 150px;
+  left: 120px;
+}
+
+.canvas-container {
+  width: 40%;
+  height: 80vh;
+  margin-top: -500px;
+  margin-left: 500px;
+}
+
 .picker-container {
   position: relative;
   display: inline-block;
   width: 50%;
+  top: -500px;
+  margin-left: 650px;
 
 }
 
@@ -17,13 +121,13 @@
 
 .picker-overlay {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: -10%;  
+  left: -50px;
   z-index: 1;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 4px;
-  padding: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 100px;
+  margin-left: 50px;
   display: none;
 }
 
@@ -35,64 +139,24 @@
   border-color: #000;
 }
 
-.Design-Page {
-  display: flex;
-  flex-direction: row;
-}
-.canvas-container {
-  width: 100%;
-  height: 80vh;
-}
-.input .picker {
-
-}
-.picker h1:hover {
-  cursor: pointer;
-  display: block;
-} 
-.input {
-  cursor: pointer;
-  font-size: 14px;
+.color-input {
+  display: none;
 }
 
-.save-button {
+.Name {
+  margin-top: 500px;
+  margin-left: 1000px;
   position: relative;
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  color: #000000;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.save-button:hover {
-  transform: translateY(-2px);
-}
-
-.save-button:active {
-  transform: translateY(2px);
-}
-
-.save-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  transform: translateZ(-10px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  padding: 20px 10px 10px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
 }
 
-.save-button:hover::before {
-  opacity: 1;
-}
-.Logos-container {
-  width: 20%;
-}

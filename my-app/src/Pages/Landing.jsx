@@ -40,7 +40,7 @@ const Landing = () => {
             <div className="hover bt-4"></div>
             <div className="hover bt-5"></div>
             <div className="hover bt-6"></div>
-            <button className="button" onClick={home}></button>
+            <button className="buttons" onClick={home}></button>
           </div>
         </div>
       </div>

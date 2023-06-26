@@ -22,9 +22,9 @@ app.post('/api/server', async (req, res) => {
                     currency: 'usd',
                     product_data: {
                         name: item.name,
-                        images: [item.image], // Assuming you have an "image" property in your line item object
+                        images: [item.image],
                     },
-                    unit_amount: item.price * 100, // Assuming your price is in dollars
+                    unit_amount: item.price * 100,
                 },
                 quantity: item.quantity,
             })),

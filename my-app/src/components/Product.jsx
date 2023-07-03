@@ -6,7 +6,7 @@ import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useStateContext } from "../context/StateContext";
-import "../Styles/globals.css";
+import "../Styles/SavedCard.css"
 import { toast, Toaster } from "react-hot-toast";
 
 SwiperCore.use([Navigation]);
@@ -45,9 +45,26 @@ const Product = () => {
   }
 
   return (
-    <div>
+    <div className="swipe">
+      <h2>new season</h2>
       <Toaster />
-      <Swiper navigation slidesPerView={4} spaceBetween={25}>
+      <Swiper 
+      navigation 
+      slidesPerView={4} 
+      spaceBetween={25} 
+      style={{padding:"20px"}} 
+      breakpoints={{
+          0: {
+            slidesPerView: 1
+          },
+          639: {
+            slidesPerView: 1,
+          },
+          768:{
+            slidesPerView:2
+          },
+          
+        }}>
         {products.map((product) => (
           <SwiperSlide key={product._id}>
             <div className="snip14188">
@@ -59,7 +76,7 @@ const Product = () => {
                   height={250}
                   className="img"
                 />
-                <h1>{product.name}</h1>
+                <h2>{product.name}</h2>
               </Link>
               <button
                 data-text="Awesome"

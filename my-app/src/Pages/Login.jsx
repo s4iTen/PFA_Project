@@ -5,6 +5,9 @@ import auth from "../firebase";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 
 const Login = () => {
   const location = useLocation();
@@ -34,6 +37,7 @@ const Login = () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
+
     }
 
     signInWithEmailAndPassword(auth, email, password)
@@ -44,7 +48,7 @@ const Login = () => {
           // Navigate back to the Design page with the saved data
           window.location.href = "/Design";
         } else {
-          window.location.href = "/";
+          window.location.href = "/Main";
         }
       })
       .catch((error) => {

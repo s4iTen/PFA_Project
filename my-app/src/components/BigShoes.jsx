@@ -13,20 +13,6 @@ const BigShoes = ({ modelPath, scale = 0.5, position = [0, -10, 0] }) => {
   const gltf = useLoader(GLTFLoader, modelPath);
   const { camera } = useThree();
 
-  const textureLoader = new THREE.TextureLoader();
-
-  // Load the color map
-  const colorTexture = textureLoader.load('Jordan_Texture/Color.png');
-  const colorMaterial = new THREE.MeshStandardMaterial({ map: colorTexture, shadowMap: true });
-
-  // Load the displacement map
-  const displacementTexture = textureLoader.load('Jordan_Texture/Displacement.png');
-  const displacementMaterial = new THREE.MeshStandardMaterial({ displacementMap: displacementTexture, shadowMap: true });
-
-  // Load the normal map
-  const normalTexture = textureLoader.load('Jordan_Texture/Normal.png');
-  const normalMaterial = new THREE.MeshStandardMaterial({ normalMap: normalTexture, shadowMap: true });
-
   useEffect(() => {
     spotLightRef.current.castShadow = true;
     groundRef.current.receiveShadow = true;
@@ -35,7 +21,7 @@ const BigShoes = ({ modelPath, scale = 0.5, position = [0, -10, 0] }) => {
   useFrame((state, delta) => (ref.current.rotation.y += 0.005));
 
   useEffect(() => {
-    camera.position.set(0, 150, 100);
+    camera.position.set(100, 0, 500);
     camera.lookAt(0, 0, 0);
   }, [camera]);
 
@@ -52,8 +38,8 @@ const BigShoes = ({ modelPath, scale = 0.5, position = [0, -10, 0] }) => {
 
       <mesh
         ref={groundRef}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, -1, 0]}
+        rotation={[0, 0, 0]}
+        position={[0, 0, 0]}
         receiveShadow
       >
         <planeBufferGeometry args={[0, 0]} />

@@ -1,57 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { client } from "../lib/client";
-import '../Styles/globals.css';
-
+import '../Styles/banner.css';
+import image1 from "../assets/ns1.png";
+import image from "../assets/ns.png";
 const Banner = () => {
-  const [bannerData, setBannerData] = useState([]);
+  
 
-  useEffect(() => {
-    const query = `*[_type == "banner"]{
-      image {
-        asset {
-          _id,
-          url
-        }
-      },
-      buttonText,
-      product,
-      desc,
-      smallText,
-      midText,
-      largeText1,
-      largeText2,
-      discount,
-      saleTime
-    }`;
-
-    client
-      .fetch(query)
-      .then((data) => {
-        setBannerData(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching banner data:", error);
-      });
-  }, []);
+  
 
   return (
-    <div className="footer-banner-container">
-      {bannerData.map((banner, index) => (
-        <div key={index}>
-          <div className="banner-desc">
-            <div className="left">
-              <p>{banner.discount}</p>
-              <h3>{banner.largeText1}</h3>
-              <p>{banner.saleTime}</p>
-            </div>
-            <div className="right">
-              <p>{banner.smallText}</p>
-              <h3>{banner.midText}</h3>
-              <p>{banner.desc}</p>
-            </div>
-          </div>
+    <div className="banner">
+      <div className="banner-container">
+        <div className="banner-left">
+          <img src={image1} alt="" />
+          <p>summer collection</p>
         </div>
-      ))}
+        <div className="banner-right">
+          <p>summer collection</p>
+          <img src={image} alt="" />
+        </div>
+      </div>
     </div>
   );
 };

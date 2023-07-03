@@ -2,7 +2,6 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import auth from "../firebase";
 import { useState } from "react";
-import "../Styles/Menu.css";
 import "../Styles/Style.scss";
 import { motion } from "framer-motion";
 import Logo from "../assets/logo.png";
@@ -10,7 +9,7 @@ import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 import { AiOutlineShopping } from "react-icons/ai";
 import sanityClient from "@sanity/client";
-import "../Styles/globals.css";
+import "../Styles/Menu.css";
 
 const sanityConfig = {
   projectId: "fg0vn4ia",
@@ -81,50 +80,54 @@ const NavBar = () => {
     : "dropdown-content";
   return (
     <div className="navbar">
-      <a href="/Main">
-        <img src={Logo} alt="" />
-      </a>
-      <div className="ul">
-        <ul>
-          <li>
-            {" "}
-            <a
-              onClick={() => {
-                window.location.href = "/Main";
-              }}
-            >
-              home
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/Design";
-              }}
-            >
-              Design
-            </a>{" "}
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/";
-              }}
-            >
-              Contact Us
-            </a>{" "}
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/";
-              }}
-            >
-              About Us
-            </a>
-          </li>
-        </ul>
+      <div className="navItems">
+        <a href="/Main">
+          <img className="LogoImage" src={Logo} alt="" />
+        </a>
+        <div className="Ulcontainer">
+          <ul className="NavUl">
+            <li className="LiNav">
+              {" "}
+              <a
+                onClick={() => {
+                  window.location.href = "/Main";
+                }}
+              >
+                home
+              </a>
+            </li>
+            <li className="LiNav">
+              <a
+                onClick={() => {
+                  window.location.href = "/Design";
+                }}
+              >
+                Design
+              </a>{" "}
+            </li>
+            <li className="LiNav">
+              <a
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+              >
+                Contact Us
+              </a>{" "}
+            </li>
+            <li className="LiNav">
+              <a
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+              >
+                About Us
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
+      {showCart && <Cart />}
+      <div className="LoginSignup">
       <div>
         <button
           type="button"
@@ -135,8 +138,6 @@ const NavBar = () => {
           <span className="cart-item-qty">{totalQuantities}</span>
         </button>
       </div>
-      {showCart && <Cart />}
-      <div className="LoginSignup">
         {!isLoggedIn ? (
           <div>
             <button onClick={navigateToLogin}>Log In</button>

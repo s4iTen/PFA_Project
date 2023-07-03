@@ -4,7 +4,6 @@ import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
 import "../Styles/ShoesContainer.css";
-import "../Styles/globals.css";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";

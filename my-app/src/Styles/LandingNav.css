@@ -8,7 +8,7 @@
     background-color: black;
     color: white;
 }
-ul {
+.ulLanding {
     display: flex;
     flex-direction: row;
     text-decoration: none;
@@ -19,19 +19,19 @@ ul {
     justify-content: center;
     align-items: center;
 }
-ul img {
+.ulLanding img {
     width: 100px;
 }
-ul li {
+.ulLanding .liLanding {
     color: white;
     font-style: initial;
     transition: 0.2s;
     cursor: pointer;
 }
-ul li:hover {
+.ulLanding .liLanding:hover {
     scale: 1.1;
 }
-.navButton {
+.navLandingButton {
     position: relative;
     left: 42%;
     height: 50px;
@@ -41,7 +41,7 @@ ul li:hover {
     cursor: pointer;
     transition: 0.2s;
 }
-.navButton:hover {
+.navLandingButton:hover {
     scale: 1.05;
     background-color: antiquewhite;
 }

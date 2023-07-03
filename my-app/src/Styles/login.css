@@ -95,3 +95,8 @@
     margin-bottom: 0;
   }
 }
+
+.a2 {
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -94,6 +94,7 @@
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1px var(--text-stroke-color);
+  cursor: pointer;
 }
 /* this is the text, when you hover on button */
 .hover-text {

@@ -69,7 +69,7 @@ function Picker() {
   };
 
   const handleSave = async () => {
-    const shoeName = state.shoeName?.trim();  
+    const shoeName = state.shoeName?.trim();
 
     if (!shoeName) {
       toast.error("Please enter a shoe name");
@@ -214,7 +214,7 @@ function Mesh(props) {
 
 function Shoes(props) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
-  const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
+  const pivot = useRef(new THREE.Object3D());
 
   return (
     <group ref={pivot} position={[4, 0, 0]} rotation={[0.8, 0, 0]}>

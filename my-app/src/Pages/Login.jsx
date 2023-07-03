@@ -4,23 +4,39 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const location = useLocation();
   const savedData = location.state && location.state.savedData;
+  const [resetEmail, setResetEmail] = useState("");
+  const [showResetForm, setShowResetForm] = useState(false);
 
   const onChange = () => {
     console.log("changed");
     setCaptchaDone(true);
   };
 
-  const navigateToLogin = () => {
-    window.location.href = "/SignUp";
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+
+    if (!resetEmail) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    sendPasswordResetEmail(auth, resetEmail)
+      .then(() => {
+        console.log("Password reset email sent successfully.");
+      })
+      .catch((error) => {
+        console.log("Error sending password reset email:", error.message);
+      });
   };
 
   const navigateTomain = () => {
-    window.location.href = "/";
+    window.location.href = "/Main";
   };
 
   const [captchaIsDone, setCaptchaDone] = useState(false);
@@ -41,7 +57,6 @@ const Login = () => {
         const user = userCredential.user;
         localStorage.setItem("current user", user.uid);
         if (savedData) {
-          // Navigate back to the Design page with the saved data
           window.location.href = "/Design";
         } else {
           window.location.href = "/";
@@ -51,16 +66,16 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(error);
-        if (errorMessage == "Firebase: Error (auth/wrong-password).") {
-          setError("wrong password");
-        } else if (errorMessage == "Firebase: Error (auth/user-not-found).") {
-          setError("verify your email");
+        if (errorMessage === "Firebase: Error (auth/wrong-password).") {
+          setError("Wrong password");
+        } else if (errorMessage === "Firebase: Error (auth/user-not-found).") {
+          setError("Verify your email");
         }
       });
   };
 
   return (
-    <div class="login-page">
+    <div className="login-page">
       <div>
         <div className="home-button-container">
           <button className="button" onClick={navigateTomain}>
@@ -69,7 +84,7 @@ const Login = () => {
         </div>
         <div className="login-box">
           <div className="logo">
-            <img src={logo} alt="Logo"/>
+            <img src={logo} alt="Logo" />
           </div>
           <div className="content">
             <h2 className="title">Log In</h2>
@@ -103,6 +118,11 @@ const Login = () => {
                 onChange={onChange}
               />
               <div className="p">
+                <button onClick={() => setShowResetForm(true)} className="a2">
+                  Forgot Password?
+                </button>
+              </div>
+              <div className="p">
                 Don't have an account?{" "}
                 <a href="/SignUp" className="a2">
                   Sign up!
@@ -112,8 +132,27 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {showResetForm && (
+        <div className="reset-password-card">
+          <h2>Reset Password</h2>
+          <form>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+              />
+            </div>
+            {error && <div>{error}</div>}
+            <button type="submit" onClick={handleForgotPassword} className="but-reset">
+              Reset Password
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
-};
+};  
 
 export default Login;

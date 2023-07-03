@@ -12,7 +12,7 @@ export const StateContextProvider = ({ children }) => {
 
   let foundProduct;
   let index;
-
+  
   const addToCart = (product) => {
     // Add your logic for adding the product to the cart here
     // For example:

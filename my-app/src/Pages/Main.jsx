@@ -18,7 +18,7 @@ const Main = () => {
         modelPath={"/deki.glb"}
         style={{ pointerEvents: "none" }}
       />
-      <Shoesy />
+      {/* <Shoesy /> */}
       <div>
         <SavedCardList />
       </div>

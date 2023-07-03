@@ -13,7 +13,6 @@ import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { useScreenshot } from "use-react-screenshot";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const state = proxy({
   current: null,
@@ -182,20 +181,9 @@ function Picker() {
       ))}
       <button
         data-text="Awesome"
-        className="button"
+        className="DesignButton"
         onClick={handleSave}
-        style={{ marginTop: "-5px", marginLeft: "1250px" }}
-      >
-        <span className="actual-text" style={{ cursor: "pointer" }}>
-          &nbsp;SAVE&nbsp;
-        </span>
-        <span
-          className="hover-text"
-          aria-hidden="true"
-          style={{ cursor: "pointer" }}
-        >
-          &nbsp;SAvE&nbsp;
-        </span>
+        >Save
       </button>
     </div>
   );
@@ -318,11 +306,12 @@ export default function Design() {
       <NavBar />
       <ToastContainer />
       <div className="Design-Page">
-        <div className="Logos-container">
+        <div className="Container-Buttons">
           <Picker />
         </div>
         <div className="canvas-container" id="design-container">
-          <Canvas>
+          <div className="Cyrcle">
+          <Canvas className="Canvas-Design">
             <ambientLight intensity={0.5} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
             <pointLight position={[10, 10, 20]} />
@@ -332,8 +321,9 @@ export default function Design() {
             </Suspense>
             <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>
+          </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

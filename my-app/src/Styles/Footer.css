@@ -1,15 +1,9 @@
-body {
-    grid-template-rows: 1fr 10rem auto;
-    grid-template-areas: "main" "." "footer";
-    overflow-x: hidden;
-    min-height: 100vh;
-    font-family: 'Open Sans', sans-serif;
-  }
+
   
   .footer {
     z-index: 1;
-    --footer-background: #232020;
-    margin-left: -20px;
+    --footer-background: black;
+    
     margin-top: 120px;
     display: grid;
     position: relative;
@@ -17,48 +11,15 @@ body {
     min-height: 12rem;
   }
   
-  .bubbles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1rem;
-    background: var(--footer-background);
-    filter: url("#blob");
-  }
+.bubbles{
+  background-image: url("../assets/Wave.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 30vh;
+}
   
-  .bubble {
-    position: absolute;
-    left: var(--position, 50%);
-    background: var(--footer-background);
-    border-radius: 100%;
-    animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
-      bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
-    transform: translate(-50%, 100%);
-  }
-  
-  @keyframes bubble-size {
-    0%,
-    75% {
-      width: var(--size, 4rem);
-      height: var(--size, 4rem);
-    }
-    100% {
-      width: 0rem;
-      height: 0rem;
-    }
-  }
-  
-  @keyframes bubble-move {
-    0% {
-      bottom: -4rem;
-    }
-    100% {
-      bottom: var(--distance, 10rem);
-    }
-  }
-  
-  .content {
+  .content1 {
     z-index: 2;
     grid-template-columns: 1fr auto;
     color: #f5f7fa;
@@ -67,17 +28,17 @@ body {
     background: var(--footer-background);
   }
   
-  .content a,
-  .content p {
+  .content1 a,
+  .content1 p {
     color: #f5f7fa;
     text-decoration: none;
   }
   
-  .content b {
+  .content1 b {
     color: white;
   }
   
-  .content p {
+  .content1 p {
     margin: 0;
     font-size: 0.75rem;
   }
@@ -164,4 +125,76 @@ margin-top: -10px;
 
 #github {
   fill: #333;
+}
+@media screen and (max-width: 768px) {
+  .footer {
+    margin-left: 0;
+    margin-top: 60px;
+    min-height: 20rem;
+  }
+  .footerTitle{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .content1 {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    padding: 1rem;
+  }
+
+  .footer-contact {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .social-links,
+  .flex-center {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .content1 {
+    padding: 0.5rem;
+  }
+
+  .footer-logo {
+    width: 120px;
+  }
+
+  .footer-contact {
+    align-items: center;
+  }
+
+  .social-btn {
+    height: 40px;
+    width: 40px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .footer {
+    margin-left: 0;
+    margin-top: 60px;
+    min-height: 20rem;
+  }
+  .content1 {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    padding: 1rem;
+  }
+
+  .footer-contact {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .social-links,
+  .flex-center {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
 }

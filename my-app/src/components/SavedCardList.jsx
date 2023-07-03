@@ -42,18 +42,43 @@ const SavedCardList = () => {
   }
 
   return (
-    <div>
+    <div className="swipe">
       <h2>Find Out What Other Styles You Can Wear </h2>
-      <Swiper
+      <Swiper style={{padding:"20px"}}
         navigation
         slidesPerView={4}
-        spaceBetween={10}
+        spaceBetween={25}
+        breakpoints={{
+          0: {
+            slidesPerView: 1
+          },
+          375: {
+            slidesPerView: 1
+          },
+          
+          639: {
+            slidesPerView: 1,
+          },
+          768:{
+            slidesPerView:2
+          },
+          1440:{
+            slidesPerView:3
+          },
+          1920:{
+            slidesPerView:4
+          },
+          2560:{
+            slidesPerView:5
+
+          }
+        }}
       >
         {colorDictionaries.map((dictionary, idx) => (
           <SwiperSlide key={idx}>
             <div className="snip1418">
-            <SavedCard colorDictionary={dictionary} />
-      </div>
+              <SavedCard colorDictionary={dictionary} />
+            </div>
             </SwiperSlide>
         ))}
       </Swiper>

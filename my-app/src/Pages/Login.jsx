@@ -4,8 +4,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
+<<<<<<< HEAD
 import { useLocation, Link } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
+=======
+import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
+>>>>>>> refs/remotes/origin/Moez
 
 const Login = () => {
   const location = useLocation();
@@ -50,6 +57,7 @@ const Login = () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
+
     }
 
     signInWithEmailAndPassword(auth, email, password)
@@ -59,7 +67,7 @@ const Login = () => {
         if (savedData) {
           window.location.href = "/Design";
         } else {
-          window.location.href = "/";
+          window.location.href = "/Main";
         }
       })
       .catch((error) => {

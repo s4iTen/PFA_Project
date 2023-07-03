@@ -1,8 +1,8 @@
 import React from "react";
 import videoSrc from "../assets/Screen Recording - June 22, 2023.mp4";
 import "../Styles/LandingPage.css";
-import LandingNav from "../components/LandingNav";
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 const Landing = () => {
   const home = () => {
@@ -11,7 +11,7 @@ const Landing = () => {
 
   return (
     <div className="body">
-      <LandingNav />
+      <NavBar />
       <div className="landing-page">
         <div className="left-section">
           <img src="/Landing.png" alt="Shoe-Image" />

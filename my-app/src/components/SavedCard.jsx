@@ -137,29 +137,33 @@ const SavedCard = ({ colorDictionary }) => {
   const { onAdd } = useStateContext();
   const navigate = useNavigate();
   const CardData = () => {
-
     const Data = colorDictionary;
     console.log(Data);
     navigate('/Shoe3D', {state:{colorDictionary}})
   };
 
-
   return (
-    <div className="Shoe-Container" onClick={CardData}>
-      <div className="canvas-wrapper">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-          <OrbitControls enableZoom={false} enableRotate={false} enablePan={false}/>
-          <Suspense fallback={null}>
-            <Shoes colorDictionary={colorDictionary} />
-          </Suspense>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[0, 10, 5]} intensity={0.6} />
-        </Canvas>
-        <div className="description">
-          <div className="name">
-            <h2>{colorDictionary.shoeName}</h2>
+    <div className="SavedCard" onClick={CardData}>
+      <div id="circle">
+        <div className="canvas-wrapper">
+          
+          <div className="description">
+            <div className="name">
+              <h2 className="ShoeName">{colorDictionary.shoeName}</h2>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="content">
+          <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
+            <OrbitControls enableZoom={false} enableRotate={false} enablePan={false}/>
+            <Suspense fallback={null}>
+              <Shoes colorDictionary={colorDictionary} />
+            </Suspense>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[0, 10, 5]} intensity={0.6} />
+          </Canvas>
+        <a className="Link">More</a>
       </div>
     </div>
   );

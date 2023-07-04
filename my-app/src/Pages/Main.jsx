@@ -8,6 +8,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Shoesy from "../components/Shoes";
 import ModelViewer from "../components/test";
+import Banner from "../components/HeroBanner";
+
 const Main = () => {
   return (
     <div className="Content-Container">
@@ -18,11 +20,10 @@ const Main = () => {
         modelPath={"/deki.glb"}
         style={{ pointerEvents: "none" }}
       />
-      {/* <Shoesy /> */}
       <div>
         <SavedCardList />
       </div>
-      <HeroBanner />
+      <Banner />
       <Product />
       <Footer />
     </div>

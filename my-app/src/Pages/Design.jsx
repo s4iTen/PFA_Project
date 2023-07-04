@@ -179,12 +179,14 @@ function Picker() {
           )}
         </div>
       ))}
+      <div className="SaveButton">
       <button
         data-text="Awesome"
         className="DesignButton"
         onClick={handleSave}
         >Save
       </button>
+      </div>
     </div>
   );
 }
@@ -317,7 +319,7 @@ export default function Design() {
             <pointLight position={[10, 10, 20]} />
 
             <Suspense fallback={null}>
-              <Shoes />
+              <Shoes  className="ModelDesign"/>
             </Suspense>
             <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>

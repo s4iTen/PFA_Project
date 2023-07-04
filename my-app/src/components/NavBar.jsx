@@ -139,9 +139,9 @@ const NavBar = () => {
         </button>
       </div>
         {!isLoggedIn ? (
-          <div>
-            <button onClick={navigateToLogin}>Log In</button>
-            <button onClick={navigateToSignUp}>Sign Up</button>
+          <div className="ButtonsLS">
+            <button className="Login" onClick={navigateToLogin}>Log In</button>
+            <button className="Signup" onClick={navigateToSignUp}>Sign Up</button>
           </div>
         ) : (
           <div className="userContainer">

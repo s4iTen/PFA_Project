@@ -13,12 +13,12 @@ const Main = () => {
     <div className="Content-Container">
       <ToastContainer />
       <NavBar />
+      {/* <Shoesy /> */}
       <ModelViewer
         scale="250"
         modelPath={"/deki.glb"}
         style={{ pointerEvents: "none" }}
       />
-      {/* <Shoesy /> */}
       <div>
         <SavedCardList />
       </div>

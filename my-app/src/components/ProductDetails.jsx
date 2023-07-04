@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import Footer from "../components/Footer";
+import "../Styles/prodectDetails.css"
 
 import {
   AiOutlineMinus,
@@ -140,7 +141,9 @@ const ProductDetails = () => {
               </div>
               <p>(20)</p>
             </div>
-            <h2>Details: </h2>
+            <div className="Details">
+            <h2 >Details: </h2>
+            </div>
             <p>{product.details}</p>
             <p className="price">{product.price}DT</p>
             <div className="sizes">
@@ -190,7 +193,7 @@ const ProductDetails = () => {
             <h2>You may also like</h2>
             <div className="maylike-products-container track">
               {otherProducts.map((otherProduct) => (
-                <div key={otherProduct._id}>
+                <div key={otherProduct._id} className="ModelDetails">
                   <a href={`/product/${otherProduct._id}`}>
                     <img
                       src={urlFor(
@@ -201,7 +204,7 @@ const ProductDetails = () => {
                       height={250}
                       style={{ borderRadius: "15px" }}
                     />
-                    <h1>{otherProduct.name}</h1>
+                    <h2>{otherProduct.name}</h2>
                   </a>
                 </div>
               ))}

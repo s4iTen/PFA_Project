@@ -15,6 +15,7 @@ const Main = () => {
     <div className="Content-Container">
       <ToastContainer />
       <NavBar />
+      {/* <Shoesy /> */}
       <ModelViewer
         scale="250"
         modelPath={"/deki.glb"}

@@ -63,6 +63,9 @@ const Product = () => {
           768:{
             slidesPerView:2
           },
+          1440:{
+            slidesPerView:4
+          },
           
         }}>
         {products.map((product) => (

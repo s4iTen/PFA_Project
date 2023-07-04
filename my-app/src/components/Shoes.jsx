@@ -3,9 +3,9 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
-import "../Styles/ShoesContainer.css";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
+import '../Styles/Nikez.css'
 import { useFrame } from "@react-three/fiber";
 
 const state = proxy({
@@ -163,43 +163,14 @@ export default function Shoesy() {
   };
   return (
     <>
-      <div className="footer-bannerr-container">
-        <button
-          className="button"
-          onClick={handleClick}
-          style={{ marginLeft: 800, color: "black" }}
-        >
-          {" "}
-          <span className="actual-text" style={{ cursor: "pointer" }}>
-            &nbsp;GET YOUR OWN STYLE&nbsp;
-          </span>
-          <span
-            className="hover-text"
-            aria-hidden="true"
-            style={{ cursor: "pointer" }}
-          >
-            &nbsp;GET NOW&nbsp;
-          </span>
-        </button>
 
-        <div className="bannner-desc">
-          <div className="left">
-            <h3>Fly Alone</h3>
-            <h2>Unleash your potential</h2>
-            <h1>Unstoppable</h1>
-            <p>Get Your OwN Shoes</p>
-            <div className="right">
-              <h2>Step up your style</h2>
-              <h3>Unparalleled Quality</h3>
-              <h2>new heights with Nikez</h2>
-              <h3> Fuel your passion</h3>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="canvas-Container">
-        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
+      <div className="Canvas-Shoe">
+        <Canvas className="CanvasShoe" dpr={[1, 2]} camera={{ position: [4, 0, 0] }}
+         style={{overflow:'hidden',
+          width:'100%' ,height:'100%',
+          marginTop:'40px',
+           paddingTop:'50px'}}>
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[10, 10, 20]} />

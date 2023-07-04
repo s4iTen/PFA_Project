@@ -1,5 +1,16 @@
+
+.Name {
+  border: #000 1px solid;
+  border-radius: 5px;
+}
+
 .Design-Page{
-  background-color: white;
+  width: 100%;
+  height: 89vh;
+  background-image: url('../assets/Greay.svg');
+  background-position: bottom;
+  background-size: cover;
+
 }
 
 .picker-container {
@@ -13,9 +24,8 @@
   height: 24px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #000;
-  margin: 10px 10px 0px;
-  padding-bottom:10px ;
+  border: 1px solid #000;
+  margin: 0px 10px 0px;
 }
 
 .picker-overlay {
@@ -79,13 +89,14 @@
 }
 .Container-Buttons {
   align-items: center;
+  justify-content: center;
   position: relative;
   width: 30%;
+
 }
 
 .Cyrcle {
   border-radius: 50%;
-  background-color: #000;
   width: 800px;
   height: 800px;
   margin-top: 40px;

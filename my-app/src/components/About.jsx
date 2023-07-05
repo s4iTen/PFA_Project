@@ -1,14 +1,16 @@
 import React from "react";
-import '../Styles/About.css';
+import "../Styles/About.css";
 import NavBar from "./NavBar";
-import moez from '../assets/moez.png';
-import yahya from '../assets/yahya.png';
+import moez from "../assets/moez.png";
+import yahya from "../assets/yahya.png";
 
 const About = () => {
   return (
     <div>
       <NavBar />
-      <h1>About Nikez Store</h1>
+      <div className="tite">
+        <p>About Nikez Store</p>
+      </div>
       <p>
         Welcome to Nikez Store, your ultimate destination for customizing your
         own Nike Air Force shoes. We are passionate about providing you with a
@@ -34,8 +36,9 @@ const About = () => {
         game and create your own unique style with our custom Nike Air Force
         shoes. Start designing today and make a statement with every step!
       </p>
-
-      <h2>Our Team</h2>
+      <div className="tite">
+        <p>Our Team</p>
+      </div>
       <div className="team-member">
         <h3>Yahya shouk</h3>
         <p>Backend Developer</p>

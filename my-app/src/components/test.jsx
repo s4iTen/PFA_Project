@@ -4,10 +4,12 @@ import { OrbitControls } from "@react-three/drei";
 import BigShoes from "./BigShoes";
 import '../Styles/Nikez.css'
 import "../Styles/ShoesContainer.css";
-import Shoesy from "./Shoes";
 import { Link } from "react-router-dom";
 
 const ModelViewer = ({ modelPath, scale = 100, position = [0, 0, 0.8] }) => {
+  const  moveDesign  = ()=> {
+    window.location.href='/Design'
+  }
   return (
     <div className="front-Container">
     <div className="Model-Container">
@@ -35,7 +37,7 @@ const ModelViewer = ({ modelPath, scale = 100, position = [0, 0, 0.8] }) => {
           <p>We're all have the problem of buying the same shoe as our friends so why doesn't we chose our own colors to touch the perfection</p>
         </div>
       </div>
-      <button className="CustimizeBTN"><Link to="/design">Create Your Own Style </Link></button>
+      <button className="CustimizeBTN" onClick={moveDesign}>Create Your Own Style</button>
     </div>
     </div>
   );

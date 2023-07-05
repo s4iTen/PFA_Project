@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   flex-direction: row;
-  background-color: #000;
+  background-color: #1d1a20;
   color: white;
   align-items: center;
   justify-content: space-between;
@@ -51,6 +51,7 @@
   .Ulcontainer {
     justify-content: center;
     align-items: center;
+    margin-left: 130px;
 
     .NavUl{
       display: flex;
@@ -62,7 +63,7 @@
         list-style-type: none;
         transition: 0.2s;
         a {
-          margin: 20px;
+          margin: 40px;
           color: #fff;
           cursor: pointer;
         }

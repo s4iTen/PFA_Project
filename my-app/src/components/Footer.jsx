@@ -19,7 +19,7 @@ function Footer() {
             <div className="footer-contact">
               <h2>Contact Us</h2>
               <h4>123 Street, Tunis</h4>
-              <h4>Email: info@nikestore.com</h4>
+              <h4>Email: nikestore@gmail.com</h4>
               <h4>Phone: +216 56 890 250</h4>
               <div class="social-links">
                 <div id="twitter" class="social-btn flex-center">

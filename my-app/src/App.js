@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import { StateContextProvider } from "./context/StateContext";
 import Landing from "./Pages/Landing";
 import ResetPassword from "./components/ResetPassword";
+import About from "./components/About";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route exact path="/Shoe3D" element={<Shoe3D />} />
           <Route exact path="/Cart" element={<Cart />} />
           <Route exact path="/ResetPassword" element={<ResetPassword />} />
-
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </StateContextProvider>
     </BrowserRouter>

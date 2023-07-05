@@ -17,8 +17,8 @@ const Main = () => {
       <NavBar />
       {/* <Shoesy /> */}
       <ModelViewer
-        scale="250"
-        modelPath={"/deki.glb"}
+        scale="750"
+        modelPath={"/logooo.glb"}
         style={{ pointerEvents: "none" }}
       />
       <div>

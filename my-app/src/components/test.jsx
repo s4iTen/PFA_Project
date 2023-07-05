@@ -5,6 +5,7 @@ import BigShoes from "./BigShoes";
 import '../Styles/Nikez.css'
 import "../Styles/ShoesContainer.css";
 import Shoesy from "./Shoes";
+import { Link } from "react-router-dom";
 
 const ModelViewer = ({ modelPath, scale = 100, position = [0, 0, 0.8] }) => {
   return (
@@ -34,7 +35,7 @@ const ModelViewer = ({ modelPath, scale = 100, position = [0, 0, 0.8] }) => {
           <p>We're all have the problem of buying the same shoe as our friends so why doesn't we chose our own colors to touch the perfection</p>
         </div>
       </div>
-      <button className="CustimizeBTN">Create Your Own Design</button>
+      <button className="CustimizeBTN"><Link to="/design">Create Your Own Style </Link></button>
     </div>
     </div>
   );

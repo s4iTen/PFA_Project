@@ -157,7 +157,7 @@ const Cart = () => {
                     className="btn"
                     onClick={handleCheckout}
                   >
-                    Pay with Stripe
+                    Pay
                   </button>
                 </div>
               </div>

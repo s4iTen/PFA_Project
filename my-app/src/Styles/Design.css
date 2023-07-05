@@ -56,6 +56,9 @@
   cursor: pointer;
   font-size: 14px;
 }
+.inputt {
+  display: none;
+}
 
 .Logos-container {
   width: 20%;
@@ -108,7 +111,6 @@ input {
   width: 200px;
   height: 40px;
   margin: 3px;
-  border: 0;
 }
 input::after {
   scale: 1.1;

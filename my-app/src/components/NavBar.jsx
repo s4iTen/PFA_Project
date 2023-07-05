@@ -10,6 +10,7 @@ import { useStateContext } from "../context/StateContext";
 import { AiOutlineShopping } from "react-icons/ai";
 import sanityClient from "@sanity/client";
 import "../Styles/Menu.css";
+import { Link as ScrollLink } from "react-scroll";
 
 const sanityConfig = {
   projectId: "fg0vn4ia",
@@ -46,7 +47,7 @@ const NavBar = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("current user");
-        window.location.href = "/";
+        window.location.href = "/Main";
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +94,7 @@ const NavBar = () => {
                   window.location.href = "/Main";
                 }}
               >
-                home
+                Home
               </a>
             </li>
             <li className="LiNav">
@@ -106,18 +107,16 @@ const NavBar = () => {
               </a>{" "}
             </li>
             <li className="LiNav">
-              <a
-                onClick={() => {
-                  window.location.href = "/";
-                }}
-              >
-                Contact Us
+              <a>
+                <ScrollLink to="footer" smooth={true} duration={500}>
+                  Contact Us
+                </ScrollLink>
               </a>{" "}
             </li>
             <li className="LiNav">
               <a
                 onClick={() => {
-                  window.location.href = "/";
+                  window.location.href = "/about";
                 }}
               >
                 About Us
@@ -128,20 +127,24 @@ const NavBar = () => {
       </div>
       {showCart && <Cart />}
       <div className="LoginSignup">
-      <div>
-        <button
-          type="button"
-          className="cart-icon"
-          onClick={() => setShowCart(true)}
-        >
-          <AiOutlineShopping />
-          <span className="cart-item-qty">{totalQuantities}</span>
-        </button>
-      </div>
+        <div>
+          <button
+            type="button"
+            className="cart-icon"
+            onClick={() => setShowCart(true)}
+          >
+            <AiOutlineShopping />
+            <span className="cart-item-qty">{totalQuantities}</span>
+          </button>
+        </div>
         {!isLoggedIn ? (
           <div className="ButtonsLS">
-            <button className="Login" onClick={navigateToLogin}>Log In</button>
-            <button className="Signup" onClick={navigateToSignUp}>Sign Up</button>
+            <button className="Login" onClick={navigateToLogin}>
+              Log In
+            </button>
+            <button className="Signup" onClick={navigateToSignUp}>
+              Sign Up
+            </button>
           </div>
         ) : (
           <div className="userContainer">

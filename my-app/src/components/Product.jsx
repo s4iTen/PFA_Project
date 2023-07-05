@@ -46,12 +46,12 @@ const Product = () => {
 
   return (
     <div className="swipe">
-      <h2>new season</h2>
+      <h2>New Arrival</h2>
       <Toaster />
       <Swiper 
       navigation 
-      slidesPerView={4} 
-      spaceBetween={25} 
+      slidesPerView={4}
+      spaceBetween={25}
       style={{padding:"20px"}} 
       breakpoints={{
           0: {

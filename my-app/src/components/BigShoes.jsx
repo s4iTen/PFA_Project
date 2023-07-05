@@ -18,7 +18,6 @@ const BigShoes = ({ modelPath, scale = 0.5, position = [0, -10, 0] }) => {
     groundRef.current.receiveShadow = true;
   }, []);
 
-  useFrame((state, delta) => (ref.current.rotation.y += 0.005));
 
   useEffect(() => {
     camera.position.set(100, 0, 500);

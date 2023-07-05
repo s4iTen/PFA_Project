@@ -46,7 +46,7 @@ function Picker() {
 
   useEffect(() => {
     if (Done) {
-      window.location.href = "/";
+      window.location.href = "/Main";
     }
   }, [Done]);
 
@@ -325,8 +325,9 @@ export default function Design() {
           </Canvas>
           </div>
         </div>
-        {/* <Footer /> */}
       </div>
+        <Footer />
     </>
+    
   );
 }

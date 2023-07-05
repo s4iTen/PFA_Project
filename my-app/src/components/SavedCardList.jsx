@@ -76,7 +76,7 @@ const SavedCardList = () => {
       >
         {colorDictionaries.map((dictionary, idx) => (
           <SwiperSlide key={idx}>
-            <div className="snip1418">
+            <div>
               <SavedCard colorDictionary={dictionary} />
             </div>
             </SwiperSlide>

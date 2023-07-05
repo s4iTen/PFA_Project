@@ -43,9 +43,10 @@ function MyShoes() {
     <div>
       <NavBar />
       <div className="snip141887">
+
         {colorDictionaries.map((dictionary, idx) => {
           if (dictionary.userId === currentUser.uid) {
-            return <SavedCard colorDictionary={dictionary} />;
+            return < SavedCard colorDictionary={dictionary} className='MyShoe'/>;
           } else {
             return null;
           }

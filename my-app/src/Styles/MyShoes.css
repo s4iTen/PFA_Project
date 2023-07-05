@@ -1,10 +1,13 @@
 .snip141887 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin: auto;
   }
   
-  .snip141887 > * {
+  .snip141887 {
     font-family: 'Raleway', Arial, sans-serif;
     cursor: pointer;
     overflow: hidden;
@@ -16,7 +19,9 @@
     border-radius: 10px;
     font-size: 16px;
     margin-bottom: 5px; /* Adjust the value to reduce the spacing */
-    background: linear-gradient(to right, #cca9a9 0%, #ecd0d0 50%, transparent 100%);
+    box-shadow: 4px 4px 5px 4px #0000005b;
     /* Add any additional styling for the product card */
   }
-  
+  .MyShoe {
+    margin-top: 20px;
+  }

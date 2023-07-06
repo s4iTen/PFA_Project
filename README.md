@@ -64,25 +64,7 @@ https://github.com/moezabdelkefi
 
 This project is licensed under the Holberton School Software Engineering Program.
 
-<iframe src="https://www.veed.io/embed/4eff6f5c-3238-425f-a708-22f7ab438cb4" width="744" height="504" frameborder="0" title="Screen Recording - Jul 6, 2023" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://github.com/s4iTen/PFA_Project/assets/113900578/8ac25bcb-8648-43a8-ac1c-2e3eb806b67a
 

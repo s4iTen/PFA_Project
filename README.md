@@ -42,7 +42,7 @@ Use the provided controls to change the shoe's colors.
 
 Preview the changes in real-time using the 3D model visualization.
 
-Once satisfied with the customization, add the shoes to your cart and proceed with the purchase.
+Once satisfied with the customization, save it then buy it.
 
 ## Firebase Integration:
 

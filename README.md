@@ -14,6 +14,7 @@ Sanity
 ## Usage:
 
 Open the application in your web browser: http://localhost:3000.
+
 Create an account or sign in with your existing account.
 
 Browse the available Nike shoe models and select the desired model to customize.

@@ -45,5 +45,16 @@ This application uses Firebase for authentication and database functionality for
 
 ## Stripe Payment Integration:
 
-This application integrates with Stripe to process payments securely for storing the data of the products like the image, name, price, details the we get the API to fetched for displayed to our application.
+This application integrates with Stripe to process payments securely.
 
+## Product Creation with Sanity:
+
+we use sanity for storing our products by creating a schema to define the structure and types to store the images, names, prices, tags, details..., also it offers
+RestFull Api to fetch and manipulate content.
+
+## Contributing:
+https://github.com/s4iTen
+https://github.com/moezabdelkefi
+
+## License:
+This project is licensed under the Holberton School Software Engineering Program.

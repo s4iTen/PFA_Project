@@ -32,6 +32,8 @@ Upon successful payment, your order will be processed and confirmed.
 
 ## 3D Model Customization:
 
+https://github.com/s4iTen/PFA_Project/assets/113900578/8ac25bcb-8648-43a8-ac1c-2e3eb806b67a
+
 To customize your Nike shoes using the 3D model feature, follow these steps:
 
 Select a Nike shoe model from the available options.
@@ -63,8 +65,3 @@ https://github.com/moezabdelkefi
 ## License:
 
 This project is licensed under the Holberton School Software Engineering Program.
-
-
-
-https://github.com/s4iTen/PFA_Project/assets/113900578/8ac25bcb-8648-43a8-ac1c-2e3eb806b67a
-

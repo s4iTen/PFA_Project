@@ -7,8 +7,11 @@ This project is an eCommerce application that allows users to customize their ow
 
 ## technologies Used:
 React
+
 Firebase
+
 Stripe
+
 Sanity
 
 ## Usage:
@@ -57,4 +60,5 @@ https://github.com/s4iTen
 https://github.com/moezabdelkefi
 
 ## License:
+
 This project is licensed under the Holberton School Software Engineering Program.

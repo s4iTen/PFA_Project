@@ -22,7 +22,7 @@ Create an account or sign in with your existing account.
 
 Browse the available Nike shoe models and select the desired model to customize.
 
-Use the 3D model customization tools to personalize your shoes with different colors.
+Use the 3D model customization tools to personalize your shoes with different colors then give it a name and save it.
 
 Add the customized shoes to your cart and proceed to checkout.
 

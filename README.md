@@ -3,7 +3,7 @@
 ![website](https://github.com/s4iTen/PFA_Project/assets/113900578/2992b43f-accb-4d04-a178-f966cf4dbe51)
 
 ## Description:
-This project is an eCommerce application that allows users to customize their own Nike shoes using a 3D model. It is built with React, Firebase, Stripe payment integration, and utilizes Sanity for product creation.
+This project is an eCommerce application for nike shoes also it allows users to customize their own Nike shoes using a 3D model. It is built with React, Firebase, Stripe payment integration, and utilizes Sanity for product creation.
 
 ## technologies Used:
 React

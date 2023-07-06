@@ -57,13 +57,13 @@ This application integrates with Stripe to process payments securely.
 we use sanity for storing our products by creating a schema to define the structure and types to store the images, names, prices, tags, details..., also it offers
 RestFull Api to fetch and manipulate content.
 
+![Screenshot 2023-07-06 213012 (1)](https://github.com/s4iTen/PFA_Project/assets/113900578/825342fb-a2ef-421c-9ae0-b7fbbac54899)
+
 ## Contributing:
 https://github.com/s4iTen
 
 https://github.com/moezabdelkefi
-
-![Screenshot 2023-07-06 213012 (1)](https://github.com/s4iTen/PFA_Project/assets/113900578/825342fb-a2ef-421c-9ae0-b7fbbac54899)
-
+moezabdelkefi17@gmail.com
 
 ## License:
 

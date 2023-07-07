@@ -5,7 +5,6 @@ import "../Styles/SavedCard.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
-import { useStateContext } from "../context/StateContext";
 
 function Mesh({ colorDictionary, ...props }) {
   const { geometry, material, color, ...rest } = props;
@@ -19,8 +18,8 @@ function Mesh({ colorDictionary, ...props }) {
 
 function Shoes({ colorDictionary }) {
   const { nodes, materials } = useGLTF("/AirComp.glb");
-  const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
-
+  // Create a ref for the pivot
+  const pivot = useRef(new THREE.Object3D());
 
   return (
     <group
@@ -134,19 +133,17 @@ function Shoes({ colorDictionary }) {
 }
 
 const SavedCard = ({ colorDictionary }) => {
-  const { onAdd } = useStateContext();
   const navigate = useNavigate();
   const CardData = () => {
     const Data = colorDictionary;
     console.log(Data);
-    navigate('/Shoe3D', {state:{colorDictionary}})
+    navigate("/Shoe3D", { state: { colorDictionary } });
   };
 
   return (
     <div className="SavedCard" onClick={CardData}>
       <div id="circle">
         <div className="canvas-wrapper">
-          
           <div className="description">
             <div className="name">
               <h2 className="ShoeName">{colorDictionary.shoeName}</h2>
@@ -155,15 +152,19 @@ const SavedCard = ({ colorDictionary }) => {
         </div>
       </div>
       <div className="content">
-          <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
-            <OrbitControls enableZoom={false} enableRotate={false} enablePan={false}/>
-            <Suspense fallback={null}>
-              <Shoes colorDictionary={colorDictionary} />
-            </Suspense>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[0, 10, 5]} intensity={0.6} />
-          </Canvas>
-        <a className="Link">More</a>
+        <Canvas dpr={[1, 2]} camera={{ position: [6, 0, 0] }}>
+          <OrbitControls
+            enableZoom={false}
+            enableRotate={false}
+            enablePan={false}
+          />
+          <Suspense fallback={null}>
+            <Shoes colorDictionary={colorDictionary} />
+          </Suspense>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[0, 10, 5]} intensity={0.6} />
+        </Canvas>
+        <p className="Link">More</p>
       </div>
     </div>
   );

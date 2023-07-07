@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Cart = () => {
   const CartRef = useRef();
   const [selectedSize, setSelectedSize] = useState(null);
+  // destructure the values from the state context
   const {
     totalPrice,
     totalQuantities,
@@ -26,25 +27,30 @@ const Cart = () => {
   } = useStateContext();
 
   const handleCheckout = async () => {
+     // Check if a size is selected
     if (!selectedSize) {
       toast.error("Please select a size");
       return;
     }
     try {
+      // Prepare line items for the checkout
       const lineItems = cartItems.map((item) => ({
         name: `${item.name} - Size: ${selectedSize}`,
         price: item.price,
         quantity: item.quantity,
       }));
 
+      // Send a POST request to the server for checkout
       const response = await axios.post("http://localhost:3001/api/server", {
         line_items: lineItems,
       });
 
       const { data } = response;
       if (data && data.id) {
+        // Redirect to the checkout URL
         window.location = data.url;
 
+        // Show a success message
         toast.success("Thank you for your purchase!", {
           autoClose: 4000,
         });
@@ -56,6 +62,7 @@ const Cart = () => {
     }
   };
 
+  // Update the selected size state
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
   };
@@ -95,6 +102,7 @@ const Cart = () => {
                 {item?.image && item.image.length > 0 && (
                   <img
                     src={urlFor(item?.image[0]).url()}
+                    alt=""
                     className="cart-product-image"
                   />
                 )}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { client } from "../lib/client";
-import '../Styles/globals.css';
+import "../Styles/globals.css";
 
 const Banner = () => {
   const [bannerData, setBannerData] = useState([]);
 
   useEffect(() => {
+    // Fetch banner data from Sanity CMS
     const query = `*[_type == "banner"]{
       image {
         asset {
@@ -27,6 +28,7 @@ const Banner = () => {
     client
       .fetch(query)
       .then((data) => {
+        // Set the fetched banner data in the component state
         setBannerData(data);
       })
       .catch((error) => {

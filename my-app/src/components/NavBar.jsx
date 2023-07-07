@@ -8,15 +8,8 @@ import Logo from "../assets/logo.png";
 import Cart from "./Cart";
 import { useStateContext } from "../context/StateContext";
 import { AiOutlineShopping } from "react-icons/ai";
-import sanityClient from "@sanity/client";
 import "../Styles/Menu.css";
 import { Link as ScrollLink } from "react-scroll";
-
-const sanityConfig = {
-  projectId: "fg0vn4ia",
-  dataset: "production",
-};
-const client = sanityClient(sanityConfig);
 
 const NavBar = () => {
   const user = auth.currentUser;
@@ -27,12 +20,15 @@ const NavBar = () => {
     userId = user.uid;
     // Do something with the user ID
   }
+
+  // Handle Add Item button click
   const handleAddItem = () => {
     window.location.href = "https://sanity-project-iota.vercel.app/";
   };
 
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
+  // Animation variants for menu items
   const itemVariants = {
     open: {
       opacity: 1,
@@ -41,8 +37,11 @@ const NavBar = () => {
     },
     closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
   };
+
+  // Check if the user is logged in
   const isLoggedIn = !!localStorage.getItem("current user");
 
+  // Handle sign out
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -54,31 +53,19 @@ const NavBar = () => {
       });
   };
 
+  // Navigate to login page
   const navigateToLogin = () => {
     window.location.href = "/Login";
   };
 
+  // Navigate to sign up page
   const navigateToSignUp = () => {
     window.location.href = "/SignUp";
   };
-  const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const handleMenuClick = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  // Additional state and variants for menu animation
   const [isOpen, setIsOpen] = useState(false);
-  const list = {
-    visible: { opacity: 1 },
-    hidden: { opacity: 0 },
-  };
 
-  const item = {
-    visible: { opacity: 1, x: 0 },
-    hidden: { opacity: 0, x: -100 },
-  };
-  const dropdownClass = isMenuOpen
-    ? "dropdown-content open"
-    : "dropdown-content";
   return (
     <div className="navbar">
       <div className="navItems">
@@ -90,6 +77,7 @@ const NavBar = () => {
             <li className="LiNav">
               {" "}
               <a
+                href="/Main"
                 onClick={() => {
                   window.location.href = "/Main";
                 }}
@@ -99,6 +87,7 @@ const NavBar = () => {
             </li>
             <li className="LiNav">
               <a
+                href="/Design"
                 onClick={() => {
                   window.location.href = "/Design";
                 }}
@@ -107,7 +96,7 @@ const NavBar = () => {
               </a>{" "}
             </li>
             <li className="LiNav">
-              <a>
+              <a href="/Footer">
                 <ScrollLink to="footer" smooth={true} duration={500}>
                   Contact Us
                 </ScrollLink>
@@ -115,6 +104,7 @@ const NavBar = () => {
             </li>
             <li className="LiNav">
               <a
+                href="/about"
                 onClick={() => {
                   window.location.href = "/about";
                 }}

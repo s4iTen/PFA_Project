@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import auth from "../firebase.js";
-import firebase from "firebase/app";
 import SavedCard from "../components/SavedCard";
-import '../Styles/MyShoes.css';
+import "../Styles/MyShoes.css";
 
 function MyShoes() {
   const [colorDictionaries, setColorDictionaries] = useState([]);
@@ -43,15 +42,16 @@ function MyShoes() {
     <div>
       <NavBar />
       <div className="snip141887">
-
         {colorDictionaries.map((dictionary, idx) => {
           if (dictionary.userId === currentUser.uid) {
-            return < SavedCard colorDictionary={dictionary} className='MyShoe'/>;
+            return (
+              <SavedCard colorDictionary={dictionary} className="MyShoe" />
+            );
           } else {
             return null;
           }
         })}
-        </div>
+      </div>
     </div>
   );
 }

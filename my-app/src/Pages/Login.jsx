@@ -1,13 +1,13 @@
 import "../Styles/login.css";
 import { React, useState } from "react";
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import auth from "../firebase";
 import logo from "../assets/logo.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-
 
 const Login = () => {
   const location = useLocation();
@@ -24,6 +24,7 @@ const Login = () => {
     e.preventDefault();
 
     if (!resetEmail) {
+      // Displays an error message if the reset email is empty
       setError("Please enter your email.");
       return;
     }
@@ -41,10 +42,10 @@ const Login = () => {
     window.location.href = "/Main";
   };
 
-  const [captchaIsDone, setCaptchaDone] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [captchaIsDone, setCaptchaDone] = useState(false); // State variable to track the captcha completion
+  const [email, setEmail] = useState(""); // State variable to track the email
+  const [password, setPassword] = useState(""); // State variable to track the password
+  const [error, setError] = useState(""); // State variable to track the error message
 
   const submitLogin = (e) => {
     e.preventDefault();
@@ -52,25 +53,23 @@ const Login = () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
-
     }
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        localStorage.setItem("current user", user.uid);
+        localStorage.setItem("current user", user.uid); // Sets the "current user" in local storage
         if (savedData) {
-          window.location.href = "/Design";
+          window.location.href = "/Design"; // Redirects to "/Design" if there is saved data
         } else {
-          window.location.href = "/Main";
+          window.location.href = "/Main"; // Redirects to "/Main" if there is no saved data
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(error);
         if (errorMessage === "Firebase: Error (auth/wrong-password).") {
-          setError("Wrong password");
+          setError("Wrong password"); // Displays an error message for wrong password
         } else if (errorMessage === "Firebase: Error (auth/user-not-found).") {
           setError("Verify your email");
         }
@@ -148,7 +147,11 @@ const Login = () => {
               />
             </div>
             {error && <div>{error}</div>}
-            <button type="submit" onClick={handleForgotPassword} className="but-reset">
+            <button
+              type="submit"
+              onClick={handleForgotPassword}
+              className="but-reset"
+            >
               Reset Password
             </button>
           </form>
@@ -156,6 +159,6 @@ const Login = () => {
       )}
     </div>
   );
-};  
+};
 
 export default Login;

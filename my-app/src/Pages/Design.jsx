@@ -10,7 +10,6 @@ import "../Styles/Design.css";
 import * as THREE from "three";
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
-import { useScreenshot } from "use-react-screenshot";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -31,45 +30,51 @@ const state = proxy({
 });
 
 function Picker() {
-  const [image, takeScreenShot] = useScreenshot({});
-  const isLoggedIn = !!localStorage.getItem("current user");
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [loader, setLoader] = useState(false);
-  const [Done, setDone] = useState(false);
-  const snap = useSnapshot(state);
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, Math.round);
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
-  const userId = currentUser ? currentUser.uid : "";
-  const db = getFirestore();
+  const isLoggedIn = !!localStorage.getItem("current user"); // Checks if a user is logged in by checking the presence of "current user" in local storage
+  const [selectedItem, setSelectedItem] = useState(null); // State variable to track the selected item
+  const [loader, setLoader] = useState(false); // State variable to track the loading state
+  const [Done, setDone] = useState(false); // State variable to track the "Done" state
+  const snap = useSnapshot(state); // Retrieves a snapshot of the state
+  const count = useMotionValue(0); // Motion value for counting
+  const rounded = useTransform(count, Math.round); // Rounded motion value
+  const auth = getAuth(); // Firebase authentication instance
+  const currentUser = auth.currentUser; // Current user object
+  const userId = currentUser ? currentUser.uid : ""; // User ID obtained from the current user object or empty string
+  const db = getFirestore(); // Firebase Firestore instance
 
+  // Redirects to "/Main" if the "Done" state is true
   useEffect(() => {
     if (Done) {
       window.location.href = "/Main";
     }
   }, [Done]);
 
+  // Handles color change for a specific key in the state
   const handleColorChange = (key, color) => {
     state.items[key] = color;
   };
 
+  // Toggles the selected item by setting its position
   const handleItemClick = (key) => {
     const selectedPosition = key === selectedItem ? null : key;
     setSelectedItem(selectedPosition);
   };
 
+  // Handles color input change for a specific key in the state
   const handleColorInputChange = (key, event) => {
     state.items[key] = event.target.value;
   };
 
+  // Handles shoe name change in the state
   const handleShoeNameChange = (event) => {
     state.shoeName = event.target.value;
   };
 
   const handleSave = async () => {
+    // Trims the shoe name from the state
     const shoeName = state.shoeName?.trim();
 
+    // Displays an error message if the shoe name is empty
     if (!shoeName) {
       toast.error("Please enter a shoe name");
       return;
@@ -80,6 +85,7 @@ function Picker() {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().substring(0, 10);
 
+    // Constructs the color dictionary object
     const colorDictionary = {
       userId: userId,
       shoeName: state.shoeName,
@@ -92,12 +98,12 @@ function Picker() {
         const existingDictionary = await getExistingDictionary(
           userId,
           state.shoeName
-        );
+        ); // Retrieves the existing dictionary for the current user and shoe name
 
         if (existingDictionary) {
           toast.error(
             "You have already created this shoe before. Please enter a unique name."
-          );
+          ); // Displays an error message if the dictionary already exists
           setLoader(false);
           return animation.stop;
         }
@@ -105,7 +111,7 @@ function Picker() {
         const docRef = await addDoc(
           collection(db, "color-dictionaries"),
           colorDictionary
-        );
+        ); // Adds the color dictionary to the Firestore collection
         console.log("Color dictionary saved with ID: ", docRef.id);
         toast.success("Created successfully");
         setLoader(false);
@@ -116,8 +122,9 @@ function Picker() {
       }
     } else {
       if (!isLoggedIn) {
+        // Saves the color dictionary to local storage if the user is not logged in
         localStorage.setItem("savedData", JSON.stringify(snap.items));
-        window.location.href = "/Login";
+        window.location.href = "/Login"; // Redirects to "/Login"
         return;
       }
     }
@@ -128,7 +135,7 @@ function Picker() {
     const existingDictionary = querySnapshot.docs.find((doc) => {
       const data = doc.data();
       return data.userId === userId && data.shoeName === shoeName;
-    });
+    }); // Finds the existing dictionary based on the user ID and shoe name
 
     return existingDictionary;
   }
@@ -180,12 +187,13 @@ function Picker() {
         </div>
       ))}
       <div className="SaveButton">
-      <button
-        data-text="Awesome"
-        className="DesignButton"
-        onClick={handleSave}
-        >Save
-      </button>
+        <button
+          data-text="Awesome"
+          className="DesignButton"
+          onClick={handleSave}
+        >
+          Save
+        </button>
       </div>
     </div>
   );
@@ -313,21 +321,20 @@ export default function Design() {
         </div>
         <div className="canvas-container" id="design-container">
           <div className="Cyrcle">
-          <Canvas className="Canvas-Design">
-            <ambientLight intensity={0.5} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-            <pointLight position={[10, 10, 20]} />
+            <Canvas className="Canvas-Design">
+              <ambientLight intensity={0.5} />
+              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+              <pointLight position={[10, 10, 20]} />
 
-            <Suspense fallback={null}>
-              <Shoes  className="ModelDesign"/>
-            </Suspense>
-            <OrbitControls enableZoom={false} enablePan={false} />
-          </Canvas>
+              <Suspense fallback={null}>
+                <Shoes className="ModelDesign" />
+              </Suspense>
+              <OrbitControls enableZoom={false} enablePan={false} />
+            </Canvas>
           </div>
         </div>
       </div>
-        <Footer />
+      <Footer />
     </>
-    
   );
 }

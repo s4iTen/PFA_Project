@@ -6,7 +6,7 @@ import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useStateContext } from "../context/StateContext";
-import "../Styles/SavedCard.css"
+import "../Styles/SavedCard.css";
 import { toast, Toaster } from "react-hot-toast";
 
 SwiperCore.use([Navigation]);
@@ -17,6 +17,7 @@ const Product = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    // Fetch product data from sanity(cms)
     const fetchData = async () => {
       try {
         const result = await client.fetch('*[_type == "product"]');
@@ -29,17 +30,23 @@ const Product = () => {
     fetchData();
   }, []);
 
+  // Add the product to the cart
   const addToCart = (product) => {
     onAdd(product, 1);
+  // Get the quantity of the added product in the cart
     const quantity = getQuantity(product);
+  // Show a success toast message with the added quantity and product name
     toast.success(`${quantity} ${product.name} Added To The Cart.`);
   };
 
+  // Find the cart item corresponding to the product
   const getQuantity = (product) => {
     const cartItem = cartItems.find((item) => item._id === product._id);
+  // Return the quantity of the cart item if found, otherwise return 1
     return cartItem ? cartItem.quantity : 1;
   };
 
+  // Display a loading message if the products are still being fetched
   if (products.length === 0) {
     return <div>Loading...</div>;
   }
@@ -48,26 +55,26 @@ const Product = () => {
     <div className="swipe">
       <h2>New Arrival</h2>
       <Toaster />
-      <Swiper 
-      navigation 
-      slidesPerView={4}
-      spaceBetween={25}
-      style={{padding:"20px"}} 
-      breakpoints={{
+      <Swiper
+        navigation
+        slidesPerView={4}
+        spaceBetween={25}
+        style={{ padding: "20px" }}
+        breakpoints={{
           0: {
-            slidesPerView: 1
+            slidesPerView: 1,
           },
           639: {
             slidesPerView: 1,
           },
-          768:{
-            slidesPerView:2
+          768: {
+            slidesPerView: 2,
           },
-          1440:{
-            slidesPerView:4
+          1440: {
+            slidesPerView: 4,
           },
-          
-        }}>
+        }}
+      >
         {products.map((product) => (
           <SwiperSlide key={product._id}>
             <div className="snip14188">

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import * as THREE from 'three';
-import { useLoader, useFrame, extend, useThree } from "@react-three/fiber";
+import { useLoader, extend, useThree } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -14,11 +13,13 @@ const BigShoes = ({ modelPath, scale = 0.5, position = [0, -10, 0] }) => {
   const { camera } = useThree();
 
   useEffect(() => {
+    // Configure the spot light to cast shadows
     spotLightRef.current.castShadow = true;
+    // Configure the ground to receive shadows
     groundRef.current.receiveShadow = true;
   }, []);
 
-
+  // Set initial camera position and target
   useEffect(() => {
     camera.position.set(100, 0, 500);
     camera.lookAt(0, 0, 0);

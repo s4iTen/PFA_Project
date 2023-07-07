@@ -3,11 +3,9 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import SavedCardList from "../components/SavedCardList";
 import Product from "../components/Product";
-import HeroBanner from "../components/HeroBanner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Shoesy from "../components/Shoes";
-import ModelViewer from "../components/test";
+import ModelViewer from "../components/Logo3d";
 import Banner from "../components/HeroBanner";
 
 const Main = () => {
@@ -15,7 +13,6 @@ const Main = () => {
     <div className="Content-Container">
       <ToastContainer />
       <NavBar />
-      {/* <Shoesy /> */}
       <ModelViewer
         scale="750"
         modelPath={"/logooo.glb"}

@@ -3,9 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useGLTF } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
-import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
-import '../Styles/Nikez.css'
+import "../Styles/Nikez.css";
 import { useFrame } from "@react-three/fiber";
 
 const state = proxy({
@@ -35,26 +34,28 @@ function Mesh(props) {
 }
 
 function Shoes(props) {
-  const { nodes, materials } = useGLTF("/AirComp.glb");
+  const { nodes, materials } = useGLTF("/AirComp.glb"); // Load 3D model using useGLTF hook
   const pivot = useRef(new THREE.Object3D()); // Create a ref for the pivot
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(0); // State to track rotation value
 
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
 
     const radius = 1;
-    const speed = 1;  
+    const speed = 1;
     const angle = elapsedTime * speed;
 
     const y = Math.sin(angle) * radius;
     pivot.current.position.y = y;
   });
 
+  // Increment rotation value by 0.01
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation((rotation) => rotation + 0.01);
     }, 1);
 
+    // Clear the interval on component unmount
     return () => {
       clearInterval(interval);
     };
@@ -156,21 +157,21 @@ function Shoes(props) {
   );
 }
 export default function Shoesy() {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/design");
-  };
   return (
     <>
-
-
       <div className="Canvas-Shoe">
-        <Canvas className="CanvasShoe" dpr={[1, 2]} camera={{ position: [4, 0, 0] }}
-         style={{overflow:'hidden',
-          width:'100%' ,height:'100%',
-          marginTop:'40px',
-           paddingTop:'50px'}}>
+        <Canvas
+          className="CanvasShoe"
+          dpr={[1, 2]}
+          camera={{ position: [4, 0, 0] }}
+          style={{
+            overflow: "hidden",
+            width: "100%",
+            height: "100%",
+            marginTop: "40px",
+            paddingTop: "50px",
+          }}
+        >
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[10, 10, 20]} />

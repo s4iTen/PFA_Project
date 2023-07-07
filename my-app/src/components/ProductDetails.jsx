@@ -8,25 +8,23 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import Footer from "../components/Footer";
-import "../Styles/prodectDetails.css"
-
+import "../Styles/prodectDetails.css";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import { color } from "framer-motion";
 
 const ProductDetails = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [quantity] = useState(1);
-  const [index, setIndex] = useState(0);
-  const [otherProducts, setOtherProducts] = useState([]);
-  const { decQty, incQty, qty } = useStateContext();
-  const [selectedSize, setSelectedSize] = useState(null);
+  const { id } = useParams(); // Extracts the "id" parameter from the URL
+  const [product, setProduct] = useState(null); // State to hold the product data
+  const [index, setIndex] = useState(0); // State to keep track of the current image index
+  const [otherProducts, setOtherProducts] = useState([]); // State to hold other products
+  const { decQty, incQty, qty } = useStateContext(); // Accesses quantity-related state and actions from the context
+  const [selectedSize, setSelectedSize] = useState(null); // State to hold the selected size
 
+  // Fetches the product data based on the "id" parameter
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -44,6 +42,7 @@ const ProductDetails = () => {
       }
     };
 
+    // Fetches other products excluding the current product
     const fetchOtherProducts = async () => {
       try {
         const result = await client.fetch(
@@ -60,10 +59,12 @@ const ProductDetails = () => {
     fetchOtherProducts();
   }, [id]);
 
+  // Renders a loading state until the product data is fetched
   if (!product) {
     return <div>Loading...</div>;
   }
 
+  // create a payment chekout session for the client side
   const handleCheckout = async () => {
     if (!selectedSize) {
       toast.error("Please select a size");
@@ -98,6 +99,7 @@ const ProductDetails = () => {
     }
   };
 
+  // Updates the selected size based on the user's selection
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
   };
@@ -112,12 +114,14 @@ const ProductDetails = () => {
             <div className="image-container">
               <img
                 src={urlFor(product.image && product.image[index])}
+                alt=""
                 className="product-detail-image"
               />
             </div>
             <div className="small-images-container">
               {product.image?.map((item, i) => (
                 <img
+                  alt=""
                   key={i}
                   src={urlFor(item)}
                   className={
@@ -142,7 +146,7 @@ const ProductDetails = () => {
               <p>(20)</p>
             </div>
             <div className="Details">
-            <h2 >Details: </h2>
+              <h2>Details: </h2>
             </div>
             <p>{product.details}</p>
             <p className="price">{product.price}DT</p>

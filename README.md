@@ -2,10 +2,28 @@
 
 ![website](https://github.com/s4iTen/PFA_Project/assets/113900578/2992b43f-accb-4d04-a178-f966cf4dbe51)
 
-## Description:
+## Introduction:
 This project is an eCommerce application for nike shoes also it allows users to customize their own Nike shoes using a 3D model. It is built with React, Firebase, Stripe payment integration, and utilizes Sanity for product creation.
 
+## Installation:
+
+### To run this React project locally, follow these steps:
+
+1. https://github.com/s4iTen/PFA_Project.git
+
+2. cd my-app
+
+3. npm start
+
+### And for run the server of stripe payment:
+
+1. cd my-app/src/Pages/api
+
+2. node server.js
+
+
 ## technologies Used:
+
 React
 
 Firebase

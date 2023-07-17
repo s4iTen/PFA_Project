@@ -46,7 +46,7 @@ In terms of external services, we integrated Stripe for secure payment processin
 
 Furthermore, we leveraged Sanity as a content management system for storing our products. Utilizing Sanity, we defined schemas that structured the storage of various product attributes such as images, names, prices, tags, and additional details. This allowed us to effectively manage and organize our product data. Additionally, Sanity's Restful API enabled us to effortlessly fetch and manipulate content, further streamlining our content management process.
 
-### Architecture Diagram:
+### Architecture Diagram and DataBase Used:
 
 ![image](https://github.com/s4iTen/PFA_Project/assets/108961283/7b0ede79-c0ae-439a-af50-d6837b2cb7a6)
 
